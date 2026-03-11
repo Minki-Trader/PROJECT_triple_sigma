@@ -1,0 +1,125 @@
+# Data Freeze Manifest
+# Campaign: C2026Q1_stage1_refresh
+# Created: 2026-03-10
+# Source: design/US100_RealTick_Backtest_Data_Policy.md (2026-03-09)
+# WF0 output: confirms window boundaries, role assignments, and role-overlap checks.
+
+freeze_version: "1.0"
+freeze_date: "2026-03-10"
+campaign_id: C2026Q1_stage1_refresh
+data_policy_source: design/US100_RealTick_Backtest_Data_Policy.md
+history_quality_audit: _coord/artifacts/us100_history_quality/US100_HISTORY_QUALITY_AUDIT.md
+
+symbol: US100
+timeframe: M5
+tester_model: 4  # Every tick based on real ticks
+
+# --- Actual-tick era horizon ---
+actual_tick_horizon:
+  from: "2022.09.13 17:15"
+  to: "2026.03.06 23:55"
+  note: >
+    Full practical analysis horizon.
+    Pre-2022.09.13 data contains ~37% generated ticks.
+
+# --- Window assignments ---
+windows:
+  optimization_folds:
+    role: optimization
+    folds:
+      - id: fold_1
+        from: "2022.09.13 17:15"
+        to: "2023.05.03 09:45"
+        tick_quality: clean_actual
+        bars_approx: 47000
+      - id: fold_2
+        from: "2023.05.03 09:55"
+        to: "2024.02.26 20:05"
+        tick_quality: clean_actual
+        bars_approx: 60000
+      - id: fold_3
+        from: "2025.04.02 09:10"
+        to: "2025.11.24 14:50"
+        tick_quality: clean_actual
+        bars_approx: 47000
+
+  benchmark:
+    role: benchmark
+    from: "2024.06.04 17:25"
+    to: "2025.04.02 09:00"
+    tick_quality: clean_actual
+    bars_approx: 58000
+    independence_note: >
+      Excluded from optimization_folds.
+      Reserved exclusively for independent selection comparison.
+
+  oos_validation:
+    role: oos
+    from: "2025.11.24 15:00"
+    to: "2026.03.06 23:55"
+    tick_quality: practical_extension
+    bars_approx: 20000
+    known_gaps:
+      - from: "2025.11.28 05:00"
+        to: "2025.11.28 05:10"
+        duration_minutes: 10
+        severity: minor
+
+  stress:
+    role: stress
+    from: "2022.08.01 00:00"
+    to: "2026.03.06 23:55"
+    tick_quality: mixed
+    note: Full contiguous span for broad sanity. Not for primary optimization.
+
+  disallowed:
+    role: disallowed
+    from: "2018.05.08 01:00"
+    to: "2026.03.06 23:55"
+    tick_quality: 37pct_generated
+    note: >
+      MUST NOT be used as primary optimization or final Model=4 comparison range.
+
+# --- Role-overlap verification ---
+role_overlap_check:
+  optimization_vs_benchmark:
+    overlap: false
+    note: >
+      fold_1 ends 2023.05.03 09:45, fold_2 ends 2024.02.26 20:05,
+      benchmark starts 2024.06.04 17:25 (98-day gap).
+      fold_3 starts 2025.04.02 09:10, benchmark ends 2025.04.02 09:00
+      (10-min gap). No overlap.
+  optimization_vs_oos:
+    overlap: false
+    note: >
+      fold_3 ends 2025.11.24 14:50, OOS starts 2025.11.24 15:00 (10-min gap).
+  benchmark_vs_oos:
+    overlap: false
+    note: >
+      Benchmark ends 2025.04.02 09:00, OOS starts 2025.11.24 15:00
+      (236-day gap).
+  pass: true
+
+# --- Gap policy ---
+gap_policy:
+  inter_fold_gaps:
+    - between: [fold_1, fold_2]
+      gap_minutes: 10
+      treatment: excluded
+    - between: [fold_2, benchmark]
+      gap_days: 98
+      treatment: excluded_different_role
+    - between: [benchmark, fold_3]
+      gap_minutes: 10
+      treatment: excluded
+    - between: [fold_3, oos_validation]
+      gap_minutes: 10
+      treatment: excluded
+  intra_window_gaps:
+    - window: oos_validation
+      from: "2025.11.28 05:00"
+      to: "2025.11.28 05:10"
+      treatment: accepted_minor
+  broad_range_prohibition: >
+    Full 2018-2026 range (37% generated ticks) must NOT be used
+    for primary optimization or Model=4 comparison.

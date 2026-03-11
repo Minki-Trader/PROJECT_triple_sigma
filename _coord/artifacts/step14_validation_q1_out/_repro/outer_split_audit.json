@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "train_count": 10406,
+  "val_count": 2602,
+  "dropped_count": 34,
+  "train_counts_by_regime": {
+    "0": 705,
+    "1": 1185,
+    "2": 1455,
+    "3": 2703,
+    "4": 1426,
+    "5": 2932
+  },
+  "val_counts_by_regime": {
+    "0": 146,
+    "1": 393,
+    "2": 203,
+    "3": 866,
+    "4": 162,
+    "5": 832
+  },
+  "dropped_counts_by_regime": {
+    "0": 11,
+    "1": 0,
+    "2": 15,
+    "3": 8,
+    "4": 0,
+    "5": 0
+  },
+  "train_end_time": "2026-02-10 23:50:00",
+  "val_start_time": "2026-02-11 09:05:00",
+  "no_time_leakage": true,
+  "embargo_bars": 72,
+  "outer_split_source": "accepted_step12_q1"
+}

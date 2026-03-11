@@ -1,0 +1,145 @@
+{
+  "fold_count": 2,
+  "folds": [
+    {
+      "fold_id": 0,
+      "target_train_ratio": 0.6,
+      "target_outer_position": 6244,
+      "selected_outer_position": 6264,
+      "selected_label_index": 6264,
+      "boundary_window_end_idx": 8333,
+      "effective_train_ratio": 0.6,
+      "embargo_bars": 72,
+      "train_count": 6213,
+      "val_count": 4142,
+      "dropped_count": 51,
+      "train_end_time": "2026-01-13 23:50:00",
+      "val_start_time": "2026-01-14 10:30:00",
+      "no_time_leakage": true,
+      "relaxed_min_requirement": false,
+      "train_counts_by_regime": {
+        "0": 494,
+        "1": 686,
+        "2": 1148,
+        "3": 1388,
+        "4": 1208,
+        "5": 1289
+      },
+      "val_counts_by_regime": {
+        "0": 203,
+        "1": 499,
+        "2": 298,
+        "3": 1315,
+        "4": 184,
+        "5": 1643
+      },
+      "dropped_counts_by_regime": {
+        "0": 8,
+        "1": 0,
+        "2": 9,
+        "3": 0,
+        "4": 34,
+        "5": 0
+      },
+      "stage2_train_counts_by_regime_side": {
+        "0_LONG": 22,
+        "0_SHORT": 18,
+        "1_LONG": 48,
+        "1_SHORT": 24,
+        "2_LONG": 282,
+        "2_SHORT": 274,
+        "3_LONG": 408,
+        "3_SHORT": 315,
+        "4_LONG": 266,
+        "4_SHORT": 279,
+        "5_LONG": 291,
+        "5_SHORT": 281
+      },
+      "stage2_val_counts_by_regime_side": {
+        "0_LONG": 7,
+        "0_SHORT": 23,
+        "1_LONG": 23,
+        "1_SHORT": 25,
+        "2_LONG": 95,
+        "2_SHORT": 72,
+        "3_LONG": 286,
+        "3_SHORT": 351,
+        "4_LONG": 33,
+        "4_SHORT": 37,
+        "5_LONG": 370,
+        "5_SHORT": 389
+      }
+    },
+    {
+      "fold_id": 1,
+      "target_train_ratio": 0.8,
+      "target_outer_position": 8325,
+      "selected_outer_position": 8122,
+      "selected_label_index": 8122,
+      "boundary_window_end_idx": 10767,
+      "effective_train_ratio": 0.779494110832207,
+      "embargo_bars": 72,
+      "train_count": 8074,
+      "val_count": 2284,
+      "dropped_count": 48,
+      "train_end_time": "2026-01-26 23:50:00",
+      "val_start_time": "2026-01-27 10:15:00",
+      "no_time_leakage": true,
+      "relaxed_min_requirement": false,
+      "train_counts_by_regime": {
+        "0": 615,
+        "1": 912,
+        "2": 1300,
+        "3": 1943,
+        "4": 1333,
+        "5": 1971
+      },
+      "val_counts_by_regime": {
+        "0": 81,
+        "1": 273,
+        "2": 130,
+        "3": 760,
+        "4": 79,
+        "5": 961
+      },
+      "dropped_counts_by_regime": {
+        "0": 9,
+        "1": 0,
+        "2": 25,
+        "3": 0,
+        "4": 14,
+        "5": 0
+      },
+      "stage2_train_counts_by_regime_side": {
+        "0_LONG": 25,
+        "0_SHORT": 34,
+        "1_LONG": 62,
+        "1_SHORT": 36,
+        "2_LONG": 324,
+        "2_SHORT": 304,
+        "3_LONG": 545,
+        "3_SHORT": 446,
+        "4_LONG": 287,
+        "4_SHORT": 301,
+        "5_LONG": 467,
+        "5_SHORT": 412
+      },
+      "stage2_val_counts_by_regime_side": {
+        "0_LONG": 4,
+        "0_SHORT": 6,
+        "1_LONG": 9,
+        "1_SHORT": 13,
+        "2_LONG": 43,
+        "2_SHORT": 37,
+        "3_LONG": 149,
+        "3_SHORT": 220,
+        "4_LONG": 15,
+        "4_SHORT": 14,
+        "5_LONG": 194,
+        "5_SHORT": 258
+      }
+    }
+  ],
+  "shuffle": false,
+  "relaxed_min_requirement": false
+}

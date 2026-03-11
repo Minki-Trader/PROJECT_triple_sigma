@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "model_pack_version": "0.1.0",
+  "candidate_policy_version": "0.1.2",
+  "regime_policy_version": "0.1.0q",
+  "cost_model_version": "0.1",
+  "search_space_version": "0.1.0",
+  "tie_policy": "candidate_preferred_then_long",
+  "symbol": "US100",
+  "timeframe": "PERIOD_M5",
+  "price_basis": "Bid",
+  "point_size": 0.009999999984385142,
+  "slip_points": 2,
+  "slip_price": 0.019999999968770284,
+  "R_pass_buffer": 0.05,
+  "H": 72,
+  "warmup_bars": 150,
+  "atr_thr": 0.0005,
+  "adx_thr1": 20.0,
+  "adx_thr2": 30.0,
+  "thr_method": "manual",
+  "thr_seed": "0",
+  "thr_notes": "step06_candidate_adaptive",
+  "dist_atr_max_mode": "adaptive_quantile",
+  "dist_atr_max_q": 0.8,
+  "dist_atr_max_w": 63,
+  "dist_atr_max_clamp_lo": 0.5,
+  "dist_atr_max_clamp_hi": 5.0,
+  "data_start": "2025-11-28 20:10:00",
+  "data_end": "2025-12-04 23:50:00",
+  "total_bars": 1087,
+  "total_labeled_samples": 674,
+  "forced_pass_count": 407,
+  "label_distribution": {
+    "LONG": 138,
+    "PASS": 407,
+    "SHORT": 129
+  },
+  "flip_distribution": {
+    "requires_flip_0": 522,
+    "requires_flip_1": 152
+  },
+  "input_files": [
+    "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251128.csv",
+    "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251201.csv",
+    "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251202.csv",
+    "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251203.csv",
+    "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251204.csv"
+  ],
+  "validation": {
+    "rows_validated": 749,
+    "max_abs_diff": {
+      "ret_1": 4.993192329332159e-09,
+      "ret_3": 5.036709706859183e-09,
+      "ret_12": 5.02125560662009e-09,
+      "range_atr": 1.8011541591533842e-07,
+      "body_atr": 1.956425013105445e-07,
+      "close_pos": 3.300540596384849e-08,
+      "rsi_norm": 1.6653345369377348e-16,
+      "adx_norm": 3.0000000039720476e-08,
+      "spread_atr": 8.411737417723941e-09,
+      "time_sin": 3.296335004954187e-08,
+      "time_cos": 3.296334993851957e-08,
+      "dist_atr_abs_feature6": 2.2000000043931323e-07,
+      "dist_atr_max_t": 0.0
+    },
+    "mismatch_count": {
+      "regime_id": 0,
+      "cand_long": 0,
+      "cand_short": 0,
+      "regime_one_hot": 0,
+      "invalid_candidate_pair": 0,
+      "dist_atr_max_mode": 0,
+      "policy_version": 0,
+      "dist_atr_max_nonpositive": 0,
+      "dist_atr_max_out_of_range": 0,
+      "dist_atr_max_value": 0
+    }
+  }
+}

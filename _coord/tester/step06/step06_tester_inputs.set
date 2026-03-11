@@ -1,0 +1,5 @@
+InpStartupValidation=true
+InpLogHeartbeat=true
+InpTimerSeconds=1
+InpDebugAlignment=true
+InpModelPackDir=triple_sigma_pack_v1

@@ -1,0 +1,81 @@
+{
+  "primary_metric": "mean_macro_f1",
+  "tie_breakers": [
+    "higher_mean_cand0_pass_recall",
+    "lower_mean_log_loss",
+    "baseline_preferred"
+  ],
+  "baseline_candidate_id": "stage1_baseline",
+  "baseline_candidate_score": 0.4124287783273539,
+  "eligible_candidate_count": 0,
+  "used_control_fallback": true,
+  "provisional_winner_source": "control_fallback",
+  "provisional_winner_candidate_id": "stage1_baseline",
+  "provisional_winner_aggregate_score": 0.4124287783273539,
+  "eligibility_guardrail": {
+    "name": "min_cand0_pass_recall",
+    "threshold": 0.5
+  },
+  "candidate_rows": [
+    {
+      "candidate_id": "stage1_baseline",
+      "search_rank": 0,
+      "is_baseline": true,
+      "mean_macro_f1": 0.4124287783273539,
+      "mean_cand0_pass_recall": 0.6897662773276179,
+      "min_cand0_pass_recall": 0.29770992366412213,
+      "mean_log_loss": 0.9317001500441866,
+      "eligible": false
+    },
+    {
+      "candidate_id": "stage1_c01",
+      "search_rank": 1,
+      "is_baseline": false,
+      "mean_macro_f1": 0.36516035440030453,
+      "mean_cand0_pass_recall": 0.5316804094941628,
+      "min_cand0_pass_recall": 0.02,
+      "mean_log_loss": 1.1252321610325262,
+      "eligible": false
+    },
+    {
+      "candidate_id": "stage1_c02",
+      "search_rank": 2,
+      "is_baseline": false,
+      "mean_macro_f1": 0.4123522953608227,
+      "mean_cand0_pass_recall": 0.6666863677466655,
+      "min_cand0_pass_recall": 0.29770992366412213,
+      "mean_log_loss": 0.9542250818716078,
+      "eligible": false
+    },
+    {
+      "candidate_id": "stage1_c03",
+      "search_rank": 3,
+      "is_baseline": false,
+      "mean_macro_f1": 0.35579186287350417,
+      "mean_cand0_pass_recall": 0.5164263905007255,
+      "min_cand0_pass_recall": 0.02,
+      "mean_log_loss": 1.1523984968999528,
+      "eligible": false
+    },
+    {
+      "candidate_id": "stage1_c04",
+      "search_rank": 4,
+      "is_baseline": false,
+      "mean_macro_f1": 0.3858959915081741,
+      "mean_cand0_pass_recall": 0.5768640057198784,
+      "min_cand0_pass_recall": 0.36416184971098264,
+      "mean_log_loss": 1.0636851595813805,
+      "eligible": false
+    },
+    {
+      "candidate_id": "stage1_c05",
+      "search_rank": 5,
+      "is_baseline": false,
+      "mean_macro_f1": 0.33327588964080546,
+      "mean_cand0_pass_recall": 0.3742926176579773,
+      "min_cand0_pass_recall": 0.0,
+      "mean_log_loss": 1.3230257378103125,
+      "eligible": false
+    }
+  ]
+}

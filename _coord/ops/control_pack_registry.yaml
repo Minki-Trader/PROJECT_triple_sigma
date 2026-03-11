@@ -1,0 +1,63 @@
+# Control Pack Registry
+# Purpose: separate runtime-integrity control from profitability control
+# Non-negotiable: Step16 smoke pack must NOT be used as profitability optimizer baseline
+# Created: 2026-03-10
+
+runtime_integrity_control:
+  pack: triple_sigma_pack_long_step16
+  location: MQL5/Files/triple_sigma_pack_long_step16
+  purpose: >
+    Step21 regression anchoring only.
+    Contains dummy/minimal ONNX models (136 bytes each).
+    Used exclusively for feature-off core-row alignment,
+    duplicate EXIT zero, same-timestamp EXIT->ENTRY zero verification.
+  allowed_uses:
+    - runtime regression presets (step21_tester_control_trade, etc.)
+    - compile smoke tests
+    - feature-off invariant checks
+  prohibited_uses:
+    - profitability evaluation
+    - optimization baseline
+    - selection comparison
+    - OOS validation
+  retained_evidence:
+    - _coord/artifacts/step21_control_trade/
+    - _coord/artifacts/step21_live_pass_regression/
+    - _coord/artifacts/step21_live_opposite_regression/
+
+profitability_control:
+  pack: triple_sigma_pack_step15_q1
+  location: MQL5/Files/triple_sigma_pack_step15_q1
+  purpose: >
+    Real ONNX model pack for actual optimization, selection, and benchmarking.
+    Contains trained Stage1 classifiers and Stage2 parameter regressors.
+  model_lineage:
+    clf_version: step14_stage1_baseline
+    prm_version: step14_stage2_c02
+    model_pack_version: "0.1.0"
+    schema_version: "1.0"
+    candidate_policy_version: "0.1.2"
+    regime_policy_version: "0.1.0q"
+    cost_model_version: "0.1"
+    stage1_input_shape: [1, 64, 22]
+    stage1_output_shape: [1, 3]  # LONG / SHORT / PASS
+    stage2_input_shape: [1, 64, 22]
+    stage2_output_shape: [1, 6]  # 6 parameter outputs
+    regimes: 6  # reg0..reg5
+  parity_evidence: _coord/artifacts/step15_export_q1_out/export_validation_report.json
+  selection_evidence:
+    stage1: _coord/artifacts/step14_validation_q1_out/stage1_selection_report.json
+    stage2: _coord/artifacts/step14_validation_q1_out/stage2_selection_report.json
+  allowed_uses:
+    - optimization baseline
+    - benchmark / OOS / stress backtests
+    - selection comparison
+    - release candidate evaluation
+  notes:
+    stage1_status: >
+      No eligible challenger found at Step14.
+      Baseline used via control_fallback (eligible_candidate_count=0).
+      Stage1 refresh is the primary bottleneck for the optimization phase.
+    stage2_status: >
+      Winner: stage2_c02.
+      Stage2 already has a viable candidate.

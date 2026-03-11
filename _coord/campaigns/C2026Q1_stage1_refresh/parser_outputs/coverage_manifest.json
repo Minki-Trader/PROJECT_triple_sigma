@@ -1,0 +1,40 @@
+{
+  "raw_event_counts": {
+    "ENTRY": 1805,
+    "EXIT": 1804,
+    "MODIFY": 1392
+  },
+  "mapped_event_counts": {
+    "ENTRY": 1805,
+    "EXIT_SL": 1564,
+    "MODIFY": 1392,
+    "NO_EXIT": 227,
+    "EXIT_FORCE": 227,
+    "GATE_BLOCK": 179,
+    "EXIT_TP": 13
+  },
+  "unmapped_events": {
+    "total": 0,
+    "by_type": {
+      "ENTRY": 0,
+      "EXIT": 0,
+      "MODIFY": 0
+    },
+    "details": []
+  },
+  "direction_distribution": {
+    "LONG": 5346,
+    "SHORT": 61
+  },
+  "no_exit_stats": {
+    "total": 227,
+    "resolved_direction": 227,
+    "unresolved_direction": 0
+  },
+  "exit_reason_taxonomy": {
+    "exit_reason_column_present": true,
+    "exit_reason_values_used": true
+  },
+  "coverage_pass": true,
+  "build_timestamp": "2026-03-11T07:43:26.662337"
+}

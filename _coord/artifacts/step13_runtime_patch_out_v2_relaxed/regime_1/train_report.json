@@ -1,0 +1,219 @@
+{
+  "regime_id": 1,
+  "status": "fallback_only",
+  "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step13_runtime_patch_out_v2_relaxed\\regime_1\\prm_reg1.joblib",
+  "output_order": [
+    "k_sl_L",
+    "k_tp_L",
+    "hold_L",
+    "k_sl_S",
+    "k_tp_S",
+    "hold_S"
+  ],
+  "long_head": {
+    "status": "fallback_constant",
+    "train_count": 8,
+    "val_count": 3,
+    "target_columns": [
+      "k_sl_L",
+      "k_tp_L",
+      "hold_L"
+    ],
+    "fallback_reason": "train_count=8 < min_train_samples_per_head=12; val_count=3 < min_val_samples_per_head=4",
+    "sample_weight_summary": {
+      "pass_row_weight": 0.25,
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0,
+      "pass_count": 0,
+      "non_pass_count": 8
+    },
+    "train_metrics": {
+      "count": 8,
+      "raw_mae": {
+        "k_sl": 0.875,
+        "k_tp": 1.9375,
+        "hold": 29.0
+      },
+      "effective_mae": {
+        "k_sl": 0.875,
+        "k_tp": 1.9375,
+        "hold": 29.0
+      },
+      "baseline_effective_mae": {
+        "k_sl": 0.875,
+        "k_tp": 1.9375,
+        "hold": 29.0
+      },
+      "raw_huber": {
+        "k_sl": 0.1875,
+        "k_tp": 0.84375,
+        "hold": 56.0
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.1590909090909091,
+        "k_tp": 0.16847826086956522,
+        "hold": 0.4084507042253521
+      },
+      "normalized_effective_mae_mean": 0.24533995806194211,
+      "baseline_normalized_effective_mae_mean": 0.24533995806194211,
+      "beats_default_baseline": true,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 0.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    },
+    "val_metrics": {
+      "count": 3,
+      "raw_mae": {
+        "k_sl": 0.5,
+        "k_tp": 1.6666666666666667,
+        "hold": 19.666666666666668
+      },
+      "effective_mae": {
+        "k_sl": 0.5,
+        "k_tp": 1.6666666666666667,
+        "hold": 19.666666666666668
+      },
+      "baseline_effective_mae": {
+        "k_sl": 0.5,
+        "k_tp": 1.6666666666666667,
+        "hold": 19.666666666666668
+      },
+      "raw_huber": {
+        "k_sl": 0.10416666666666667,
+        "k_tp": 0.75,
+        "hold": 37.333333333333336
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.09090909090909091,
+        "k_tp": 0.14492753623188406,
+        "hold": 0.27699530516431925
+      },
+      "normalized_effective_mae_mean": 0.17094397743509807,
+      "baseline_normalized_effective_mae_mean": 0.17094397743509807,
+      "beats_default_baseline": true,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 0.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    }
+  },
+  "short_head": {
+    "status": "fallback_constant",
+    "train_count": 4,
+    "val_count": 1,
+    "target_columns": [
+      "k_sl_S",
+      "k_tp_S",
+      "hold_S"
+    ],
+    "fallback_reason": "train_count=4 < min_train_samples_per_head=12; val_count=1 < min_val_samples_per_head=4",
+    "sample_weight_summary": {
+      "pass_row_weight": 0.25,
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0,
+      "pass_count": 0,
+      "non_pass_count": 4
+    },
+    "train_metrics": {
+      "count": 4,
+      "raw_mae": {
+        "k_sl": 0.125,
+        "k_tp": 4.5,
+        "hold": 13.75
+      },
+      "effective_mae": {
+        "k_sl": 0.125,
+        "k_tp": 4.5,
+        "hold": 13.75
+      },
+      "baseline_effective_mae": {
+        "k_sl": 0.125,
+        "k_tp": 4.5,
+        "hold": 13.75
+      },
+      "raw_huber": {
+        "k_sl": 0.0234375,
+        "k_tp": 2.125,
+        "hold": 25.5
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.022727272727272728,
+        "k_tp": 0.391304347826087,
+        "hold": 0.1936619718309859
+      },
+      "normalized_effective_mae_mean": 0.20256453079478187,
+      "baseline_normalized_effective_mae_mean": 0.20256453079478187,
+      "beats_default_baseline": true,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 0.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    },
+    "val_metrics": {
+      "count": 1,
+      "raw_mae": {
+        "k_sl": 1.0,
+        "k_tp": 0.5,
+        "hold": 16.0
+      },
+      "effective_mae": {
+        "k_sl": 1.0,
+        "k_tp": 0.5,
+        "hold": 16.0
+      },
+      "baseline_effective_mae": {
+        "k_sl": 1.0,
+        "k_tp": 0.5,
+        "hold": 16.0
+      },
+      "raw_huber": {
+        "k_sl": 0.21875,
+        "k_tp": 0.125,
+        "hold": 30.0
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.18181818181818182,
+        "k_tp": 0.043478260869565216,
+        "hold": 0.22535211267605634
+      },
+      "normalized_effective_mae_mean": 0.1502161851212678,
+      "baseline_normalized_effective_mae_mean": 0.1502161851212678,
+      "beats_default_baseline": true,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 0.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    }
+  }
+}

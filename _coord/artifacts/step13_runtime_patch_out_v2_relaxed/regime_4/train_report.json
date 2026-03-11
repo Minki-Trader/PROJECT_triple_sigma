@@ -1,0 +1,219 @@
+{
+  "regime_id": 4,
+  "status": "trained_both",
+  "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step13_runtime_patch_out_v2_relaxed\\regime_4\\prm_reg4.joblib",
+  "output_order": [
+    "k_sl_L",
+    "k_tp_L",
+    "hold_L",
+    "k_sl_S",
+    "k_tp_S",
+    "hold_S"
+  ],
+  "long_head": {
+    "status": "trained",
+    "train_count": 14,
+    "val_count": 10,
+    "target_columns": [
+      "k_sl_L",
+      "k_tp_L",
+      "hold_L"
+    ],
+    "fallback_reason": null,
+    "sample_weight_summary": {
+      "pass_row_weight": 0.25,
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0,
+      "pass_count": 0,
+      "non_pass_count": 14
+    },
+    "train_metrics": {
+      "count": 14,
+      "raw_mae": {
+        "k_sl": 1.0751039011520354,
+        "k_tp": 0.6785714285714286,
+        "hold": 9.142857142857144
+      },
+      "effective_mae": {
+        "k_sl": 1.0751038960048132,
+        "k_tp": 0.6785714285714286,
+        "hold": 9.142857142857142
+      },
+      "baseline_effective_mae": {
+        "k_sl": 1.25,
+        "k_tp": 9.321428571428571,
+        "hold": 22.285714285714285
+      },
+      "raw_huber": {
+        "k_sl": 0.23754961437301716,
+        "k_tp": 0.33035714285714285,
+        "hold": 16.345116088369895
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.19547343563723876,
+        "k_tp": 0.059006211180124224,
+        "hold": 0.12877263581488932
+      },
+      "normalized_effective_mae_mean": 0.12775076087741744,
+      "baseline_normalized_effective_mae_mean": 0.45057167776090007,
+      "beats_default_baseline": true,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 1.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    },
+    "val_metrics": {
+      "count": 10,
+      "raw_mae": {
+        "k_sl": 1.2794181535486022,
+        "k_tp": 8.1,
+        "hold": 31.98988513229537
+      },
+      "effective_mae": {
+        "k_sl": 1.2794181823730468,
+        "k_tp": 8.1,
+        "hold": 32.2
+      },
+      "baseline_effective_mae": {
+        "k_sl": 0.8,
+        "k_tp": 1.9,
+        "hold": 18.0
+      },
+      "raw_huber": {
+        "k_sl": 0.2886376331061622,
+        "k_tp": 3.925,
+        "hold": 61.97977026459074
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.23262148770419033,
+        "k_tp": 0.7043478260869565,
+        "hold": 0.45352112676056344
+      },
+      "normalized_effective_mae_mean": 0.46349681351723676,
+      "baseline_normalized_effective_mae_mean": 0.18806435450648554,
+      "beats_default_baseline": false,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 1.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    }
+  },
+  "short_head": {
+    "status": "trained",
+    "train_count": 28,
+    "val_count": 10,
+    "target_columns": [
+      "k_sl_S",
+      "k_tp_S",
+      "hold_S"
+    ],
+    "fallback_reason": null,
+    "sample_weight_summary": {
+      "pass_row_weight": 0.25,
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0,
+      "pass_count": 0,
+      "non_pass_count": 28
+    },
+    "train_metrics": {
+      "count": 28,
+      "raw_mae": {
+        "k_sl": 0.14591884088298637,
+        "k_tp": 0.4944590744496023,
+        "hold": 4.436048233539096
+      },
+      "effective_mae": {
+        "k_sl": 0.14497894474438258,
+        "k_tp": 0.49445908410208567,
+        "hold": 4.464285714285714
+      },
+      "baseline_effective_mae": {
+        "k_sl": 0.6607142857142857,
+        "k_tp": 4.410714285714286,
+        "hold": 20.357142857142858
+      },
+      "raw_huber": {
+        "k_sl": 0.019050711209694805,
+        "k_tp": 0.1595927768687259,
+        "hold": 7.259810429369302
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.026359808135342288,
+        "k_tp": 0.04299644209583354,
+        "hold": 0.06287726358148893
+      },
+      "normalized_effective_mae_mean": 0.04407783793755491,
+      "baseline_normalized_effective_mae_mean": 0.26346352157742237,
+      "beats_default_baseline": true,
+      "k_sl_low_clip_rate": 0.07142857142857142,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 1.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    },
+    "val_metrics": {
+      "count": 10,
+      "raw_mae": {
+        "k_sl": 0.27747861444372723,
+        "k_tp": 2.686212848913935,
+        "hold": 27.69962085309259
+      },
+      "effective_mae": {
+        "k_sl": 0.27747859954833987,
+        "k_tp": 2.6862128734588624,
+        "hold": 27.7
+      },
+      "baseline_effective_mae": {
+        "k_sl": 0.3,
+        "k_tp": 3.75,
+        "hold": 10.7
+      },
+      "raw_huber": {
+        "k_sl": 0.04384819644362353,
+        "k_tp": 1.2181064244569675,
+        "hold": 53.39924170618518
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.05045065446333452,
+        "k_tp": 0.2335837281268576,
+        "hold": 0.3901408450704225
+      },
+      "normalized_effective_mae_mean": 0.22472507588687152,
+      "baseline_normalized_effective_mae_mean": 0.1771122121397688,
+      "beats_default_baseline": false,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 1.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    }
+  }
+}

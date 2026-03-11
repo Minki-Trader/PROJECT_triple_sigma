@@ -1,0 +1,172 @@
+{
+  "regime_id": 5,
+  "status": "trained",
+  "train_count_raw": 2932,
+  "train_count_retained": 2932,
+  "val_count": 832,
+  "cand0_retained_count": 1601,
+  "cand1_retained_count": 1331,
+  "best_epoch": 3,
+  "epochs_trained": 11,
+  "early_stopped": true,
+  "train_label_distribution_raw": {
+    "LONG": 661,
+    "SHORT": 670,
+    "PASS": 1601
+  },
+  "train_label_distribution_retained": {
+    "LONG": 661,
+    "SHORT": 670,
+    "PASS": 1601
+  },
+  "val_label_distribution": {
+    "LONG": 189,
+    "SHORT": 183,
+    "PASS": 460
+  },
+  "train_metrics": {
+    "count": 2932,
+    "label_distribution": {
+      "LONG": 661,
+      "SHORT": 670,
+      "PASS": 1601
+    },
+    "pred_distribution": {
+      "LONG": 766,
+      "SHORT": 613,
+      "PASS": 1553
+    },
+    "macro_f1": 0.8684485928671499,
+    "pass_precision": 0.9452672247263362,
+    "pass_recall": 0.9169269206745784,
+    "cand0_pass_recall": 0.9169269206745784,
+    "cand1_accuracy": 0.8512396694214877,
+    "cand0_mean_p_pass": 0.7989773154258728,
+    "cand0_std_p_pass": 0.2183585911989212,
+    "log_loss": 0.36566110516678124,
+    "confusion_matrix": [
+      [
+        583,
+        22,
+        56
+      ],
+      [
+        91,
+        550,
+        29
+      ],
+      [
+        92,
+        41,
+        1468
+      ]
+    ]
+  },
+  "val_metrics": {
+    "count": 832,
+    "label_distribution": {
+      "LONG": 189,
+      "SHORT": 183,
+      "PASS": 460
+    },
+    "pred_distribution": {
+      "LONG": 188,
+      "SHORT": 178,
+      "PASS": 466
+    },
+    "macro_f1": 0.47603572332448923,
+    "pass_precision": 0.7510729613733905,
+    "pass_recall": 0.7608695652173914,
+    "cand0_pass_recall": 0.7608695652173914,
+    "cand1_accuracy": 0.3333333333333333,
+    "cand0_mean_p_pass": 0.6875603795051575,
+    "cand0_std_p_pass": 0.30541491508483887,
+    "log_loss": 0.9348502297318712,
+    "confusion_matrix": [
+      [
+        63,
+        61,
+        65
+      ],
+      [
+        71,
+        61,
+        51
+      ],
+      [
+        54,
+        56,
+        350
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_log_loss": 0.7764572011851064,
+      "val_log_loss": 1.0048197334490705,
+      "monitor_log_loss": 1.0048197334490705
+    },
+    {
+      "epoch": 2,
+      "train_log_loss": 0.5633144766582137,
+      "val_log_loss": 0.9489398459428313,
+      "monitor_log_loss": 0.9489398459428313
+    },
+    {
+      "epoch": 3,
+      "train_log_loss": 0.36566110516678124,
+      "val_log_loss": 0.9348502297318712,
+      "monitor_log_loss": 0.9348502297318712
+    },
+    {
+      "epoch": 4,
+      "train_log_loss": 0.24282727630595652,
+      "val_log_loss": 0.9706271244301561,
+      "monitor_log_loss": 0.9706271244301561
+    },
+    {
+      "epoch": 5,
+      "train_log_loss": 0.16949955497449903,
+      "val_log_loss": 1.0290698132395362,
+      "monitor_log_loss": 1.0290698132395362
+    },
+    {
+      "epoch": 6,
+      "train_log_loss": 0.10237600767050394,
+      "val_log_loss": 1.070735153069503,
+      "monitor_log_loss": 1.070735153069503
+    },
+    {
+      "epoch": 7,
+      "train_log_loss": 0.07865386998359665,
+      "val_log_loss": 1.116128535316118,
+      "monitor_log_loss": 1.116128535316118
+    },
+    {
+      "epoch": 8,
+      "train_log_loss": 0.0503709120587413,
+      "val_log_loss": 1.1303959515665718,
+      "monitor_log_loss": 1.1303959515665718
+    },
+    {
+      "epoch": 9,
+      "train_log_loss": 0.03178856610449923,
+      "val_log_loss": 1.2098830676799888,
+      "monitor_log_loss": 1.2098830676799888
+    },
+    {
+      "epoch": 10,
+      "train_log_loss": 0.021897639235357126,
+      "val_log_loss": 1.2168918094146173,
+      "monitor_log_loss": 1.2168918094146173
+    },
+    {
+      "epoch": 11,
+      "train_log_loss": 0.013989112732381495,
+      "val_log_loss": 1.2445567508883149,
+      "monitor_log_loss": 1.2445567508883149
+    }
+  ],
+  "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_q1_out\\regime_5\\clf_reg5.joblib"
+}

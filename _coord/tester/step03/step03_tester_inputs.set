@@ -1,0 +1,4 @@
+InpStartupValidation=true
+InpLogHeartbeat=true
+InpTimerSeconds=1
+InpDebugAlignment=true

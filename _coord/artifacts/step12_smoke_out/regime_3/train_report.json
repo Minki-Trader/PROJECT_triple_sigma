@@ -1,0 +1,178 @@
+{
+  "regime_id": 3,
+  "status": "trained",
+  "train_count_raw": 119,
+  "train_count_retained": 119,
+  "val_count": 26,
+  "cand0_retained_count": 97,
+  "cand1_retained_count": 22,
+  "best_epoch": 4,
+  "epochs_trained": 12,
+  "early_stopped": true,
+  "train_label_distribution_raw": {
+    "LONG": 15,
+    "SHORT": 7,
+    "PASS": 97
+  },
+  "train_label_distribution_retained": {
+    "LONG": 15,
+    "SHORT": 7,
+    "PASS": 97
+  },
+  "val_label_distribution": {
+    "LONG": 4,
+    "SHORT": 0,
+    "PASS": 22
+  },
+  "train_metrics": {
+    "count": 119,
+    "label_distribution": {
+      "LONG": 15,
+      "SHORT": 7,
+      "PASS": 97
+    },
+    "pred_distribution": {
+      "LONG": 16,
+      "SHORT": 9,
+      "PASS": 94
+    },
+    "macro_f1": 0.9173492653268029,
+    "pass_precision": 0.9893617021276596,
+    "pass_recall": 0.9587628865979382,
+    "cand0_pass_recall": 0.9587628865979382,
+    "cand1_accuracy": 0.9545454545454546,
+    "cand0_mean_p_pass": 0.8725895881652832,
+    "cand0_std_p_pass": 0.1571701020002365,
+    "log_loss": 0.16150458577137689,
+    "confusion_matrix": [
+      [
+        14,
+        0,
+        1
+      ],
+      [
+        0,
+        7,
+        0
+      ],
+      [
+        2,
+        2,
+        93
+      ]
+    ]
+  },
+  "val_metrics": {
+    "count": 26,
+    "label_distribution": {
+      "LONG": 4,
+      "SHORT": 0,
+      "PASS": 22
+    },
+    "pred_distribution": {
+      "LONG": 0,
+      "SHORT": 2,
+      "PASS": 24
+    },
+    "macro_f1": 0.2898550724637681,
+    "pass_precision": 0.8333333333333334,
+    "pass_recall": 0.9090909090909091,
+    "cand0_pass_recall": 0.9090909090909091,
+    "cand1_accuracy": 0.0,
+    "cand0_mean_p_pass": 0.7229195237159729,
+    "cand0_std_p_pass": 0.17803628742694855,
+    "log_loss": 0.8637474140319831,
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        4
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        20
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_log_loss": 0.7952756213199275,
+      "val_log_loss": 1.3558131335435912,
+      "monitor_log_loss": 1.3558131335435912
+    },
+    {
+      "epoch": 2,
+      "train_log_loss": 0.4063681551990031,
+      "val_log_loss": 1.069561030314444,
+      "monitor_log_loss": 1.069561030314444
+    },
+    {
+      "epoch": 3,
+      "train_log_loss": 0.24749348122654763,
+      "val_log_loss": 0.9269963684287151,
+      "monitor_log_loss": 0.9269963684287151
+    },
+    {
+      "epoch": 4,
+      "train_log_loss": 0.16150458577137689,
+      "val_log_loss": 0.8637474140319831,
+      "monitor_log_loss": 0.8637474140319831
+    },
+    {
+      "epoch": 5,
+      "train_log_loss": 0.11531225643368492,
+      "val_log_loss": 0.8638462347119731,
+      "monitor_log_loss": 0.8638462347119731
+    },
+    {
+      "epoch": 6,
+      "train_log_loss": 0.08511838884062088,
+      "val_log_loss": 0.8872674068772908,
+      "monitor_log_loss": 0.8872674068772908
+    },
+    {
+      "epoch": 7,
+      "train_log_loss": 0.06273066447595126,
+      "val_log_loss": 0.9185131012785329,
+      "monitor_log_loss": 0.9185131012785329
+    },
+    {
+      "epoch": 8,
+      "train_log_loss": 0.047206433840967364,
+      "val_log_loss": 0.9577913548683722,
+      "monitor_log_loss": 0.9577913548683722
+    },
+    {
+      "epoch": 9,
+      "train_log_loss": 0.034788070251626245,
+      "val_log_loss": 0.998925717001603,
+      "monitor_log_loss": 0.998925717001603
+    },
+    {
+      "epoch": 10,
+      "train_log_loss": 0.02612492195373864,
+      "val_log_loss": 1.0375444900535946,
+      "monitor_log_loss": 1.0375444900535946
+    },
+    {
+      "epoch": 11,
+      "train_log_loss": 0.019610526685581046,
+      "val_log_loss": 1.074313129892296,
+      "monitor_log_loss": 1.074313129892296
+    },
+    {
+      "epoch": 12,
+      "train_log_loss": 0.014695135661525704,
+      "val_log_loss": 1.1081661379324912,
+      "monitor_log_loss": 1.1081661379324912
+    }
+  ],
+  "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_smoke_out\\regime_3\\clf_reg3.joblib"
+}

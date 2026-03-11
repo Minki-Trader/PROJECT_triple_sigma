@@ -1,0 +1,45 @@
+{
+  "0": {
+    "tested": true,
+    "row_count": 4,
+    "shape_ok": true,
+    "prob_all_finite": true,
+    "prob_sum_close": true
+  },
+  "1": {
+    "tested": true,
+    "row_count": 4,
+    "shape_ok": true,
+    "prob_all_finite": true,
+    "prob_sum_close": true
+  },
+  "2": {
+    "tested": true,
+    "row_count": 4,
+    "shape_ok": true,
+    "prob_all_finite": true,
+    "prob_sum_close": true
+  },
+  "3": {
+    "tested": true,
+    "row_count": 4,
+    "shape_ok": true,
+    "prob_all_finite": true,
+    "prob_sum_close": true
+  },
+  "4": {
+    "tested": true,
+    "row_count": 4,
+    "shape_ok": true,
+    "prob_all_finite": true,
+    "prob_sum_close": true
+  },
+  "5": {
+    "tested": true,
+    "row_count": 4,
+    "shape_ok": true,
+    "prob_all_finite": true,
+    "prob_sum_close": true
+  },
+  "all_passed": true
+}

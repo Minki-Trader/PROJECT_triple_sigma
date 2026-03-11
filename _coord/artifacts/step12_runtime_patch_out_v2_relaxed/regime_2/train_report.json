@@ -1,0 +1,172 @@
+{
+  "regime_id": 2,
+  "status": "trained",
+  "train_count_raw": 67,
+  "train_count_retained": 67,
+  "val_count": 35,
+  "cand0_retained_count": 38,
+  "cand1_retained_count": 29,
+  "best_epoch": 3,
+  "epochs_trained": 11,
+  "early_stopped": true,
+  "train_label_distribution_raw": {
+    "LONG": 8,
+    "SHORT": 21,
+    "PASS": 38
+  },
+  "train_label_distribution_retained": {
+    "LONG": 8,
+    "SHORT": 21,
+    "PASS": 38
+  },
+  "val_label_distribution": {
+    "LONG": 1,
+    "SHORT": 8,
+    "PASS": 26
+  },
+  "train_metrics": {
+    "count": 67,
+    "label_distribution": {
+      "LONG": 8,
+      "SHORT": 21,
+      "PASS": 38
+    },
+    "pred_distribution": {
+      "LONG": 12,
+      "SHORT": 21,
+      "PASS": 34
+    },
+    "macro_f1": 0.8394179894179894,
+    "pass_precision": 0.9117647058823529,
+    "pass_recall": 0.8157894736842105,
+    "cand0_pass_recall": 0.8157894736842105,
+    "cand1_accuracy": 0.896551724137931,
+    "cand0_mean_p_pass": 0.5582669377326965,
+    "cand0_std_p_pass": 0.1520262062549591,
+    "log_loss": 0.5934342770158384,
+    "confusion_matrix": [
+      [
+        8,
+        0,
+        0
+      ],
+      [
+        0,
+        18,
+        3
+      ],
+      [
+        4,
+        3,
+        31
+      ]
+    ]
+  },
+  "val_metrics": {
+    "count": 35,
+    "label_distribution": {
+      "LONG": 1,
+      "SHORT": 8,
+      "PASS": 26
+    },
+    "pred_distribution": {
+      "LONG": 14,
+      "SHORT": 11,
+      "PASS": 10
+    },
+    "macro_f1": 0.22027290448343081,
+    "pass_precision": 1.0,
+    "pass_recall": 0.38461538461538464,
+    "cand0_pass_recall": 0.38461538461538464,
+    "cand1_accuracy": 0.1111111111111111,
+    "cand0_mean_p_pass": 0.38711121678352356,
+    "cand0_std_p_pass": 0.06069845333695412,
+    "log_loss": 1.1309487648155327,
+    "confusion_matrix": [
+      [
+        0,
+        1,
+        0
+      ],
+      [
+        7,
+        1,
+        0
+      ],
+      [
+        7,
+        9,
+        10
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_log_loss": 0.979494273799284,
+      "val_log_loss": 1.383851302310768,
+      "monitor_log_loss": 1.383851302310768
+    },
+    {
+      "epoch": 2,
+      "train_log_loss": 0.7555456433217731,
+      "val_log_loss": 1.1941200308883995,
+      "monitor_log_loss": 1.1941200308883995
+    },
+    {
+      "epoch": 3,
+      "train_log_loss": 0.5934342770158384,
+      "val_log_loss": 1.1309487648155327,
+      "monitor_log_loss": 1.1309487648155327
+    },
+    {
+      "epoch": 4,
+      "train_log_loss": 0.4864534257383517,
+      "val_log_loss": 1.161325432611386,
+      "monitor_log_loss": 1.161325432611386
+    },
+    {
+      "epoch": 5,
+      "train_log_loss": 0.4213160779186905,
+      "val_log_loss": 1.210609362563479,
+      "monitor_log_loss": 1.210609362563479
+    },
+    {
+      "epoch": 6,
+      "train_log_loss": 0.38241127739723657,
+      "val_log_loss": 1.2632455589066114,
+      "monitor_log_loss": 1.2632455589066114
+    },
+    {
+      "epoch": 7,
+      "train_log_loss": 0.3744754876823704,
+      "val_log_loss": 1.3457993344753978,
+      "monitor_log_loss": 1.3457993344753978
+    },
+    {
+      "epoch": 8,
+      "train_log_loss": 0.3747095433846062,
+      "val_log_loss": 1.4180920788898284,
+      "monitor_log_loss": 1.4180920788898284
+    },
+    {
+      "epoch": 9,
+      "train_log_loss": 0.37736823205306097,
+      "val_log_loss": 1.479728817478047,
+      "monitor_log_loss": 1.479728817478047
+    },
+    {
+      "epoch": 10,
+      "train_log_loss": 0.36443406123470307,
+      "val_log_loss": 1.5101511108612917,
+      "monitor_log_loss": 1.5101511108612917
+    },
+    {
+      "epoch": 11,
+      "train_log_loss": 0.3201959453809743,
+      "val_log_loss": 1.4884397194790655,
+      "monitor_log_loss": 1.4884397194790655
+    }
+  ],
+  "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_2\\clf_reg2.joblib"
+}

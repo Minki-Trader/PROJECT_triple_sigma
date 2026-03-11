@@ -1,0 +1,23 @@
+# GPT Pro audit ZIP and unpacked copy
+GPT-PRO-FOR-REPORT/
+GPT-PRO-FOR-REPORT.zip
+
+# Tester log tails (50-60MB each)
+**/tester_log_tail.txt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temp
+*.tmp

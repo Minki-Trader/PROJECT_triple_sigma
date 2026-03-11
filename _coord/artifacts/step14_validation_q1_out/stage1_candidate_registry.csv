@@ -1,0 +1,7 @@
+stage,candidate_id,search_rank,is_baseline,cand0_max_fraction,cand0_sample_weight,seed
+stage1,stage1_baseline,0,True,0.95,1.0,42
+stage1,stage1_c01,1,False,0.95,0.3,42
+stage1,stage1_c02,2,False,0.75,1.0,42
+stage1,stage1_c03,3,False,0.75,0.3,42
+stage1,stage1_c04,4,False,0.5,1.0,42
+stage1,stage1_c05,5,False,0.5,0.3,42

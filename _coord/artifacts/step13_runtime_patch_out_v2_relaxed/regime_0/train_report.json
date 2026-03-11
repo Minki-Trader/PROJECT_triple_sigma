@@ -1,0 +1,96 @@
+{
+  "regime_id": 0,
+  "status": "fallback_only",
+  "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step13_runtime_patch_out_v2_relaxed\\regime_0\\prm_reg0.joblib",
+  "output_order": [
+    "k_sl_L",
+    "k_tp_L",
+    "hold_L",
+    "k_sl_S",
+    "k_tp_S",
+    "hold_S"
+  ],
+  "long_head": {
+    "status": "fallback_constant",
+    "train_count": 0,
+    "val_count": 0,
+    "target_columns": [
+      "k_sl_L",
+      "k_tp_L",
+      "hold_L"
+    ],
+    "fallback_reason": "train_count=0 < min_train_samples_per_head=12; val_count=0 < min_val_samples_per_head=4",
+    "sample_weight_summary": {
+      "pass_row_weight": 0.25,
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "pass_count": 0,
+      "non_pass_count": 0
+    },
+    "train_metrics": null,
+    "val_metrics": null
+  },
+  "short_head": {
+    "status": "fallback_constant",
+    "train_count": 1,
+    "val_count": 0,
+    "target_columns": [
+      "k_sl_S",
+      "k_tp_S",
+      "hold_S"
+    ],
+    "fallback_reason": "train_count=1 < min_train_samples_per_head=12; val_count=0 < min_val_samples_per_head=4",
+    "sample_weight_summary": {
+      "pass_row_weight": 0.25,
+      "min": 1.0,
+      "max": 1.0,
+      "mean": 1.0,
+      "pass_count": 0,
+      "non_pass_count": 1
+    },
+    "train_metrics": {
+      "count": 1,
+      "raw_mae": {
+        "k_sl": 0.5,
+        "k_tp": 10.0,
+        "hold": 41.0
+      },
+      "effective_mae": {
+        "k_sl": 0.5,
+        "k_tp": 10.0,
+        "hold": 41.0
+      },
+      "baseline_effective_mae": {
+        "k_sl": 0.5,
+        "k_tp": 10.0,
+        "hold": 41.0
+      },
+      "raw_huber": {
+        "k_sl": 0.09375,
+        "k_tp": 4.875,
+        "hold": 80.0
+      },
+      "normalized_effective_mae": {
+        "k_sl": 0.09090909090909091,
+        "k_tp": 0.8695652173913043,
+        "hold": 0.5774647887323944
+      },
+      "normalized_effective_mae_mean": 0.5126463656775965,
+      "baseline_normalized_effective_mae_mean": 0.5126463656775965,
+      "beats_default_baseline": true,
+      "k_sl_low_clip_rate": 0.0,
+      "k_sl_high_clip_rate": 0.0,
+      "k_tp_low_clip_rate": 0.0,
+      "k_tp_high_clip_rate": 0.0,
+      "hold_low_clip_rate": 0.0,
+      "hold_high_clip_rate": 0.0,
+      "hold_round_changed_rate": 0.0,
+      "hold_boundary_rate": 0.0,
+      "raw_nan_count": 0,
+      "raw_inf_count": 0,
+      "effective_all_finite": true
+    },
+    "val_metrics": null
+  }
+}

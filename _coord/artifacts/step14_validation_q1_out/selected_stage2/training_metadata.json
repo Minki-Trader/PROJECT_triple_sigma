@@ -1,0 +1,2653 @@
+{
+  "implementation_status": "step14_selected_stage2_refit",
+  "prm_version": "step14_stage2_c02",
+  "architecture_baseline": {
+    "family": "sklearn_gradient_boosting_regressor",
+    "wrapper": "multioutput_per_direction",
+    "loss": "huber",
+    "direction_masking": "two_direction_heads"
+  },
+  "training_config": {
+    "min_train_samples_per_head": 12,
+    "min_val_samples_per_head": 4,
+    "pass_row_weight": 0.25,
+    "gbr_n_estimators": 120,
+    "gbr_learning_rate": 0.03,
+    "gbr_max_depth": 2,
+    "gbr_min_samples_leaf": 8,
+    "gbr_subsample": 0.8,
+    "gbr_alpha": 0.9,
+    "seed": 42,
+    "model_name": "step14_stage2_c02"
+  },
+  "source_step11_metadata": {
+    "schema_version": "1.0",
+    "model_pack_version": "0.1.0",
+    "candidate_policy_version": "0.1.2",
+    "regime_policy_version": "0.1.0q",
+    "cost_model_version": "0.1",
+    "search_space_version": "0.1.0",
+    "tie_policy": "candidate_preferred_then_long",
+    "symbol": "US100",
+    "timeframe": "PERIOD_M5",
+    "price_basis": "Bid",
+    "point_size": 0.01,
+    "slip_points": 2,
+    "slip_price": 0.02,
+    "R_pass_buffer": 0.05,
+    "H": 72,
+    "warmup_bars": 150,
+    "atr_thr": 0.0005,
+    "adx_thr1": 20.0,
+    "adx_thr2": 30.0,
+    "thr_method": "manual",
+    "thr_seed": "0",
+    "thr_notes": "step06_candidate_adaptive",
+    "dist_atr_max_mode": "adaptive_quantile",
+    "dist_atr_max_q": 0.8,
+    "dist_atr_max_w": 63,
+    "dist_atr_max_clamp_lo": 0.5,
+    "dist_atr_max_clamp_hi": 5.0,
+    "data_start": "2025-11-28 20:10:00",
+    "data_end": "2026-02-27 23:50:00",
+    "total_bars": 17231,
+    "total_labeled_samples": 13042,
+    "forced_pass_count": 7775,
+    "label_distribution": {
+      "LONG": 2631,
+      "PASS": 7775,
+      "SHORT": 2636
+    },
+    "flip_distribution": {
+      "requires_flip_0": 10439,
+      "requires_flip_1": 2603
+    },
+    "input_files": [
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251128.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251201.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251202.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251203.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251204.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251205.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251208.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251209.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251210.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251211.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251212.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251215.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251216.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251217.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251218.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251219.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251222.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251223.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251224.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251226.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251229.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251230.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251231.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260102.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260105.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260106.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260107.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260108.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260109.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260112.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260113.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260114.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260115.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260116.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260119.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260120.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260121.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260122.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260123.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260126.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260127.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260128.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260129.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260130.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260202.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260203.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260204.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260205.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260206.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260209.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260210.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260211.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260212.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260213.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260216.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260217.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260218.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260219.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260220.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260223.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260224.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260225.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260226.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260227.csv"
+    ],
+    "validation": {
+      "rows_validated": 13176,
+      "rows_validated_dist_atr_max": 13114,
+      "gap_first_ready_rows_excluded": 62,
+      "max_abs_diff": {
+        "ret_1": 5.081867258602268e-09,
+        "ret_3": 5.096099493784312e-09,
+        "ret_12": 5.288300734818119e-09,
+        "range_atr": 2.3398744541935912e-07,
+        "body_atr": 2.3351752265199366e-07,
+        "close_pos": 3.401574799610785e-08,
+        "rsi_norm": 2.220446049250313e-16,
+        "adx_norm": 3.000000015074278e-08,
+        "spread_atr": 4.8869454705169346e-08,
+        "time_sin": 3.296335004954187e-08,
+        "time_cos": 3.296335004954187e-08,
+        "dist_atr_abs_feature6": 2.400000003177638e-07,
+        "dist_atr_max_t": 0.0
+      },
+      "mismatch_count": {
+        "regime_id": 0,
+        "cand_long": 0,
+        "cand_short": 0,
+        "regime_one_hot": 0,
+        "invalid_candidate_pair": 0,
+        "dist_atr_max_mode": 0,
+        "policy_version": 0,
+        "dist_atr_max_nonpositive": 0,
+        "dist_atr_max_out_of_range": 0,
+        "dist_atr_max_value": 0
+      }
+    }
+  },
+  "source_step12_training_metadata": {
+    "implementation_status": "step14_selected_stage1_refit",
+    "clf_version": "step14_stage1_baseline",
+    "architecture_baseline": {
+      "family": "sklearn_mlp",
+      "hidden_layers": [
+        64,
+        32
+      ]
+    },
+    "training_config": {
+      "train_ratio": 0.8,
+      "embargo_bars": 72,
+      "min_train_samples_per_regime": 24,
+      "min_val_samples_per_regime": 4,
+      "cand0_max_fraction": 0.95,
+      "cand0_sample_weight": 1.0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 64,
+      "epochs": 40,
+      "patience": 8,
+      "min_delta": 0.0001,
+      "seed": 42,
+      "model_name": "step14_stage1_baseline"
+    },
+    "source_step11_metadata": {
+      "schema_version": "1.0",
+      "model_pack_version": "0.1.0",
+      "candidate_policy_version": "0.1.2",
+      "regime_policy_version": "0.1.0q",
+      "cost_model_version": "0.1",
+      "search_space_version": "0.1.0",
+      "tie_policy": "candidate_preferred_then_long",
+      "symbol": "US100",
+      "timeframe": "PERIOD_M5",
+      "price_basis": "Bid",
+      "point_size": 0.01,
+      "slip_points": 2,
+      "slip_price": 0.02,
+      "R_pass_buffer": 0.05,
+      "H": 72,
+      "warmup_bars": 150,
+      "atr_thr": 0.0005,
+      "adx_thr1": 20.0,
+      "adx_thr2": 30.0,
+      "thr_method": "manual",
+      "thr_seed": "0",
+      "thr_notes": "step06_candidate_adaptive",
+      "dist_atr_max_mode": "adaptive_quantile",
+      "dist_atr_max_q": 0.8,
+      "dist_atr_max_w": 63,
+      "dist_atr_max_clamp_lo": 0.5,
+      "dist_atr_max_clamp_hi": 5.0,
+      "data_start": "2025-11-28 20:10:00",
+      "data_end": "2026-02-27 23:50:00",
+      "total_bars": 17231,
+      "total_labeled_samples": 13042,
+      "forced_pass_count": 7775,
+      "label_distribution": {
+        "LONG": 2631,
+        "PASS": 7775,
+        "SHORT": 2636
+      },
+      "flip_distribution": {
+        "requires_flip_0": 10439,
+        "requires_flip_1": 2603
+      },
+      "input_files": [
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251128.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251201.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251202.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251203.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251204.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251205.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251208.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251209.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251210.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251211.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251212.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251215.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251216.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251217.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251218.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251219.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251222.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251223.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251224.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251226.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251229.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251230.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251231.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260102.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260105.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260106.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260107.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260108.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260109.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260112.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260113.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260114.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260115.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260116.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260119.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260120.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260121.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260122.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260123.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260126.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260127.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260128.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260129.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260130.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260202.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260203.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260204.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260205.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260206.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260209.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260210.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260211.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260212.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260213.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260216.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260217.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260218.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260219.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260220.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260223.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260224.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260225.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260226.csv",
+        "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20260227.csv"
+      ],
+      "validation": {
+        "rows_validated": 13176,
+        "rows_validated_dist_atr_max": 13114,
+        "gap_first_ready_rows_excluded": 62,
+        "max_abs_diff": {
+          "ret_1": 5.081867258602268e-09,
+          "ret_3": 5.096099493784312e-09,
+          "ret_12": 5.288300734818119e-09,
+          "range_atr": 2.3398744541935912e-07,
+          "body_atr": 2.3351752265199366e-07,
+          "close_pos": 3.401574799610785e-08,
+          "rsi_norm": 2.220446049250313e-16,
+          "adx_norm": 3.000000015074278e-08,
+          "spread_atr": 4.8869454705169346e-08,
+          "time_sin": 3.296335004954187e-08,
+          "time_cos": 3.296335004954187e-08,
+          "dist_atr_abs_feature6": 2.400000003177638e-07,
+          "dist_atr_max_t": 0.0
+        },
+        "mismatch_count": {
+          "regime_id": 0,
+          "cand_long": 0,
+          "cand_short": 0,
+          "regime_one_hot": 0,
+          "invalid_candidate_pair": 0,
+          "dist_atr_max_mode": 0,
+          "policy_version": 0,
+          "dist_atr_max_nonpositive": 0,
+          "dist_atr_max_out_of_range": 0,
+          "dist_atr_max_value": 0
+        }
+      }
+    },
+    "data_start": "2025-11-28 20:10:00",
+    "data_end": "2026-02-27 23:50:00",
+    "total_labeled_samples": 13042,
+    "train_bar_count": 13556,
+    "scaler_source": "global_train_bars",
+    "scaler_bar_count": 13556,
+    "scaler_replaced_std_indices": [],
+    "split_plan": {
+      "target_split_index": 10434,
+      "selected_split_index": 10440,
+      "boundary_window_end_idx": 13789,
+      "target_train_ratio": 0.8,
+      "effective_train_ratio": 0.7999692496924969,
+      "embargo_bars": 72,
+      "train_count": 10406,
+      "val_count": 2602,
+      "dropped_count": 34,
+      "requested_min_val_samples_per_regime": 4,
+      "effective_min_val_samples_per_regime": 4,
+      "relaxed_min_val_requirement": false,
+      "train_end_time": "2026-02-10 23:50:00",
+      "val_start_time": "2026-02-11 09:05:00",
+      "no_time_leakage": true,
+      "fallback_used": false,
+      "train_counts_by_regime": {
+        "0": 705,
+        "1": 1185,
+        "2": 1455,
+        "3": 2703,
+        "4": 1426,
+        "5": 2932
+      },
+      "val_counts_by_regime": {
+        "0": 146,
+        "1": 393,
+        "2": 203,
+        "3": 866,
+        "4": 162,
+        "5": 832
+      },
+      "dropped_counts_by_regime": {
+        "0": 11,
+        "1": 0,
+        "2": 15,
+        "3": 8,
+        "4": 0,
+        "5": 0
+      }
+    },
+    "per_regime": {
+      "0": {
+        "regime_id": 0,
+        "status": "trained",
+        "train_count_raw": 705,
+        "train_count_retained": 705,
+        "val_count": 146,
+        "cand0_retained_count": 635,
+        "cand1_retained_count": 70,
+        "best_epoch": 9,
+        "epochs_trained": 17,
+        "early_stopped": true,
+        "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_0\\clf_reg0.joblib",
+        "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_0\\train_report.json",
+        "train_label_distribution": {
+          "LONG": 29,
+          "SHORT": 41,
+          "PASS": 635
+        },
+        "val_label_distribution": {
+          "LONG": 4,
+          "SHORT": 5,
+          "PASS": 137
+        },
+        "train_metrics": {
+          "count": 705,
+          "label_distribution": {
+            "LONG": 29,
+            "SHORT": 41,
+            "PASS": 635
+          },
+          "pred_distribution": {
+            "LONG": 45,
+            "SHORT": 38,
+            "PASS": 622
+          },
+          "macro_f1": 0.883814239301989,
+          "pass_precision": 0.9935691318327974,
+          "pass_recall": 0.9732283464566929,
+          "cand0_pass_recall": 0.9732283464566929,
+          "cand1_accuracy": 0.9142857142857143,
+          "cand0_mean_p_pass": 0.9145885705947876,
+          "cand0_std_p_pass": 0.14553599059581757,
+          "log_loss": 0.12068520565076561,
+          "confusion_matrix": [
+            [
+              28,
+              0,
+              1
+            ],
+            [
+              2,
+              36,
+              3
+            ],
+            [
+              15,
+              2,
+              618
+            ]
+          ]
+        },
+        "val_metrics": {
+          "count": 146,
+          "label_distribution": {
+            "LONG": 4,
+            "SHORT": 5,
+            "PASS": 137
+          },
+          "pred_distribution": {
+            "LONG": 11,
+            "SHORT": 5,
+            "PASS": 130
+          },
+          "macro_f1": 0.49238451935081146,
+          "pass_precision": 0.9692307692307692,
+          "pass_recall": 0.9197080291970803,
+          "cand0_pass_recall": 0.9197080291970803,
+          "cand1_accuracy": 0.3333333333333333,
+          "cand0_mean_p_pass": 0.8005591630935669,
+          "cand0_std_p_pass": 0.21628887951374054,
+          "log_loss": 0.42871605281055736,
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              2,
+              2,
+              1
+            ],
+            [
+              8,
+              3,
+              126
+            ]
+          ]
+        }
+      },
+      "1": {
+        "regime_id": 1,
+        "status": "trained",
+        "train_count_raw": 1185,
+        "train_count_retained": 1185,
+        "val_count": 393,
+        "cand0_retained_count": 1065,
+        "cand1_retained_count": 120,
+        "best_epoch": 6,
+        "epochs_trained": 14,
+        "early_stopped": true,
+        "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_1\\clf_reg1.joblib",
+        "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_1\\train_report.json",
+        "train_label_distribution": {
+          "LONG": 71,
+          "SHORT": 49,
+          "PASS": 1065
+        },
+        "val_label_distribution": {
+          "LONG": 22,
+          "SHORT": 13,
+          "PASS": 358
+        },
+        "train_metrics": {
+          "count": 1185,
+          "label_distribution": {
+            "LONG": 71,
+            "SHORT": 49,
+            "PASS": 1065
+          },
+          "pred_distribution": {
+            "LONG": 105,
+            "SHORT": 52,
+            "PASS": 1028
+          },
+          "macro_f1": 0.9198124124404795,
+          "pass_precision": 1.0,
+          "pass_recall": 0.9652582159624413,
+          "cand0_pass_recall": 0.9652582159624413,
+          "cand1_accuracy": 1.0,
+          "cand0_mean_p_pass": 0.8765669465065002,
+          "cand0_std_p_pass": 0.14875036478042603,
+          "log_loss": 0.14633178116259107,
+          "confusion_matrix": [
+            [
+              71,
+              0,
+              0
+            ],
+            [
+              0,
+              49,
+              0
+            ],
+            [
+              34,
+              3,
+              1028
+            ]
+          ]
+        },
+        "val_metrics": {
+          "count": 393,
+          "label_distribution": {
+            "LONG": 22,
+            "SHORT": 13,
+            "PASS": 358
+          },
+          "pred_distribution": {
+            "LONG": 16,
+            "SHORT": 5,
+            "PASS": 372
+          },
+          "macro_f1": 0.36313386205239123,
+          "pass_precision": 0.9139784946236559,
+          "pass_recall": 0.9497206703910615,
+          "cand0_pass_recall": 0.9497206703910615,
+          "cand1_accuracy": 0.08571428571428572,
+          "cand0_mean_p_pass": 0.8576772809028625,
+          "cand0_std_p_pass": 0.1707545816898346,
+          "log_loss": 0.4370874118466813,
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              19
+            ],
+            [
+              0,
+              0,
+              13
+            ],
+            [
+              13,
+              5,
+              340
+            ]
+          ]
+        }
+      },
+      "2": {
+        "regime_id": 2,
+        "status": "trained",
+        "train_count_raw": 1455,
+        "train_count_retained": 1455,
+        "val_count": 203,
+        "cand0_retained_count": 730,
+        "cand1_retained_count": 725,
+        "best_epoch": 10,
+        "epochs_trained": 18,
+        "early_stopped": true,
+        "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_2\\clf_reg2.joblib",
+        "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_2\\train_report.json",
+        "train_label_distribution": {
+          "LONG": 377,
+          "SHORT": 348,
+          "PASS": 730
+        },
+        "val_label_distribution": {
+          "LONG": 68,
+          "SHORT": 34,
+          "PASS": 101
+        },
+        "train_metrics": {
+          "count": 1455,
+          "label_distribution": {
+            "LONG": 377,
+            "SHORT": 348,
+            "PASS": 730
+          },
+          "pred_distribution": {
+            "LONG": 376,
+            "SHORT": 346,
+            "PASS": 733
+          },
+          "macro_f1": 0.9804866454161886,
+          "pass_precision": 0.9877216916780355,
+          "pass_recall": 0.9917808219178083,
+          "cand0_pass_recall": 0.9917808219178083,
+          "cand1_accuracy": 0.9737931034482759,
+          "cand0_mean_p_pass": 0.9393779039382935,
+          "cand0_std_p_pass": 0.09545281529426575,
+          "log_loss": 0.09557577964155466,
+          "confusion_matrix": [
+            [
+              367,
+              3,
+              7
+            ],
+            [
+              7,
+              339,
+              2
+            ],
+            [
+              2,
+              4,
+              724
+            ]
+          ]
+        },
+        "val_metrics": {
+          "count": 203,
+          "label_distribution": {
+            "LONG": 68,
+            "SHORT": 34,
+            "PASS": 101
+          },
+          "pred_distribution": {
+            "LONG": 61,
+            "SHORT": 44,
+            "PASS": 98
+          },
+          "macro_f1": 0.5356598136778107,
+          "pass_precision": 0.8469387755102041,
+          "pass_recall": 0.8217821782178217,
+          "cand0_pass_recall": 0.8217821782178217,
+          "cand1_accuracy": 0.4117647058823529,
+          "cand0_mean_p_pass": 0.7297929525375366,
+          "cand0_std_p_pass": 0.2936708331108093,
+          "log_loss": 1.08428090199687,
+          "confusion_matrix": [
+            [
+              30,
+              27,
+              11
+            ],
+            [
+              18,
+              12,
+              4
+            ],
+            [
+              13,
+              5,
+              83
+            ]
+          ]
+        }
+      },
+      "3": {
+        "regime_id": 3,
+        "status": "trained",
+        "train_count_raw": 2703,
+        "train_count_retained": 2703,
+        "val_count": 866,
+        "cand0_retained_count": 1343,
+        "cand1_retained_count": 1360,
+        "best_epoch": 2,
+        "epochs_trained": 10,
+        "early_stopped": true,
+        "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_3\\clf_reg3.joblib",
+        "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_3\\train_report.json",
+        "train_label_distribution": {
+          "LONG": 694,
+          "SHORT": 666,
+          "PASS": 1343
+        },
+        "val_label_distribution": {
+          "LONG": 176,
+          "SHORT": 264,
+          "PASS": 426
+        },
+        "train_metrics": {
+          "count": 2703,
+          "label_distribution": {
+            "LONG": 694,
+            "SHORT": 666,
+            "PASS": 1343
+          },
+          "pred_distribution": {
+            "LONG": 633,
+            "SHORT": 843,
+            "PASS": 1227
+          },
+          "macro_f1": 0.7546897546359185,
+          "pass_precision": 0.8663406682966586,
+          "pass_recall": 0.7915115413253909,
+          "cand0_pass_recall": 0.7915115413253909,
+          "cand1_accuracy": 0.7507352941176471,
+          "cand0_mean_p_pass": 0.5997586846351624,
+          "cand0_std_p_pass": 0.2158343642950058,
+          "log_loss": 0.6312129530535568,
+          "confusion_matrix": [
+            [
+              460,
+              126,
+              108
+            ],
+            [
+              49,
+              561,
+              56
+            ],
+            [
+              124,
+              156,
+              1063
+            ]
+          ]
+        },
+        "val_metrics": {
+          "count": 866,
+          "label_distribution": {
+            "LONG": 176,
+            "SHORT": 264,
+            "PASS": 426
+          },
+          "pred_distribution": {
+            "LONG": 199,
+            "SHORT": 256,
+            "PASS": 411
+          },
+          "macro_f1": 0.4221616273014122,
+          "pass_precision": 0.6520681265206812,
+          "pass_recall": 0.6291079812206573,
+          "cand0_pass_recall": 0.6291079812206573,
+          "cand1_accuracy": 0.32954545454545453,
+          "cand0_mean_p_pass": 0.49537408351898193,
+          "cand0_std_p_pass": 0.22873137891292572,
+          "log_loss": 1.0503354619829757,
+          "confusion_matrix": [
+            [
+              46,
+              77,
+              53
+            ],
+            [
+              75,
+              99,
+              90
+            ],
+            [
+              78,
+              80,
+              268
+            ]
+          ]
+        }
+      },
+      "4": {
+        "regime_id": 4,
+        "status": "trained",
+        "train_count_raw": 1426,
+        "train_count_retained": 1426,
+        "val_count": 162,
+        "cand0_retained_count": 801,
+        "cand1_retained_count": 625,
+        "best_epoch": 6,
+        "epochs_trained": 14,
+        "early_stopped": true,
+        "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_4\\clf_reg4.joblib",
+        "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_4\\train_report.json",
+        "train_label_distribution": {
+          "LONG": 302,
+          "SHORT": 323,
+          "PASS": 801
+        },
+        "val_label_distribution": {
+          "LONG": 37,
+          "SHORT": 28,
+          "PASS": 97
+        },
+        "train_metrics": {
+          "count": 1426,
+          "label_distribution": {
+            "LONG": 302,
+            "SHORT": 323,
+            "PASS": 801
+          },
+          "pred_distribution": {
+            "LONG": 305,
+            "SHORT": 351,
+            "PASS": 770
+          },
+          "macro_f1": 0.9130455221870134,
+          "pass_precision": 0.9675324675324676,
+          "pass_recall": 0.9300873907615481,
+          "cand0_pass_recall": 0.9300873907615481,
+          "cand1_accuracy": 0.9168,
+          "cand0_mean_p_pass": 0.7997823357582092,
+          "cand0_std_p_pass": 0.2010623812675476,
+          "log_loss": 0.28933403556853193,
+          "confusion_matrix": [
+            [
+              276,
+              20,
+              6
+            ],
+            [
+              7,
+              297,
+              19
+            ],
+            [
+              22,
+              34,
+              745
+            ]
+          ]
+        },
+        "val_metrics": {
+          "count": 162,
+          "label_distribution": {
+            "LONG": 37,
+            "SHORT": 28,
+            "PASS": 97
+          },
+          "pred_distribution": {
+            "LONG": 41,
+            "SHORT": 31,
+            "PASS": 90
+          },
+          "macro_f1": 0.4829381319909734,
+          "pass_precision": 0.8333333333333334,
+          "pass_recall": 0.7731958762886598,
+          "cand0_pass_recall": 0.7731958762886598,
+          "cand1_accuracy": 0.3384615384615385,
+          "cand0_mean_p_pass": 0.6766223907470703,
+          "cand0_std_p_pass": 0.2984773516654968,
+          "log_loss": 0.9310817424687914,
+          "confusion_matrix": [
+            [
+              12,
+              13,
+              12
+            ],
+            [
+              15,
+              10,
+              3
+            ],
+            [
+              14,
+              8,
+              75
+            ]
+          ]
+        }
+      },
+      "5": {
+        "regime_id": 5,
+        "status": "trained",
+        "train_count_raw": 2932,
+        "train_count_retained": 2932,
+        "val_count": 832,
+        "cand0_retained_count": 1601,
+        "cand1_retained_count": 1331,
+        "best_epoch": 3,
+        "epochs_trained": 11,
+        "early_stopped": true,
+        "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_5\\clf_reg5.joblib",
+        "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_5\\train_report.json",
+        "train_label_distribution": {
+          "LONG": 661,
+          "SHORT": 670,
+          "PASS": 1601
+        },
+        "val_label_distribution": {
+          "LONG": 189,
+          "SHORT": 183,
+          "PASS": 460
+        },
+        "train_metrics": {
+          "count": 2932,
+          "label_distribution": {
+            "LONG": 661,
+            "SHORT": 670,
+            "PASS": 1601
+          },
+          "pred_distribution": {
+            "LONG": 766,
+            "SHORT": 613,
+            "PASS": 1553
+          },
+          "macro_f1": 0.8684485928671499,
+          "pass_precision": 0.9452672247263362,
+          "pass_recall": 0.9169269206745784,
+          "cand0_pass_recall": 0.9169269206745784,
+          "cand1_accuracy": 0.8512396694214877,
+          "cand0_mean_p_pass": 0.7989773154258728,
+          "cand0_std_p_pass": 0.2183585911989212,
+          "log_loss": 0.36566110516678124,
+          "confusion_matrix": [
+            [
+              583,
+              22,
+              56
+            ],
+            [
+              91,
+              550,
+              29
+            ],
+            [
+              92,
+              41,
+              1468
+            ]
+          ]
+        },
+        "val_metrics": {
+          "count": 832,
+          "label_distribution": {
+            "LONG": 189,
+            "SHORT": 183,
+            "PASS": 460
+          },
+          "pred_distribution": {
+            "LONG": 188,
+            "SHORT": 178,
+            "PASS": 466
+          },
+          "macro_f1": 0.47603572332448923,
+          "pass_precision": 0.7510729613733905,
+          "pass_recall": 0.7608695652173914,
+          "cand0_pass_recall": 0.7608695652173914,
+          "cand1_accuracy": 0.3333333333333333,
+          "cand0_mean_p_pass": 0.6875603795051575,
+          "cand0_std_p_pass": 0.30541491508483887,
+          "log_loss": 0.9348502297318712,
+          "confusion_matrix": [
+            [
+              63,
+              61,
+              65
+            ],
+            [
+              71,
+              61,
+              51
+            ],
+            [
+              54,
+              56,
+              350
+            ]
+          ]
+        }
+      }
+    },
+    "acceptance": {
+      "A1_no_time_leakage": true,
+      "A2_cand0_pass_recall_min": 0.6291079812206573,
+      "A2_threshold": 0.5,
+      "A2_pass": true,
+      "A3_export_deferred_to_step15": true,
+      "evaluated_regimes": 6
+    },
+    "selected_from_step14_candidate_id": "stage1_baseline",
+    "step14_selection": {
+      "stage": "stage1",
+      "candidate_id": "stage1_baseline",
+      "candidate_params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 1.0
+      }
+    }
+  },
+  "source_split_plan": {
+    "target_split_index": 10434,
+    "selected_split_index": 10440,
+    "boundary_window_end_idx": 13789,
+    "target_train_ratio": 0.8,
+    "effective_train_ratio": 0.7999692496924969,
+    "embargo_bars": 72,
+    "train_count": 10406,
+    "val_count": 2602,
+    "dropped_count": 34,
+    "requested_min_val_samples_per_regime": 4,
+    "effective_min_val_samples_per_regime": 4,
+    "relaxed_min_val_requirement": false,
+    "train_end_time": "2026-02-10 23:50:00",
+    "val_start_time": "2026-02-11 09:05:00",
+    "no_time_leakage": true,
+    "fallback_used": false,
+    "train_counts_by_regime": {
+      "0": 705,
+      "1": 1185,
+      "2": 1455,
+      "3": 2703,
+      "4": 1426,
+      "5": 2932
+    },
+    "val_counts_by_regime": {
+      "0": 146,
+      "1": 393,
+      "2": 203,
+      "3": 866,
+      "4": 162,
+      "5": 832
+    },
+    "dropped_counts_by_regime": {
+      "0": 11,
+      "1": 0,
+      "2": 15,
+      "3": 8,
+      "4": 0,
+      "5": 0
+    }
+  },
+  "source_scaler_stats": {
+    "mean": [
+      1.1418338742992028e-06,
+      3.964211419297728e-06,
+      1.599669666568309e-05,
+      0.7830180621496017,
+      0.0015024882251401576,
+      0.01756320243655946,
+      0.09113545022056652,
+      0.2621955655982591,
+      0.009593205276630273,
+      0.01744131194895249,
+      0.23296378581144883,
+      0.033469192151814695
+    ],
+    "std": [
+      0.0005802941093155268,
+      0.0010211593117832353,
+      0.002055947424707915,
+      0.605284803826521,
+      0.5925161520157181,
+      0.5398971850248487,
+      1.2024402903768892,
+      2.0368507868605414,
+      0.12657266219909913,
+      0.2153035736174567,
+      0.1624619660132326,
+      0.04500117134328521
+    ]
+  },
+  "data_start": "2025-11-28 20:10:00",
+  "data_end": "2026-02-27 23:50:00",
+  "total_labeled_samples": 13042,
+  "total_stage2_samples": 5254,
+  "stage2_train_samples": 4231,
+  "stage2_val_samples": 1023,
+  "split_reuse_audit": {
+    "passed": true,
+    "train_count": 10406,
+    "val_count": 2602,
+    "dropped_count": 34,
+    "train_counts_by_regime": {
+      "0": 705,
+      "1": 1185,
+      "2": 1455,
+      "3": 2703,
+      "4": 1426,
+      "5": 2932
+    },
+    "val_counts_by_regime": {
+      "0": 146,
+      "1": 393,
+      "2": 203,
+      "3": 866,
+      "4": 162,
+      "5": 832
+    },
+    "dropped_counts_by_regime": {
+      "0": 11,
+      "1": 0,
+      "2": 15,
+      "3": 8,
+      "4": 0,
+      "5": 0
+    },
+    "train_end_time": "2026-02-10 23:50:00",
+    "val_start_time": "2026-02-11 09:05:00",
+    "no_time_leakage": true
+  },
+  "stage2_audit": {
+    "cand1_only": true,
+    "masking_integrity": true,
+    "total_candidate_rows": 5267,
+    "retained_rows": 5254,
+    "dropped_rows": 13,
+    "train_rows": 4231,
+    "val_rows": 1023,
+    "rows_by_regime": {
+      "0": 79,
+      "1": 155,
+      "2": 827,
+      "3": 1800,
+      "4": 690,
+      "5": 1703
+    },
+    "rows_by_target_side": {
+      "LONG": 2630,
+      "SHORT": 2624
+    },
+    "train_rows_by_regime": {
+      "0": 70,
+      "1": 120,
+      "2": 725,
+      "3": 1360,
+      "4": 625,
+      "5": 1331
+    },
+    "val_rows_by_regime": {
+      "0": 9,
+      "1": 35,
+      "2": 102,
+      "3": 440,
+      "4": 65,
+      "5": 372
+    },
+    "non_pass_rows_matching_target_side": true
+  },
+  "per_regime": {
+    "0": {
+      "status": "trained_both",
+      "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_0\\prm_reg0.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_0\\train_report.json",
+      "long_head": {
+        "status": "trained",
+        "train_count": 29,
+        "val_count": 4,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 29
+        },
+        "train_metrics": {
+          "count": 29,
+          "raw_mae": {
+            "k_sl": 0.5965127462044484,
+            "k_tp": 1.4440109698146202,
+            "hold": 10.379008884514237
+          },
+          "effective_mae": {
+            "k_sl": 0.5965127348899841,
+            "k_tp": 1.4440109647553543,
+            "hold": 10.310344827586206
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.9655172413793104,
+            "k_tp": 4.689655172413793,
+            "hold": 20.275862068965516
+          },
+          "raw_huber": {
+            "k_sl": 0.12029210298761892,
+            "k_tp": 0.6118721045088142,
+            "hold": 18.94400501661784
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.10845686088908803,
+            "k_tp": 0.12556617084829166,
+            "hold": 0.1452161243322001
+          },
+          "normalized_effective_mae_mean": 0.12641305202319328,
+          "baseline_normalized_effective_mae_mean": 0.28964007112960805,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 4,
+          "raw_mae": {
+            "k_sl": 0.6134605621784537,
+            "k_tp": 4.772168299349074,
+            "hold": 17.917750783190737
+          },
+          "effective_mae": {
+            "k_sl": 0.6134605407714844,
+            "k_tp": 4.772168517112732,
+            "hold": 18.0
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.5,
+            "k_tp": 7.5,
+            "hold": 13.5
+          },
+          "raw_huber": {
+            "k_sl": 0.12288545440711156,
+            "k_tp": 2.261084149674537,
+            "hold": 33.835501566381474
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.11153828014026988,
+            "k_tp": 0.4149711754011071,
+            "hold": 0.2535211267605634
+          },
+          "normalized_effective_mae_mean": 0.2600101941006468,
+          "baseline_normalized_effective_mae_mean": 0.31107461634099726,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      },
+      "short_head": {
+        "status": "trained",
+        "train_count": 41,
+        "val_count": 5,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 41
+        },
+        "train_metrics": {
+          "count": 41,
+          "raw_mae": {
+            "k_sl": 0.42271953864551476,
+            "k_tp": 1.3689097354805773,
+            "hold": 8.818714016270103
+          },
+          "effective_mae": {
+            "k_sl": 0.4227195265816479,
+            "k_tp": 1.3689097485891202,
+            "hold": 8.853658536585366
+          },
+          "baseline_effective_mae": {
+            "k_sl": 1.0121951219512195,
+            "k_tp": 5.378048780487805,
+            "hold": 20.5609756097561
+          },
+          "raw_huber": {
+            "k_sl": 0.0775204034945271,
+            "k_tp": 0.5681922991075983,
+            "hold": 15.679368438813334
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.0768580957421178,
+            "k_tp": 0.1190356303120974,
+            "hold": 0.12469941600824459
+          },
+          "normalized_effective_mae_mean": 0.1068643806874866,
+          "baseline_normalized_effective_mae_mean": 0.3137610327280693,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 5,
+          "raw_mae": {
+            "k_sl": 1.0007669612228098,
+            "k_tp": 2.9027692349375536,
+            "hold": 5.909091971258302
+          },
+          "effective_mae": {
+            "k_sl": 1.0007669448852539,
+            "k_tp": 2.902769374847412,
+            "hold": 5.8
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.6,
+            "k_tp": 8.7,
+            "hold": 13.8
+          },
+          "raw_huber": {
+            "k_sl": 0.21894174030570243,
+            "k_tp": 1.3308852373893947,
+            "hold": 9.823181748748041
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.18195762634277343,
+            "k_tp": 0.25241472824760103,
+            "hold": 0.08169014084507042
+          },
+          "normalized_effective_mae_mean": 0.17202083181181496,
+          "baseline_normalized_effective_mae_mean": 0.35332628180148085,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      }
+    },
+    "1": {
+      "status": "trained_both",
+      "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_1\\prm_reg1.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_1\\train_report.json",
+      "long_head": {
+        "status": "trained",
+        "train_count": 71,
+        "val_count": 22,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 71
+        },
+        "train_metrics": {
+          "count": 71,
+          "raw_mae": {
+            "k_sl": 0.2102435835141686,
+            "k_tp": 0.7251373259378245,
+            "hold": 5.711767886046593
+          },
+          "effective_mae": {
+            "k_sl": 0.21024358776253713,
+            "k_tp": 0.7251373176843348,
+            "hold": 5.71830985915493
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.704225352112676,
+            "k_tp": 4.204225352112676,
+            "hold": 25.661971830985916
+          },
+          "raw_huber": {
+            "k_sl": 0.029092018954397676,
+            "k_tp": 0.2596859204083392,
+            "hold": 9.54605612841466
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.03822610686591584,
+            "k_tp": 0.06305541892907258,
+            "hold": 0.08053957548105535
+          },
+          "normalized_effective_mae_mean": 0.06060703375868126,
+          "baseline_normalized_effective_mae_mean": 0.2850206697700725,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 22,
+          "raw_mae": {
+            "k_sl": 0.44682455021067374,
+            "k_tp": 3.7806754286149715,
+            "hold": 23.896807231557247
+          },
+          "effective_mae": {
+            "k_sl": 0.44682455333796417,
+            "k_tp": 3.7806754220615733,
+            "hold": 23.90909090909091
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.75,
+            "k_tp": 4.113636363636363,
+            "hold": 15.954545454545455
+          },
+          "raw_huber": {
+            "k_sl": 0.08284175409904593,
+            "k_tp": 1.7653377143074858,
+            "hold": 45.84523106804976
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.08124082787962984,
+            "k_tp": 0.3287543845270933,
+            "hold": 0.33674775928297057
+          },
+          "normalized_effective_mae_mean": 0.24891432389656457,
+          "baseline_normalized_effective_mae_mean": 0.2395943513518529,
+          "beats_default_baseline": false,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      },
+      "short_head": {
+        "status": "trained",
+        "train_count": 49,
+        "val_count": 13,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 49
+        },
+        "train_metrics": {
+          "count": 49,
+          "raw_mae": {
+            "k_sl": 0.29026321004582617,
+            "k_tp": 0.805314093598838,
+            "hold": 6.110161313315952
+          },
+          "effective_mae": {
+            "k_sl": 0.29026321488983775,
+            "k_tp": 0.8053141272797877,
+            "hold": 6.122448979591836
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7959183673469388,
+            "k_tp": 3.4489795918367347,
+            "hold": 20.142857142857142
+          },
+          "raw_huber": {
+            "k_sl": 0.050045434065889974,
+            "k_tp": 0.3014020681487488,
+            "hold": 10.32573993851544
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.0527751299799705,
+            "k_tp": 0.07002731541563371,
+            "hold": 0.0862316757688991
+          },
+          "normalized_effective_mae_mean": 0.06967804038816777,
+          "baseline_normalized_effective_mae_mean": 0.24277530418725413,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 13,
+          "raw_mae": {
+            "k_sl": 0.5182279654221307,
+            "k_tp": 2.2441743352662877,
+            "hold": 17.761078413158238
+          },
+          "effective_mae": {
+            "k_sl": 0.5182279577622046,
+            "k_tp": 2.244174370398888,
+            "hold": 17.692307692307693
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7692307692307693,
+            "k_tp": 0.7307692307692307,
+            "hold": 15.76923076923077
+          },
+          "raw_huber": {
+            "k_sl": 0.10070045519145684,
+            "k_tp": 0.9971484498442863,
+            "hold": 33.522156826316476
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.09422326504767357,
+            "k_tp": 0.19514559742599027,
+            "hold": 0.24918743228602386
+          },
+          "normalized_effective_mae_mean": 0.1795187649198959,
+          "baseline_normalized_effective_mae_mean": 0.14183571072732126,
+          "beats_default_baseline": false,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      }
+    },
+    "2": {
+      "status": "trained_both",
+      "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_2\\prm_reg2.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_2\\train_report.json",
+      "long_head": {
+        "status": "trained",
+        "train_count": 377,
+        "val_count": 68,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 377
+        },
+        "train_metrics": {
+          "count": 377,
+          "raw_mae": {
+            "k_sl": 0.5000713201098823,
+            "k_tp": 2.0029319448543097,
+            "hold": 11.505157509469568
+          },
+          "effective_mae": {
+            "k_sl": 0.5000713201985751,
+            "k_tp": 2.0029319287611256,
+            "hold": 11.496021220159152
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.713527851458886,
+            "k_tp": 5.135278514588859,
+            "hold": 17.917771883289124
+          },
+          "raw_huber": {
+            "k_sl": 0.09705952758955823,
+            "k_tp": 0.8839767075859218,
+            "hold": 21.105691134966087
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.09092205821792275,
+            "k_tp": 0.17416799380531528,
+            "hold": 0.1619157918332275
+          },
+          "normalized_effective_mae_mean": 0.14233528128548853,
+          "baseline_normalized_effective_mae_mean": 0.2762137595636339,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 68,
+          "raw_mae": {
+            "k_sl": 1.072821863743917,
+            "k_tp": 4.207944132829619,
+            "hold": 22.792839373971116
+          },
+          "effective_mae": {
+            "k_sl": 1.0728218651869719,
+            "k_tp": 4.207944175776313,
+            "hold": 22.720588235294116
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.8970588235294118,
+            "k_tp": 7.022058823529412,
+            "hold": 23.41176470588235
+          },
+          "raw_huber": {
+            "k_sl": 0.23735175715459042,
+            "k_tp": 1.9794868809972337,
+            "hold": 43.585678747942225
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.1950585209430858,
+            "k_tp": 0.36590818919794027,
+            "hold": 0.32000828500414247
+          },
+          "normalized_effective_mae_mean": 0.2936583317150562,
+          "baseline_normalized_effective_mae_mean": 0.3678195266304484,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      },
+      "short_head": {
+        "status": "trained",
+        "train_count": 348,
+        "val_count": 34,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 348
+        },
+        "train_metrics": {
+          "count": 348,
+          "raw_mae": {
+            "k_sl": 0.5324308950084805,
+            "k_tp": 2.083317372423676,
+            "hold": 11.496054728047216
+          },
+          "effective_mae": {
+            "k_sl": 0.5324308978415083,
+            "k_tp": 2.083317372990751,
+            "hold": 11.508620689655173
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.8045977011494253,
+            "k_tp": 5.244252873563219,
+            "hold": 18.17241379310345
+          },
+          "raw_huber": {
+            "k_sl": 0.1044304811001099,
+            "k_tp": 0.9226438778589054,
+            "hold": 21.041907438863337
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.09680561778936515,
+            "k_tp": 0.18115803243397832,
+            "hold": 0.16209324915007287
+          },
+          "normalized_effective_mae_mean": 0.1466856331244721,
+          "baseline_normalized_effective_mae_mean": 0.28608732338909504,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 34,
+          "raw_mae": {
+            "k_sl": 1.1531886761003474,
+            "k_tp": 3.396931942783386,
+            "hold": 12.828198866228526
+          },
+          "effective_mae": {
+            "k_sl": 1.1531886738889359,
+            "k_tp": 3.3969319708207073,
+            "hold": 12.794117647058824
+          },
+          "baseline_effective_mae": {
+            "k_sl": 1.1911764705882353,
+            "k_tp": 5.382352941176471,
+            "hold": 12.529411764705882
+          },
+          "raw_huber": {
+            "k_sl": 0.25973155900797923,
+            "k_tp": 1.580147499873653,
+            "hold": 23.713030032428577
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.20967066797980652,
+            "k_tp": 0.29538538876701803,
+            "hold": 0.18019884009942005
+          },
+          "normalized_effective_mae_mean": 0.2284182989487482,
+          "baseline_normalized_effective_mae_mean": 0.28702627295977684,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      }
+    },
+    "3": {
+      "status": "trained_both",
+      "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_3\\prm_reg3.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_3\\train_report.json",
+      "long_head": {
+        "status": "trained",
+        "train_count": 694,
+        "val_count": 176,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 694
+        },
+        "train_metrics": {
+          "count": 694,
+          "raw_mae": {
+            "k_sl": 0.4560648966128852,
+            "k_tp": 1.987259044725712,
+            "hold": 15.013864541249422
+          },
+          "effective_mae": {
+            "k_sl": 0.4560648974149303,
+            "k_tp": 1.9872590423660939,
+            "hold": 15.021613832853026
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7305475504322767,
+            "k_tp": 4.38328530259366,
+            "hold": 21.902017291066283
+          },
+          "raw_huber": {
+            "k_sl": 0.08657576706144704,
+            "k_tp": 0.8744711720131826,
+            "hold": 28.061201402182764
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.08292089043907823,
+            "k_tp": 0.17280513411879078,
+            "hold": 0.21157202581483134
+          },
+          "normalized_effective_mae_mean": 0.1557660167909001,
+          "baseline_normalized_effective_mae_mean": 0.27415372927690035,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 176,
+          "raw_mae": {
+            "k_sl": 0.5175968602533471,
+            "k_tp": 2.749964691012971,
+            "hold": 23.681681552070895
+          },
+          "effective_mae": {
+            "k_sl": 0.5175968588075854,
+            "k_tp": 2.749964691021226,
+            "hold": 23.698863636363637
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.6903409090909091,
+            "k_tp": 3.747159090909091,
+            "hold": 20.727272727272727
+          },
+          "raw_huber": {
+            "k_sl": 0.1016257033967627,
+            "k_tp": 1.2534552807145034,
+            "hold": 45.36436809706517
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.09410851978319736,
+            "k_tp": 0.23912736443662833,
+            "hold": 0.33378681177976954
+          },
+          "normalized_effective_mae_mean": 0.22234089866653176,
+          "baseline_normalized_effective_mae_mean": 0.2477632895227395,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      },
+      "short_head": {
+        "status": "trained",
+        "train_count": 666,
+        "val_count": 264,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 666
+        },
+        "train_metrics": {
+          "count": 666,
+          "raw_mae": {
+            "k_sl": 0.5034884201335502,
+            "k_tp": 2.3368916274509135,
+            "hold": 15.250812057507863
+          },
+          "effective_mae": {
+            "k_sl": 0.5034884189342236,
+            "k_tp": 2.3368916336122574,
+            "hold": 15.252252252252251
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7672672672672672,
+            "k_tp": 4.425675675675675,
+            "hold": 19.382882882882882
+          },
+          "raw_huber": {
+            "k_sl": 0.09815437916010483,
+            "k_tp": 1.0475826506840908,
+            "hold": 28.543560395188305
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.09154334889713156,
+            "k_tp": 0.2032079681401963,
+            "hold": 0.21482045425707397
+          },
+          "normalized_effective_mae_mean": 0.16985725709813393,
+          "baseline_normalized_effective_mae_mean": 0.2657809510228371,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 264,
+          "raw_mae": {
+            "k_sl": 0.596328052365705,
+            "k_tp": 2.6875533541363477,
+            "hold": 17.658990292493723
+          },
+          "effective_mae": {
+            "k_sl": 0.5963280548652014,
+            "k_tp": 2.6875533615097855,
+            "hold": 17.670454545454547
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7784090909090909,
+            "k_tp": 4.3143939393939394,
+            "hold": 16.223484848484848
+          },
+          "raw_huber": {
+            "k_sl": 0.12140339800061123,
+            "k_tp": 1.224554178981155,
+            "hold": 33.36071882118563
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.10842328270276388,
+            "k_tp": 0.23370029230519873,
+            "hold": 0.2488796414852753
+          },
+          "normalized_effective_mae_mean": 0.19700107216441265,
+          "baseline_normalized_effective_mae_mean": 0.24839780086676486,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      }
+    },
+    "4": {
+      "status": "trained_both",
+      "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_4\\prm_reg4.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_4\\train_report.json",
+      "long_head": {
+        "status": "trained",
+        "train_count": 302,
+        "val_count": 37,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 302
+        },
+        "train_metrics": {
+          "count": 302,
+          "raw_mae": {
+            "k_sl": 0.5253257636992259,
+            "k_tp": 1.9374597787207908,
+            "hold": 11.413942147910815
+          },
+          "effective_mae": {
+            "k_sl": 0.5253257666597303,
+            "k_tp": 1.9374597656805783,
+            "hold": 11.403973509933774
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.8013245033112583,
+            "k_tp": 5.0447019867549665,
+            "hold": 18.278145695364238
+          },
+          "raw_huber": {
+            "k_sl": 0.10357901001115966,
+            "k_tp": 0.8511397564651867,
+            "hold": 20.892270915836193
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.0955137757563146,
+            "k_tp": 0.16847476223309377,
+            "hold": 0.16061934521033486
+          },
+          "normalized_effective_mae_mean": 0.14153596106658106,
+          "baseline_normalized_effective_mae_mean": 0.2806012579942656,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 37,
+          "raw_mae": {
+            "k_sl": 1.0518400838556536,
+            "k_tp": 3.691630661492617,
+            "hold": 13.671626893838186
+          },
+          "effective_mae": {
+            "k_sl": 1.051840079797281,
+            "k_tp": 3.6916306792078792,
+            "hold": 13.594594594594595
+          },
+          "baseline_effective_mae": {
+            "k_sl": 1.0,
+            "k_tp": 6.554054054054054,
+            "hold": 14.243243243243244
+          },
+          "raw_huber": {
+            "k_sl": 0.2317157805930786,
+            "k_tp": 1.727151635507082,
+            "hold": 25.415627069408867
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.19124365087223288,
+            "k_tp": 0.3210113634093808,
+            "hold": 0.19147316330414924
+          },
+          "normalized_effective_mae_mean": 0.2345760591952543,
+          "baseline_normalized_effective_mae_mean": 0.31744832847098614,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      },
+      "short_head": {
+        "status": "trained",
+        "train_count": 323,
+        "val_count": 28,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 323
+        },
+        "train_metrics": {
+          "count": 323,
+          "raw_mae": {
+            "k_sl": 0.5642717477522847,
+            "k_tp": 2.1994828793518826,
+            "hold": 11.18603195794463
+          },
+          "effective_mae": {
+            "k_sl": 0.564271748250483,
+            "k_tp": 2.1994828646397075,
+            "hold": 11.170278637770897
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.8188854489164087,
+            "k_tp": 5.187306501547988,
+            "hold": 17.96594427244582
+          },
+          "raw_huber": {
+            "k_sl": 0.11367553833208016,
+            "k_tp": 0.9792029384432085,
+            "hold": 20.43404302927529
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.10259486331826963,
+            "k_tp": 0.1912593795338876,
+            "hold": 0.15732786813761826
+          },
+          "normalized_effective_mae_mean": 0.15039403699659182,
+          "baseline_normalized_effective_mae_mean": 0.28433328754491155,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 28,
+          "raw_mae": {
+            "k_sl": 1.141369193215071,
+            "k_tp": 4.473257489834997,
+            "hold": 18.360248974569384
+          },
+          "effective_mae": {
+            "k_sl": 1.1413691937923431,
+            "k_tp": 4.473257490566799,
+            "hold": 18.392857142857142
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.9821428571428571,
+            "k_tp": 6.285714285714286,
+            "hold": 16.142857142857142
+          },
+          "raw_huber": {
+            "k_sl": 0.254600310305034,
+            "k_tp": 2.1116287449174984,
+            "hold": 34.720497949138775
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.20752167159860785,
+            "k_tp": 0.3889789122231999,
+            "hold": 0.2590543259557344
+          },
+          "normalized_effective_mae_mean": 0.2851849699258474,
+          "baseline_normalized_effective_mae_mean": 0.3175064882045899,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      }
+    },
+    "5": {
+      "status": "trained_both",
+      "bundle_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_5\\prm_reg5.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out\\selected_stage2\\regime_5\\train_report.json",
+      "long_head": {
+        "status": "trained",
+        "train_count": 661,
+        "val_count": 189,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 661
+        },
+        "train_metrics": {
+          "count": 661,
+          "raw_mae": {
+            "k_sl": 0.43410425753656595,
+            "k_tp": 2.048664921777154,
+            "hold": 14.87959263237674
+          },
+          "effective_mae": {
+            "k_sl": 0.43410425638827904,
+            "k_tp": 2.0486649233346266,
+            "hold": 14.886535552193646
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7239031770045385,
+            "k_tp": 4.654311649016641,
+            "hold": 23.714069591527988
+          },
+          "raw_huber": {
+            "k_sl": 0.08133056173118021,
+            "k_tp": 0.9035829052523419,
+            "hold": 27.77853216538028
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.07892804661605074,
+            "k_tp": 0.17814477594214145,
+            "hold": 0.2096695148196288
+          },
+          "normalized_effective_mae_mean": 0.15558077912594034,
+          "baseline_normalized_effective_mae_mean": 0.29011416390204675,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 189,
+          "raw_mae": {
+            "k_sl": 0.4839660754415448,
+            "k_tp": 2.8665471708280807,
+            "hold": 22.404332907221374
+          },
+          "effective_mae": {
+            "k_sl": 0.4839660733465164,
+            "k_tp": 2.8665471505866478,
+            "hold": 22.423280423280424
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7380952380952381,
+            "k_tp": 3.068783068783069,
+            "hold": 19.682539682539684
+          },
+          "raw_huber": {
+            "k_sl": 0.09364959095377066,
+            "k_tp": 1.3116206299146782,
+            "hold": 42.80914234330386
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.08799383151754844,
+            "k_tp": 0.24926496961623024,
+            "hold": 0.31582085103211865
+          },
+          "normalized_effective_mae_mean": 0.21769321738863245,
+          "baseline_normalized_effective_mae_mean": 0.226089568200203,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      },
+      "short_head": {
+        "status": "trained",
+        "train_count": 670,
+        "val_count": 183,
+        "fallback_reason": null,
+        "sample_weight_summary": {
+          "pass_row_weight": 0.25,
+          "min": 1.0,
+          "max": 1.0,
+          "mean": 1.0,
+          "pass_count": 0,
+          "non_pass_count": 670
+        },
+        "train_metrics": {
+          "count": 670,
+          "raw_mae": {
+            "k_sl": 0.4292961429926477,
+            "k_tp": 1.8220413042632637,
+            "hold": 13.714218493884651
+          },
+          "effective_mae": {
+            "k_sl": 0.4292961435531502,
+            "k_tp": 1.8220413147513546,
+            "hold": 13.734328358208955
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7231343283582089,
+            "k_tp": 3.9985074626865673,
+            "hold": 19.655223880597013
+          },
+          "raw_huber": {
+            "k_sl": 0.07895839772895236,
+            "k_tp": 0.7921371578448054,
+            "hold": 25.47233407635874
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.07805384428239094,
+            "k_tp": 0.15843837519576995,
+            "hold": 0.19344124448181627
+          },
+          "normalized_effective_mae_mean": 0.14331115465332572,
+          "baseline_normalized_effective_mae_mean": 0.25200313635297317,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        },
+        "val_metrics": {
+          "count": 183,
+          "raw_mae": {
+            "k_sl": 0.5825641582019151,
+            "k_tp": 2.2515230091151026,
+            "hold": 14.716090302583343
+          },
+          "effective_mae": {
+            "k_sl": 0.5825641578663894,
+            "k_tp": 2.2515230009464617,
+            "hold": 14.726775956284152
+          },
+          "baseline_effective_mae": {
+            "k_sl": 0.7295081967213115,
+            "k_tp": 3.808743169398907,
+            "hold": 18.825136612021858
+          },
+          "raw_huber": {
+            "k_sl": 0.11777551961369376,
+            "k_tp": 1.0075069309375602,
+            "hold": 27.46345321190187
+          },
+          "normalized_effective_mae": {
+            "k_sl": 0.10592075597570716,
+            "k_tp": 0.1957846087779532,
+            "hold": 0.20741937966597399
+          },
+          "normalized_effective_mae_mean": 0.16970824813987814,
+          "baseline_normalized_effective_mae_mean": 0.24299189378044547,
+          "beats_default_baseline": true,
+          "k_sl_low_clip_rate": 0.0,
+          "k_sl_high_clip_rate": 0.0,
+          "k_tp_low_clip_rate": 0.0,
+          "k_tp_high_clip_rate": 0.0,
+          "hold_low_clip_rate": 0.0,
+          "hold_high_clip_rate": 0.0,
+          "hold_round_changed_rate": 1.0,
+          "hold_boundary_rate": 0.0,
+          "raw_nan_count": 0,
+          "raw_inf_count": 0,
+          "effective_all_finite": true
+        }
+      }
+    }
+  },
+  "acceptance": {
+    "A1_split_match_step12": true,
+    "A2_step12_no_time_leakage": true,
+    "A3_cand1_only": true,
+    "A4_masking_integrity": true,
+    "A5_bundle_predict_shape_and_finite": true,
+    "A6_postprocess_contract_valid": true,
+    "A7_export_deferred_to_step15": true,
+    "fallback_head_count": 0,
+    "quality_heads_evaluated": 12,
+    "quality_heads_beating_default_baseline": 10,
+    "quality_max_hold_boundary_rate": 0.0,
+    "quality_rows": [
+      {
+        "regime_id": 0,
+        "side": "LONG",
+        "status": "trained",
+        "val_count": 4,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.2600101941006468,
+        "baseline_normalized_effective_mae_mean": 0.31107461634099726,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 0,
+        "side": "SHORT",
+        "status": "trained",
+        "val_count": 5,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.17202083181181496,
+        "baseline_normalized_effective_mae_mean": 0.35332628180148085,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 1,
+        "side": "LONG",
+        "status": "trained",
+        "val_count": 22,
+        "beats_default_baseline": false,
+        "normalized_effective_mae_mean": 0.24891432389656457,
+        "baseline_normalized_effective_mae_mean": 0.2395943513518529,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 1,
+        "side": "SHORT",
+        "status": "trained",
+        "val_count": 13,
+        "beats_default_baseline": false,
+        "normalized_effective_mae_mean": 0.1795187649198959,
+        "baseline_normalized_effective_mae_mean": 0.14183571072732126,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 2,
+        "side": "LONG",
+        "status": "trained",
+        "val_count": 68,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.2936583317150562,
+        "baseline_normalized_effective_mae_mean": 0.3678195266304484,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 2,
+        "side": "SHORT",
+        "status": "trained",
+        "val_count": 34,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.2284182989487482,
+        "baseline_normalized_effective_mae_mean": 0.28702627295977684,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 3,
+        "side": "LONG",
+        "status": "trained",
+        "val_count": 176,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.22234089866653176,
+        "baseline_normalized_effective_mae_mean": 0.2477632895227395,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 3,
+        "side": "SHORT",
+        "status": "trained",
+        "val_count": 264,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.19700107216441265,
+        "baseline_normalized_effective_mae_mean": 0.24839780086676486,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 4,
+        "side": "LONG",
+        "status": "trained",
+        "val_count": 37,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.2345760591952543,
+        "baseline_normalized_effective_mae_mean": 0.31744832847098614,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 4,
+        "side": "SHORT",
+        "status": "trained",
+        "val_count": 28,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.2851849699258474,
+        "baseline_normalized_effective_mae_mean": 0.3175064882045899,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 5,
+        "side": "LONG",
+        "status": "trained",
+        "val_count": 189,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.21769321738863245,
+        "baseline_normalized_effective_mae_mean": 0.226089568200203,
+        "hold_boundary_rate": 0.0
+      },
+      {
+        "regime_id": 5,
+        "side": "SHORT",
+        "status": "trained",
+        "val_count": 183,
+        "beats_default_baseline": true,
+        "normalized_effective_mae_mean": 0.16970824813987814,
+        "baseline_normalized_effective_mae_mean": 0.24299189378044547,
+        "hold_boundary_rate": 0.0
+      }
+    ],
+    "split_reuse_audit": {
+      "passed": true,
+      "train_count": 10406,
+      "val_count": 2602,
+      "dropped_count": 34,
+      "train_counts_by_regime": {
+        "0": 705,
+        "1": 1185,
+        "2": 1455,
+        "3": 2703,
+        "4": 1426,
+        "5": 2932
+      },
+      "val_counts_by_regime": {
+        "0": 146,
+        "1": 393,
+        "2": 203,
+        "3": 866,
+        "4": 162,
+        "5": 832
+      },
+      "dropped_counts_by_regime": {
+        "0": 11,
+        "1": 0,
+        "2": 15,
+        "3": 8,
+        "4": 0,
+        "5": 0
+      },
+      "train_end_time": "2026-02-10 23:50:00",
+      "val_start_time": "2026-02-11 09:05:00",
+      "no_time_leakage": true
+    },
+    "stage2_audit": {
+      "cand1_only": true,
+      "masking_integrity": true,
+      "total_candidate_rows": 5267,
+      "retained_rows": 5254,
+      "dropped_rows": 13,
+      "train_rows": 4231,
+      "val_rows": 1023,
+      "rows_by_regime": {
+        "0": 79,
+        "1": 155,
+        "2": 827,
+        "3": 1800,
+        "4": 690,
+        "5": 1703
+      },
+      "rows_by_target_side": {
+        "LONG": 2630,
+        "SHORT": 2624
+      },
+      "train_rows_by_regime": {
+        "0": 70,
+        "1": 120,
+        "2": 725,
+        "3": 1360,
+        "4": 625,
+        "5": 1331
+      },
+      "val_rows_by_regime": {
+        "0": 9,
+        "1": 35,
+        "2": 102,
+        "3": 440,
+        "4": 65,
+        "5": 372
+      },
+      "non_pass_rows_matching_target_side": true
+    },
+    "bundle_smoke": {
+      "0": {
+        "tested": true,
+        "row_count": 8,
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "target_side_counts": {
+          "LONG": 4,
+          "SHORT": 4
+        }
+      },
+      "1": {
+        "tested": true,
+        "row_count": 8,
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "target_side_counts": {
+          "LONG": 4,
+          "SHORT": 4
+        }
+      },
+      "2": {
+        "tested": true,
+        "row_count": 8,
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "target_side_counts": {
+          "LONG": 4,
+          "SHORT": 4
+        }
+      },
+      "3": {
+        "tested": true,
+        "row_count": 8,
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "target_side_counts": {
+          "LONG": 4,
+          "SHORT": 4
+        }
+      },
+      "4": {
+        "tested": true,
+        "row_count": 8,
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "target_side_counts": {
+          "LONG": 4,
+          "SHORT": 4
+        }
+      },
+      "5": {
+        "tested": true,
+        "row_count": 8,
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "target_side_counts": {
+          "LONG": 4,
+          "SHORT": 4
+        }
+      }
+    }
+  },
+  "selected_from_step14_candidate_id": "stage2_c02",
+  "step14_selection": {
+    "stage": "stage2",
+    "candidate_id": "stage2_c02",
+    "candidate_params": {
+      "gbr_n_estimators": 120,
+      "gbr_learning_rate": 0.03,
+      "gbr_max_depth": 2
+    }
+  }
+}

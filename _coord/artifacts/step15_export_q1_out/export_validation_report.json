@@ -1,0 +1,670 @@
+{
+  "accepted": true,
+  "acceptance": {
+    "A1_source_bundle_complete_and_consistent": true,
+    "A2_stage1_onnx_export_complete": true,
+    "A3_stage2_onnx_export_complete": true,
+    "A4_pack_meta_complete_and_runtime_compatible": true,
+    "A5_scaler_stats_packaged_and_valid": true,
+    "A6_static_inference_smoke_pass": true,
+    "A7_source_parity_smoke_pass": true,
+    "A8_pack_layout_runtime_compatible": true,
+    "A9_export_reports_complete": true
+  },
+  "source_bundle_audit": {
+    "required_files_present": true,
+    "handoff_stage1_matches_selected": true,
+    "handoff_stage2_matches_selected": true,
+    "missing_stage1_lineage_keys": [],
+    "missing_stage2_lineage_keys": [],
+    "lineage_matches": {
+      "schema_version": true,
+      "model_pack_version": true,
+      "candidate_policy_version": true,
+      "regime_policy_version": true,
+      "cost_model_version": true,
+      "atr_thr": true,
+      "adx_thr1": true,
+      "adx_thr2": true,
+      "dist_atr_max_mode": true,
+      "dist_atr_max_q": true,
+      "dist_atr_max_w": true,
+      "dist_atr_max_clamp_lo": true,
+      "dist_atr_max_clamp_hi": true
+    },
+    "selected_scaler_stats_equal": true,
+    "selected_split_plan_equal": true,
+    "A1_source_bundle_complete_and_consistent": true
+  },
+  "stage1_onnx_validation": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg0_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "1": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg1_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "2": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg2_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "3": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg3_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "4": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg4_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "5": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg5_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      }
+    }
+  },
+  "stage2_onnx_validation": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg0_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "1": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg1_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "2": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg2_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "3": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg3_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "4": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg4_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "5": {
+        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg5_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      }
+    }
+  },
+  "pack_meta_validation": {
+    "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv",
+    "missing_required_keys": [],
+    "unsupported_keys": [],
+    "value_matches_source_step11": {
+      "model_pack_version": true,
+      "schema_version": true,
+      "regime_policy_version": true,
+      "candidate_policy_version": true,
+      "cost_model_version": true,
+      "atr_thr": true,
+      "adx_thr1": true,
+      "adx_thr2": true,
+      "thr_method": true,
+      "thr_seed": true,
+      "thr_notes": true,
+      "dist_atr_max_mode": true,
+      "dist_atr_max_q": true,
+      "dist_atr_max_w": true,
+      "dist_atr_max_clamp_lo": true,
+      "dist_atr_max_clamp_hi": true
+    },
+    "format": "key_value_text",
+    "runtime_compatible": true
+  },
+  "scaler_validation": {
+    "schema_valid": true,
+    "mean_length": 12,
+    "std_length": 12,
+    "all_mean_finite": true,
+    "all_std_finite": true,
+    "all_std_positive": true,
+    "semantic_match_selected": true
+  },
+  "stage1_smoke": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 1.7881393432617188e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "1": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.5762786865234375e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "2": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 5.960464477539062e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "3": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 2.384185791015625e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "4": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 1.7881393432617188e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "5": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 1.7881393432617188e-07,
+        "samples_tested": 8,
+        "passed": true
+      }
+    }
+  },
+  "stage2_smoke": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "1": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 5.7220458984375e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "2": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 7.62939453125e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "3": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "4": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 7.62939453125e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "5": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      }
+    }
+  },
+  "pack_layout_validation": {
+    "files": [
+      "clf_reg0_v0.1.0.onnx",
+      "clf_reg1_v0.1.0.onnx",
+      "clf_reg2_v0.1.0.onnx",
+      "clf_reg3_v0.1.0.onnx",
+      "clf_reg4_v0.1.0.onnx",
+      "clf_reg5_v0.1.0.onnx",
+      "pack_meta.csv",
+      "prm_reg0_v0.1.0.onnx",
+      "prm_reg1_v0.1.0.onnx",
+      "prm_reg2_v0.1.0.onnx",
+      "prm_reg3_v0.1.0.onnx",
+      "prm_reg4_v0.1.0.onnx",
+      "prm_reg5_v0.1.0.onnx",
+      "scaler_stats.json"
+    ],
+    "expected_files": [
+      "clf_reg0_v0.1.0.onnx",
+      "clf_reg1_v0.1.0.onnx",
+      "clf_reg2_v0.1.0.onnx",
+      "clf_reg3_v0.1.0.onnx",
+      "clf_reg4_v0.1.0.onnx",
+      "clf_reg5_v0.1.0.onnx",
+      "prm_reg0_v0.1.0.onnx",
+      "prm_reg1_v0.1.0.onnx",
+      "prm_reg2_v0.1.0.onnx",
+      "prm_reg3_v0.1.0.onnx",
+      "prm_reg4_v0.1.0.onnx",
+      "prm_reg5_v0.1.0.onnx",
+      "pack_meta.csv",
+      "scaler_stats.json"
+    ],
+    "runtime_compatible": true
+  },
+  "export_manifest": {
+    "source_step14_dir": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out",
+    "selected_candidate_ids": {
+      "stage1": "stage1_baseline",
+      "stage2": "stage2_c02"
+    },
+    "clf_version": "step14_stage1_baseline",
+    "prm_version": "step14_stage2_c02",
+    "model_pack_version": "0.1.0",
+    "schema_version": "1.0",
+    "candidate_policy_version": "0.1.2",
+    "regime_policy_version": "0.1.0q",
+    "cost_model_version": "0.1",
+    "atr_thr": 0.0005,
+    "adx_thr1": 20.0,
+    "adx_thr2": 30.0,
+    "dist_atr_max_mode": "adaptive_quantile",
+    "dist_atr_max_q": 0.8,
+    "dist_atr_max_w": 63,
+    "dist_atr_max_clamp_lo": 0.5,
+    "dist_atr_max_clamp_hi": 5.0,
+    "target_opset": 17,
+    "model_pack_dir": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack",
+    "stage1_files": [
+      "clf_reg0_v0.1.0.onnx",
+      "clf_reg1_v0.1.0.onnx",
+      "clf_reg2_v0.1.0.onnx",
+      "clf_reg3_v0.1.0.onnx",
+      "clf_reg4_v0.1.0.onnx",
+      "clf_reg5_v0.1.0.onnx"
+    ],
+    "stage2_files": [
+      "prm_reg0_v0.1.0.onnx",
+      "prm_reg1_v0.1.0.onnx",
+      "prm_reg2_v0.1.0.onnx",
+      "prm_reg3_v0.1.0.onnx",
+      "prm_reg4_v0.1.0.onnx",
+      "prm_reg5_v0.1.0.onnx"
+    ],
+    "pack_meta": {
+      "model_pack_version": "0.1.0",
+      "schema_version": "1.0",
+      "regime_policy_version": "0.1.0q",
+      "candidate_policy_version": "0.1.2",
+      "cost_model_version": "0.1",
+      "atr_thr": 0.0005,
+      "adx_thr1": 20.0,
+      "adx_thr2": 30.0,
+      "thr_method": "manual",
+      "thr_seed": "0",
+      "thr_notes": "step06_candidate_adaptive",
+      "dist_atr_max_mode": "adaptive_quantile",
+      "dist_atr_max_q": 0.8,
+      "dist_atr_max_w": 63,
+      "dist_atr_max_clamp_lo": 0.5,
+      "dist_atr_max_clamp_hi": 5.0
+    },
+    "file_sha256": {
+      "clf_reg0_v0.1.0.onnx": "b728563cfea34270b9468e56adb08ce46f360ec208f378a2ee84b4dfdbbd5da4",
+      "clf_reg1_v0.1.0.onnx": "e160bc684343496abe633c2a1e470a5f12d940c2b245363f4455ff02d497b18b",
+      "clf_reg2_v0.1.0.onnx": "0472ac6c21bef0de61e2b6000e799c8bfef71a87d5c55897e7d7fefb77d42117",
+      "clf_reg3_v0.1.0.onnx": "2d1516a9f0b4b581bd35300d2e4b123c17f222741d3fe8403aecbea35407a8bc",
+      "clf_reg4_v0.1.0.onnx": "9a8603f388010378885dc2391d4591ba12eebe1182d8336d11429dbc87fd0648",
+      "clf_reg5_v0.1.0.onnx": "652102d75b3644fd8b318f54a2ffdc4ba259bf4cc25682814ff77f5828283fae",
+      "pack_meta.csv": "cb1807c15486bd752f24508cf5dfa84062322d20ece3d6661028825e7b4ee417",
+      "prm_reg0_v0.1.0.onnx": "b50d7914ae622208d6b5d2cce90ede1c1c9bd37b83f2b831d987d786363ace1f",
+      "prm_reg1_v0.1.0.onnx": "00effd5a39713bb3f95593c43a979629edaabfc753c6294116099fed2338e4e8",
+      "prm_reg2_v0.1.0.onnx": "67d775914d73903649851ba2ea2cccb7199a3733e2f1a5c716e1bacfe249d9fd",
+      "prm_reg3_v0.1.0.onnx": "aa3e5e271a87a0d8abba9759bc2aec69d2c27c6a95ead2fa64931a82157a93a5",
+      "prm_reg4_v0.1.0.onnx": "3541a3199d161a1930a471e047d7896e74a7a3201a1e5615f9066bfb87c5a266",
+      "prm_reg5_v0.1.0.onnx": "b2e7fddec04e04060b02e55dc1b03fcf35da3f0440e1a45602c5efc076b379a0",
+      "scaler_stats.json": "05f24d8a60fcc3186bd76226526493861dae9dfe2b08a5fe90921426ae9ee4e0"
+    }
+  }
+}

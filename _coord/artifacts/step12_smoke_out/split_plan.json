@@ -1,0 +1,42 @@
+{
+  "target_split_index": 709,
+  "selected_split_index": 667,
+  "boundary_window_end_idx": 1008,
+  "target_train_ratio": 0.8,
+  "effective_train_ratio": 0.730958230958231,
+  "embargo_bars": 72,
+  "train_count": 595,
+  "val_count": 219,
+  "dropped_count": 72,
+  "requested_min_val_samples_per_regime": 4,
+  "effective_min_val_samples_per_regime": 4,
+  "relaxed_min_val_requirement": false,
+  "train_end_time": "2025-12-04 11:15:00",
+  "val_start_time": "2025-12-04 17:20:00",
+  "no_time_leakage": true,
+  "fallback_used": false,
+  "train_counts_by_regime": {
+    "0": 38,
+    "1": 56,
+    "2": 141,
+    "3": 119,
+    "4": 139,
+    "5": 102
+  },
+  "val_counts_by_regime": {
+    "0": 34,
+    "1": 15,
+    "2": 76,
+    "3": 26,
+    "4": 64,
+    "5": 4
+  },
+  "dropped_counts_by_regime": {
+    "0": 3,
+    "1": 8,
+    "2": 27,
+    "3": 7,
+    "4": 24,
+    "5": 3
+  }
+}

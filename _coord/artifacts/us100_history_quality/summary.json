@@ -1,0 +1,68 @@
+{
+  "bar_data": {
+    "source_csv": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\Common\\Files\\history_qa\\us100_m5_bars.csv",
+    "bar_count": 549608,
+    "start": "2018-05-08 01:00",
+    "end": "2026-03-06 23:55",
+    "gap_count_gt_5m": 2853,
+    "recurring_market_closure_count": 2705,
+    "exceptional_closure_or_missing_count": 91,
+    "intraday_missing_candidate_count": 57,
+    "largest_clean_segment": {
+      "start": "2021-02-01 03:00",
+      "end": "2022-09-13 17:05",
+      "bars": 114049,
+      "calendar_days": 589.59
+    }
+  },
+  "tick_data": {
+    "tick_dir": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\bases\\FPMarketsSC-Live\\ticks\\US100",
+    "present_month_count": 53,
+    "missing_month_count": 31,
+    "missing_months": [
+      "202001",
+      "202002",
+      "202003",
+      "202004",
+      "202005",
+      "202006",
+      "202007",
+      "202008",
+      "202009",
+      "202010",
+      "202011",
+      "202012",
+      "202101",
+      "202102",
+      "202103",
+      "202104",
+      "202105",
+      "202106",
+      "202107",
+      "202108",
+      "202109",
+      "202110",
+      "202111",
+      "202112",
+      "202201",
+      "202202",
+      "202203",
+      "202204",
+      "202205",
+      "202206",
+      "202207"
+    ],
+    "largest_contiguous_segment": {
+      "start": "2022-08-01",
+      "end": "2026-03-06 23:55",
+      "bars": 44,
+      "calendar_days": 1314.0
+    }
+  },
+  "recommended_real_tick_backtest_segment": {
+    "start": "2024-06-04 17:25",
+    "end": "2025-04-02 09:00",
+    "bars": 0,
+    "calendar_days": 301.65
+  }
+}

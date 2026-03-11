@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "candidate_policy_version": "0.1.2",
+  "regime_policy_version": "0.1.0q",
+  "cost_model_version": "0.1",
+  "search_space_version": "0.1.0",
+  "atr_thr": 0.0005,
+  "adx_thr1": 20.0,
+  "adx_thr2": 30.0,
+  "step14_outer_split": {
+    "target_split_index": 10434,
+    "selected_split_index": 10440,
+    "boundary_window_end_idx": 13789,
+    "target_train_ratio": 0.8,
+    "effective_train_ratio": 0.7999692496924969,
+    "embargo_bars": 72,
+    "train_count": 10406,
+    "val_count": 2602,
+    "dropped_count": 34,
+    "requested_min_val_samples_per_regime": 4,
+    "effective_min_val_samples_per_regime": 4,
+    "relaxed_min_val_requirement": false,
+    "train_end_time": "2026-02-10 23:50:00",
+    "val_start_time": "2026-02-11 09:05:00",
+    "no_time_leakage": true,
+    "fallback_used": false,
+    "train_counts_by_regime": {
+      "0": 705,
+      "1": 1185,
+      "2": 1455,
+      "3": 2703,
+      "4": 1426,
+      "5": 2932
+    },
+    "val_counts_by_regime": {
+      "0": 146,
+      "1": 393,
+      "2": 203,
+      "3": 866,
+      "4": 162,
+      "5": 832
+    },
+    "dropped_counts_by_regime": {
+      "0": 11,
+      "1": 0,
+      "2": 15,
+      "3": 8,
+      "4": 0,
+      "5": 0
+    }
+  },
+  "stage1": {
+    "selected_candidate_id": "stage1_baseline",
+    "selected_candidate_params": {
+      "cand0_max_fraction": 0.95,
+      "cand0_sample_weight": 1.0
+    },
+    "final_handoff_candidate_id": "stage1_baseline",
+    "final_handoff_is_baseline": true,
+    "clf_version": "step14_stage1_baseline",
+    "expected_future_pack_filenames": [
+      "clf_reg0.onnx",
+      "clf_reg1.onnx",
+      "clf_reg2.onnx",
+      "clf_reg3.onnx",
+      "clf_reg4.onnx",
+      "clf_reg5.onnx"
+    ]
+  },
+  "stage2": {
+    "selected_candidate_id": "stage2_c02",
+    "selected_candidate_params": {
+      "gbr_n_estimators": 120,
+      "gbr_learning_rate": 0.03,
+      "gbr_max_depth": 2
+    },
+    "final_handoff_candidate_id": "stage2_c02",
+    "final_handoff_is_baseline": false,
+    "prm_version": "step14_stage2_c02",
+    "expected_future_pack_filenames": [
+      "prm_reg0.onnx",
+      "prm_reg1.onnx",
+      "prm_reg2.onnx",
+      "prm_reg3.onnx",
+      "prm_reg4.onnx",
+      "prm_reg5.onnx"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "parser_version": "1.0",
+  "parse_timestamp": "2026-03-10T22:31:45.288864",
+  "raw_dir": "_coord\\artifacts\\step21_live_trailing_probe",
+  "output_dir": "_coord\\campaigns\\C2026Q1_stage1_refresh\\parser_outputs",
+  "files_parsed": {
+    "trade_log": {
+      "rows": 5001,
+      "columns": 36,
+      "entry_count": 1805,
+      "exit_count": 1804,
+      "modify_count": 1392
+    },
+    "bar_log": {
+      "files": 240,
+      "total_rows": 65333,
+      "columns": 90
+    }
+  },
+  "schema_version": "2.0",
+  "contract_version": "1.0",
+  "issues": [],
+  "invariant_issues": [],
+  "pass": true,
+  "invariants_pass": true,
+  "master_tables": {
+    "trades_master": 1805,
+    "bars_master": 65333,
+    "modify_master": 1392,
+    "execution_master": 5001,
+    "audit_master": 0
+  },
+  "master_table_issues": [],
+  "master_table_warnings": [
+    "modify_master: 4 MODIFY rows share timestamp with EXIT for same trade_id (close-before-modify violation)"
+  ],
+  "master_tables_pass": true,
+  "master_table_build_timestamp": "2026-03-10T22:31:53.919789",
+  "counterfactual_eval": {
+    "rows": 5407,
+    "horizon": 72,
+    "decision_types": {
+      "ENTRY": 1805,
+      "EXIT_SL": 1564,
+      "MODIFY": 1392,
+      "NO_EXIT": 227,
+      "EXIT_FORCE": 227,
+      "GATE_BLOCK": 179,
+      "EXIT_TP": 13
+    },
+    "coverage_pass": true,
+    "unmapped_total": 0,
+    "exit_reason_taxonomy_used": true,
+    "build_timestamp": "2026-03-11T07:43:26.664225"
+  },
+  "daily_risk_metrics": {
+    "trading_days": 239,
+    "total_trades": 1804,
+    "total_gross_pnl": -44.45000000000001,
+    "total_net_pnl": -44.45000000000001,
+    "total_pnl": -44.45000000000003,
+    "final_drawdown": -144.27,
+    "max_equity_dd_pct": -1.5370570960670589,
+    "cost_model": {
+      "broker_commission_in_pnl": true,
+      "additional_commission_per_lot": 0.0,
+      "initial_equity": 10000.0
+    },
+    "avg_profit_factor": 1.8530432847803215,
+    "avg_win_rate": 0.6840977014617182,
+    "build_timestamp": "2026-03-11T07:43:15.505312"
+  }
+}

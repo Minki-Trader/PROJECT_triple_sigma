@@ -1,0 +1,149 @@
+{
+  "scenarios": [
+    {
+      "scenario": "full_available_m5_range",
+      "start": "2018-05-08 01:00",
+      "end": "2026-03-06 23:55",
+      "bars": 549608,
+      "calendar_days": 2859.95,
+      "actual_tick_coverage": "incomplete",
+      "generated_tick_exposure": "very_high (37.00% of bars fall inside months without .tkc coverage between 201904 and 202603)",
+      "training_suitability": "low_to_medium",
+      "optimization_suitability": "low",
+      "final_backtest_suitability": "low",
+      "notes": "Not suitable as a single Model=4 optimization/final-evaluation range. If the tester substitutes generated ticks across missing tick months, the contamination is too large."
+    },
+    {
+      "scenario": "largest_clean_bar_only_segment",
+      "start": "2021-02-01 03:00",
+      "end": "2022-09-13 17:05",
+      "bars": 114049,
+      "calendar_days": 589.59,
+      "actual_tick_coverage": "partial_or_none",
+      "generated_tick_exposure": "n/a_for_training_bars",
+      "training_suitability": "medium_to_high",
+      "optimization_suitability": "low",
+      "final_backtest_suitability": "low",
+      "notes": "Useful only as auxiliary bar-based training data. Keep it out of final Model=4 optimization/reporting because actual tick coverage is not continuous."
+    },
+    {
+      "scenario": "full_contiguous_actual_tick_range",
+      "start": "2022-08-01",
+      "end": "2026-03-06 23:55",
+      "bars": 254262,
+      "calendar_days": 1314.0,
+      "actual_tick_coverage": "contiguous_months_present",
+      "generated_tick_exposure": "low (17 missing M5 bars inside range, 0.0067% of bars)",
+      "training_suitability": "medium_to_high",
+      "optimization_suitability": "medium",
+      "final_backtest_suitability": "medium",
+      "notes": "Viable for exploratory backtests and broad stress runs, but still crosses 10 intraday missing-bar events. Keep gap dates visible in evaluation notes."
+    },
+    {
+      "scenario": "largest_clean_actual_tick_window",
+      "start": "2024-06-04 17:25",
+      "end": "2025-04-02 09:00",
+      "bars": 58405,
+      "calendar_days": 301.65,
+      "actual_tick_coverage": "clean_and_contiguous",
+      "generated_tick_exposure": "none_expected",
+      "training_suitability": "high",
+      "optimization_suitability": "high",
+      "final_backtest_suitability": "high",
+      "notes": "Best single clean window for high-confidence Model=4 optimization and final comparisons."
+    },
+    {
+      "scenario": "segment_aware_clean_actual_tick_pack",
+      "start": "2022-09-13 17:15",
+      "end": "2025-11-24 14:50",
+      "bars": 206766,
+      "calendar_days": 1069.0,
+      "actual_tick_coverage": "clean_and_contiguous_by_segment",
+      "generated_tick_exposure": "none_inside_selected_segments",
+      "training_suitability": "high",
+      "optimization_suitability": "high",
+      "final_backtest_suitability": "medium_to_high",
+      "notes": "Best choice for rolling or walk-forward optimization. Use the four >=180-day clean actual-tick windows as separate folds instead of forcing one contaminated continuous range."
+    }
+  ],
+  "metrics": {
+    "full_actual_tick_range": {
+      "start": "2022-08-01",
+      "end": "2026-03-06 23:55",
+      "bars": 254262,
+      "calendar_days": 1314.0,
+      "intraday_gap_count": 10,
+      "missing_bars": 17,
+      "missing_bar_ratio_pct": 0.006686
+    },
+    "missing_tick_months": {
+      "count": 31,
+      "months": [
+        "202001",
+        "202002",
+        "202003",
+        "202004",
+        "202005",
+        "202006",
+        "202007",
+        "202008",
+        "202009",
+        "202010",
+        "202011",
+        "202012",
+        "202101",
+        "202102",
+        "202103",
+        "202104",
+        "202105",
+        "202106",
+        "202107",
+        "202108",
+        "202109",
+        "202110",
+        "202111",
+        "202112",
+        "202201",
+        "202202",
+        "202203",
+        "202204",
+        "202205",
+        "202206",
+        "202207"
+      ],
+      "bars_in_missing_tick_months": 180275,
+      "share_of_observed_tick_range_bars_pct": 37.0
+    },
+    "rolling_clean_pack": {
+      "segment_count_ge_180d": 4,
+      "total_bars": 206766,
+      "total_calendar_days": 1069.0,
+      "segments": [
+        {
+          "start": "2024-06-04 17:25",
+          "end": "2025-04-02 09:00",
+          "bars": 58405,
+          "calendar_days": 301.65
+        },
+        {
+          "start": "2023-05-03 09:55",
+          "end": "2024-02-26 20:05",
+          "bars": 57596,
+          "calendar_days": 299.42
+        },
+        {
+          "start": "2025-04-02 09:10",
+          "end": "2025-11-24 14:50",
+          "bars": 45902,
+          "calendar_days": 236.24
+        },
+        {
+          "start": "2022-09-13 17:15",
+          "end": "2023-05-03 09:45",
+          "bars": 44863,
+          "calendar_days": 231.69
+        }
+      ]
+    }
+  }
+}

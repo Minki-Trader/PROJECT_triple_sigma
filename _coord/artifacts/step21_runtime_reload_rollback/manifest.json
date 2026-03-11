@@ -1,0 +1,174 @@
+{
+  "artifact_dir": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step21_runtime_reload_rollback",
+  "created_at": "2026-03-09T14:08:51.111055+00:00",
+  "preset": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\tester\\step21\\step21_tester_runtime_reload_rollback.ini",
+  "summary": "_coord/logs/smoke/step21_runtime_reload_rollback_summary.md",
+  "validation_class": "runtime-reload-rollback",
+  "trigger_source": "runtime patch forced failure + rollback + broker audit",
+  "synthetic": false,
+  "baseline_compare": "",
+  "files": {
+    "README.md": {
+      "sha256": "87be360594d589024dcd587a1fd12a09a9412f022defa23f2df78fc9d6e9ba0b",
+      "size": 674
+    },
+    "bar_log_20260102.csv": {
+      "sha256": "aafac9454d9b06e09862548764cd242a6bd3a26f5b44e6fd12f4af02aa519dbb",
+      "size": 2517
+    },
+    "bar_log_20260105.csv": {
+      "sha256": "ea8100d72c0e0e381af644d6a7736a15f2fde9b7ccbfb85ffa85d327da715993",
+      "size": 201882
+    },
+    "bar_log_20260106.csv": {
+      "sha256": "1649a55a0be3f38e7b7f780879437ec15243038f9a9fec0b9661ed2d663a361b",
+      "size": 201418
+    },
+    "bar_log_20260107.csv": {
+      "sha256": "961af57a5a3baa14c5eed4cf98b06fe1c73a1ff90160e4fffb12b42619be25f1",
+      "size": 204333
+    },
+    "bar_log_20260108.csv": {
+      "sha256": "4861597d171939eb5935578effe67bd6f78e802b6f26d84f8b1f95546cc0b0f3",
+      "size": 203891
+    },
+    "bar_log_20260109.csv": {
+      "sha256": "4860f30f262ded610c7d7a46748a44f6b977d77f219230f8c0067c5efcdfa7bc",
+      "size": 203931
+    },
+    "bar_log_20260112.csv": {
+      "sha256": "148b153f61013ca8029475f331b9561316448cb1123d7230de7dda5f52fadd52",
+      "size": 201664
+    },
+    "bar_log_20260113.csv": {
+      "sha256": "e05617f80ceec6e61ff108aceee21e4a41edbe4d95fd9c78f85ba5ef847ba53d",
+      "size": 202021
+    },
+    "bar_log_20260114.csv": {
+      "sha256": "74a6470a40847372b6867a7d498220e831a7fec177fb3ac102236f5e289868c4",
+      "size": 203341
+    },
+    "bar_log_20260115.csv": {
+      "sha256": "60526abd216b4959a8c79e08b54b8e36eea7c50ee762881a4d4e9a53bea26bed",
+      "size": 203362
+    },
+    "bar_log_20260116.csv": {
+      "sha256": "b5a0164735ca6b8378c358056dbe9a4c56098e04cdad82354f6e1070fe5d9d0d",
+      "size": 204071
+    },
+    "bar_log_20260119.csv": {
+      "sha256": "2e285aa203af9d989632b89c9b923fa7f48cdcf18f79eb93ab2b43f5c3a81030",
+      "size": 167489
+    },
+    "bar_log_20260120.csv": {
+      "sha256": "6190fe6980c77a75508690471d27a49d904a6cf59824c7dbab229af6195212b8",
+      "size": 203547
+    },
+    "bar_log_20260121.csv": {
+      "sha256": "94f027d1e9a367219bd2a5aeeef30befcca67016977451deccdf6b8f81f62ffb",
+      "size": 203566
+    },
+    "bar_log_20260122.csv": {
+      "sha256": "129cd49177ce3ce2716b0758db2d971bae8f3fcefba815abb12b36d24f12d4a8",
+      "size": 202405
+    },
+    "bar_log_20260123.csv": {
+      "sha256": "9a88b56655a49d25b1e45920a28c8ffbec7fbdd2310419a183c2ff6999904b71",
+      "size": 204292
+    },
+    "bar_log_20260126.csv": {
+      "sha256": "27f4707b6d160227b82f26e64f4d9f0e82c04f7252d4cae1797acdcb531fe665",
+      "size": 201717
+    },
+    "bar_log_20260127.csv": {
+      "sha256": "54b8eab0cb8ec6c63dc22291277ce2cf43941aaa1ec11e8784894070c7cb7d5e",
+      "size": 202015
+    },
+    "bar_log_20260128.csv": {
+      "sha256": "230e5b3e1c97a6beb54ac2ba288bd719a452f74bd87f4eb1a797a431a94789ce",
+      "size": 202621
+    },
+    "bar_log_20260129.csv": {
+      "sha256": "ad0d963cbb17d4b5126a0442bb06cfad4dcab8ec08c80cba093be5bb822e03ec",
+      "size": 204053
+    },
+    "bar_log_20260130.csv": {
+      "sha256": "f7d971ab97ab49b1206201461b2df055fd3ae1830703ae33a758e22675e717ec",
+      "size": 202175
+    },
+    "bar_log_20260202.csv": {
+      "sha256": "008891251bd6021b62b36fbe29062bbc576dce2d1090cf9a22e70cbf13bce757",
+      "size": 201692
+    },
+    "bar_log_20260203.csv": {
+      "sha256": "c6fdc2ec1aff5f8b0b169b39dca7cc6f20f9d34c62d4ddd0ea9294d874e301b1",
+      "size": 201884
+    },
+    "bar_log_20260204.csv": {
+      "sha256": "5c96a85efce2b35f72144fcffab12c626208462519bda6ffb54b5fe63493594a",
+      "size": 202269
+    },
+    "bar_log_20260205.csv": {
+      "sha256": "d8489c7f499a05ecf572e6839c809fcc1f6ddd2da68c61edbafee31c71af1cf5",
+      "size": 202293
+    },
+    "broker_audit.csv": {
+      "sha256": "501556fc889b42692fc9f51527cfaa1eb177757ca2dda1e1d085e5a949f3303a",
+      "size": 43457
+    },
+    "exec_state.ini": {
+      "sha256": "8895176256a26b1915ffff8fae203069c0cf03160dcc4570f89adbb30fb124a9",
+      "size": 1077
+    },
+    "tester_log_tail.txt": {
+      "sha256": "ee6adde267e56ea99048f397ce95901dc27ca0dd58db402819809c5dae694942",
+      "size": 4528005
+    },
+    "trade_log.csv": {
+      "sha256": "075c7c0457e45d989829eee2b2997d9d3a3f020da1167ed79d376a6e57e4a94f",
+      "size": 55001
+    }
+  },
+  "trade_log_stats": {
+    "rows": 186,
+    "event_type_counts": {
+      "ENTRY": 93,
+      "EXIT": 93
+    },
+    "exit_reason_counts": {
+      "FORCE_EXIT": 50,
+      "TP": 9,
+      "SL": 34
+    },
+    "modify_reason_counts": {},
+    "duplicate_non_modify_trade_event_groups": 0,
+    "duplicate_exit_groups": 0,
+    "same_timestamp_exit_to_entry": 0,
+    "modify_count": 0,
+    "tx_authority_counts": {
+      "TX_DEAL": 186
+    },
+    "runtime_reload_status_counts": {
+      "ROLLED_BACK": 186
+    }
+  },
+  "broker_audit_stats": {
+    "rows": 190,
+    "tag_counts": {
+      "init": 1,
+      "runtime_reload_attempt": 1,
+      "runtime_reload_rollback": 1,
+      "entry_logged": 93,
+      "exit_logged": 93,
+      "deinit": 1
+    }
+  },
+  "last_bar_state": {
+    "active_model_pack_dir": "triple_sigma_pack_long_step16",
+    "runtime_reload_status": "ROLLED_BACK",
+    "runtime_reload_attempts": "1",
+    "runtime_reload_successes": "0",
+    "runtime_reload_rollbacks": "1"
+  },
+  "baseline_result": null
+}

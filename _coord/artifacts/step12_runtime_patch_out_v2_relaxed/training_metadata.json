@@ -1,0 +1,766 @@
+{
+  "implementation_status": "step12_baseline_implemented",
+  "clf_version": "step12_mlp_v1",
+  "architecture_baseline": {
+    "family": "sklearn_mlp",
+    "hidden_layers": [
+      64,
+      32
+    ]
+  },
+  "training_config": {
+    "train_ratio": 0.8,
+    "embargo_bars": 72,
+    "min_train_samples_per_regime": 6,
+    "min_val_samples_per_regime": 2,
+    "cand0_max_fraction": 0.95,
+    "cand0_sample_weight": 1.0,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 64,
+    "epochs": 40,
+    "patience": 8,
+    "min_delta": 0.0001,
+    "seed": 42,
+    "model_name": "mlp_v1"
+  },
+  "source_step11_metadata": {
+    "schema_version": "1.0",
+    "model_pack_version": "0.1.0",
+    "candidate_policy_version": "0.1.2",
+    "regime_policy_version": "0.1.0q",
+    "cost_model_version": "0.1",
+    "search_space_version": "0.1.0",
+    "tie_policy": "candidate_preferred_then_long",
+    "symbol": "US100",
+    "timeframe": "PERIOD_M5",
+    "price_basis": "Bid",
+    "point_size": 0.009999999984385142,
+    "slip_points": 2,
+    "slip_price": 0.019999999968770284,
+    "R_pass_buffer": 0.05,
+    "H": 72,
+    "warmup_bars": 150,
+    "atr_thr": 0.0005,
+    "adx_thr1": 20.0,
+    "adx_thr2": 30.0,
+    "thr_method": "manual",
+    "thr_seed": "0",
+    "thr_notes": "step06_candidate_adaptive",
+    "dist_atr_max_mode": "adaptive_quantile",
+    "dist_atr_max_q": 0.8,
+    "dist_atr_max_w": 63,
+    "dist_atr_max_clamp_lo": 0.5,
+    "dist_atr_max_clamp_hi": 5.0,
+    "data_start": "2025-11-28 20:10:00",
+    "data_end": "2025-12-04 23:50:00",
+    "total_bars": 1087,
+    "total_labeled_samples": 674,
+    "forced_pass_count": 407,
+    "label_distribution": {
+      "LONG": 138,
+      "PASS": 407,
+      "SHORT": 129
+    },
+    "flip_distribution": {
+      "requires_flip_0": 522,
+      "requires_flip_1": 152
+    },
+    "input_files": [
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251128.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251201.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251202.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251203.csv",
+      "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs\\bar_log_20251204.csv"
+    ],
+    "validation": {
+      "rows_validated": 749,
+      "max_abs_diff": {
+        "ret_1": 4.993192329332159e-09,
+        "ret_3": 5.036709706859183e-09,
+        "ret_12": 5.02125560662009e-09,
+        "range_atr": 1.8011541591533842e-07,
+        "body_atr": 1.956425013105445e-07,
+        "close_pos": 3.300540596384849e-08,
+        "rsi_norm": 1.6653345369377348e-16,
+        "adx_norm": 3.0000000039720476e-08,
+        "spread_atr": 8.411737417723941e-09,
+        "time_sin": 3.296335004954187e-08,
+        "time_cos": 3.296334993851957e-08,
+        "dist_atr_abs_feature6": 2.2000000043931323e-07,
+        "dist_atr_max_t": 0.0
+      },
+      "mismatch_count": {
+        "regime_id": 0,
+        "cand_long": 0,
+        "cand_short": 0,
+        "regime_one_hot": 0,
+        "invalid_candidate_pair": 0,
+        "dist_atr_max_mode": 0,
+        "policy_version": 0,
+        "dist_atr_max_nonpositive": 0,
+        "dist_atr_max_out_of_range": 0,
+        "dist_atr_max_value": 0
+      }
+    }
+  },
+  "data_start": "2025-11-28 20:10:00",
+  "data_end": "2025-12-04 23:50:00",
+  "total_labeled_samples": 674,
+  "train_bar_count": 722,
+  "scaler_source": "global_train_bars",
+  "scaler_bar_count": 722,
+  "scaler_replaced_std_indices": [],
+  "split_plan": {
+    "target_split_index": 539,
+    "selected_split_index": 541,
+    "boundary_window_end_idx": 882,
+    "target_train_ratio": 0.8,
+    "effective_train_ratio": 0.8003003003003003,
+    "embargo_bars": 72,
+    "train_count": 533,
+    "val_count": 133,
+    "dropped_count": 8,
+    "requested_min_val_samples_per_regime": 2,
+    "effective_min_val_samples_per_regime": 2,
+    "relaxed_min_val_requirement": false,
+    "train_end_time": "2025-12-03 23:45:00",
+    "val_start_time": "2025-12-04 06:50:00",
+    "no_time_leakage": true,
+    "fallback_used": false,
+    "train_counts_by_regime": {
+      "0": 8,
+      "1": 117,
+      "2": 67,
+      "3": 155,
+      "4": 97,
+      "5": 89
+    },
+    "val_counts_by_regime": {
+      "0": 3,
+      "1": 17,
+      "2": 35,
+      "3": 29,
+      "4": 44,
+      "5": 5
+    },
+    "dropped_counts_by_regime": {
+      "0": 0,
+      "1": 0,
+      "2": 8,
+      "3": 0,
+      "4": 0,
+      "5": 0
+    }
+  },
+  "per_regime": {
+    "0": {
+      "regime_id": 0,
+      "status": "trained",
+      "train_count_raw": 8,
+      "train_count_retained": 8,
+      "val_count": 3,
+      "cand0_retained_count": 7,
+      "cand1_retained_count": 1,
+      "best_epoch": 35,
+      "epochs_trained": 40,
+      "early_stopped": false,
+      "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_0\\clf_reg0.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_0\\train_report.json",
+      "train_label_distribution": {
+        "LONG": 0,
+        "SHORT": 1,
+        "PASS": 7
+      },
+      "val_label_distribution": {
+        "LONG": 0,
+        "SHORT": 0,
+        "PASS": 3
+      },
+      "train_metrics": {
+        "count": 8,
+        "label_distribution": {
+          "LONG": 0,
+          "SHORT": 1,
+          "PASS": 7
+        },
+        "pred_distribution": {
+          "LONG": 0,
+          "SHORT": 1,
+          "PASS": 7
+        },
+        "macro_f1": 0.6666666666666666,
+        "pass_precision": 1.0,
+        "pass_recall": 1.0,
+        "cand0_pass_recall": 1.0,
+        "cand1_accuracy": 1.0,
+        "cand0_mean_p_pass": 0.9972831606864929,
+        "cand0_std_p_pass": 0.006135906558483839,
+        "log_loss": 0.0028107956022604846,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            7
+          ]
+        ]
+      },
+      "val_metrics": {
+        "count": 3,
+        "label_distribution": {
+          "LONG": 0,
+          "SHORT": 0,
+          "PASS": 3
+        },
+        "pred_distribution": {
+          "LONG": 0,
+          "SHORT": 0,
+          "PASS": 3
+        },
+        "macro_f1": 0.3333333333333333,
+        "pass_precision": 1.0,
+        "pass_recall": 1.0,
+        "cand0_pass_recall": 1.0,
+        "cand1_accuracy": null,
+        "cand0_mean_p_pass": 0.9854936599731445,
+        "cand0_std_p_pass": 0.004176640417426825,
+        "log_loss": 0.014621508407236555,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3
+          ]
+        ]
+      }
+    },
+    "1": {
+      "regime_id": 1,
+      "status": "trained",
+      "train_count_raw": 117,
+      "train_count_retained": 117,
+      "val_count": 17,
+      "cand0_retained_count": 105,
+      "cand1_retained_count": 12,
+      "best_epoch": 2,
+      "epochs_trained": 10,
+      "early_stopped": true,
+      "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_1\\clf_reg1.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_1\\train_report.json",
+      "train_label_distribution": {
+        "LONG": 8,
+        "SHORT": 4,
+        "PASS": 105
+      },
+      "val_label_distribution": {
+        "LONG": 3,
+        "SHORT": 1,
+        "PASS": 13
+      },
+      "train_metrics": {
+        "count": 117,
+        "label_distribution": {
+          "LONG": 8,
+          "SHORT": 4,
+          "PASS": 105
+        },
+        "pred_distribution": {
+          "LONG": 7,
+          "SHORT": 25,
+          "PASS": 85
+        },
+        "macro_f1": 0.69780197620488,
+        "pass_precision": 0.9882352941176471,
+        "pass_recall": 0.8,
+        "cand0_pass_recall": 0.8,
+        "cand1_accuracy": 0.9166666666666666,
+        "cand0_mean_p_pass": 0.6204413175582886,
+        "cand0_std_p_pass": 0.23156796395778656,
+        "log_loss": 0.5639893404976581,
+        "confusion_matrix": [
+          [
+            7,
+            0,
+            1
+          ],
+          [
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            21,
+            84
+          ]
+        ]
+      },
+      "val_metrics": {
+        "count": 17,
+        "label_distribution": {
+          "LONG": 3,
+          "SHORT": 1,
+          "PASS": 13
+        },
+        "pred_distribution": {
+          "LONG": 2,
+          "SHORT": 0,
+          "PASS": 15
+        },
+        "macro_f1": 0.2619047619047619,
+        "pass_precision": 0.7333333333333333,
+        "pass_recall": 0.8461538461538461,
+        "cand0_pass_recall": 0.8461538461538461,
+        "cand1_accuracy": 0.0,
+        "cand0_mean_p_pass": 0.6131985187530518,
+        "cand0_std_p_pass": 0.13839296996593475,
+        "log_loss": 0.8606222388795103,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            3
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            2,
+            0,
+            11
+          ]
+        ]
+      }
+    },
+    "2": {
+      "regime_id": 2,
+      "status": "trained",
+      "train_count_raw": 67,
+      "train_count_retained": 67,
+      "val_count": 35,
+      "cand0_retained_count": 38,
+      "cand1_retained_count": 29,
+      "best_epoch": 3,
+      "epochs_trained": 11,
+      "early_stopped": true,
+      "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_2\\clf_reg2.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_2\\train_report.json",
+      "train_label_distribution": {
+        "LONG": 8,
+        "SHORT": 21,
+        "PASS": 38
+      },
+      "val_label_distribution": {
+        "LONG": 1,
+        "SHORT": 8,
+        "PASS": 26
+      },
+      "train_metrics": {
+        "count": 67,
+        "label_distribution": {
+          "LONG": 8,
+          "SHORT": 21,
+          "PASS": 38
+        },
+        "pred_distribution": {
+          "LONG": 12,
+          "SHORT": 21,
+          "PASS": 34
+        },
+        "macro_f1": 0.8394179894179894,
+        "pass_precision": 0.9117647058823529,
+        "pass_recall": 0.8157894736842105,
+        "cand0_pass_recall": 0.8157894736842105,
+        "cand1_accuracy": 0.896551724137931,
+        "cand0_mean_p_pass": 0.5582669377326965,
+        "cand0_std_p_pass": 0.1520262062549591,
+        "log_loss": 0.5934342770158384,
+        "confusion_matrix": [
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            0,
+            18,
+            3
+          ],
+          [
+            4,
+            3,
+            31
+          ]
+        ]
+      },
+      "val_metrics": {
+        "count": 35,
+        "label_distribution": {
+          "LONG": 1,
+          "SHORT": 8,
+          "PASS": 26
+        },
+        "pred_distribution": {
+          "LONG": 14,
+          "SHORT": 11,
+          "PASS": 10
+        },
+        "macro_f1": 0.22027290448343081,
+        "pass_precision": 1.0,
+        "pass_recall": 0.38461538461538464,
+        "cand0_pass_recall": 0.38461538461538464,
+        "cand1_accuracy": 0.1111111111111111,
+        "cand0_mean_p_pass": 0.38711121678352356,
+        "cand0_std_p_pass": 0.06069845333695412,
+        "log_loss": 1.1309487648155327,
+        "confusion_matrix": [
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            7,
+            1,
+            0
+          ],
+          [
+            7,
+            9,
+            10
+          ]
+        ]
+      }
+    },
+    "3": {
+      "regime_id": 3,
+      "status": "trained",
+      "train_count_raw": 155,
+      "train_count_retained": 155,
+      "val_count": 29,
+      "cand0_retained_count": 79,
+      "cand1_retained_count": 76,
+      "best_epoch": 1,
+      "epochs_trained": 9,
+      "early_stopped": true,
+      "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_3\\clf_reg3.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_3\\train_report.json",
+      "train_label_distribution": {
+        "LONG": 42,
+        "SHORT": 34,
+        "PASS": 79
+      },
+      "val_label_distribution": {
+        "LONG": 9,
+        "SHORT": 7,
+        "PASS": 13
+      },
+      "train_metrics": {
+        "count": 155,
+        "label_distribution": {
+          "LONG": 42,
+          "SHORT": 34,
+          "PASS": 79
+        },
+        "pred_distribution": {
+          "LONG": 49,
+          "SHORT": 53,
+          "PASS": 53
+        },
+        "macro_f1": 0.6915900191762261,
+        "pass_precision": 0.8490566037735849,
+        "pass_recall": 0.569620253164557,
+        "cand0_pass_recall": 0.569620253164557,
+        "cand1_accuracy": 0.8157894736842105,
+        "cand0_mean_p_pass": 0.45930472016334534,
+        "cand0_std_p_pass": 0.20239794254302979,
+        "log_loss": 0.7483927193080545,
+        "confusion_matrix": [
+          [
+            32,
+            4,
+            6
+          ],
+          [
+            2,
+            30,
+            2
+          ],
+          [
+            15,
+            19,
+            45
+          ]
+        ]
+      },
+      "val_metrics": {
+        "count": 29,
+        "label_distribution": {
+          "LONG": 9,
+          "SHORT": 7,
+          "PASS": 13
+        },
+        "pred_distribution": {
+          "LONG": 9,
+          "SHORT": 6,
+          "PASS": 14
+        },
+        "macro_f1": 0.3247863247863248,
+        "pass_precision": 0.42857142857142855,
+        "pass_recall": 0.46153846153846156,
+        "cand0_pass_recall": 0.46153846153846156,
+        "cand1_accuracy": 0.25,
+        "cand0_mean_p_pass": 0.38066479563713074,
+        "cand0_std_p_pass": 0.14463388919830322,
+        "log_loss": 1.253433061176279,
+        "confusion_matrix": [
+          [
+            2,
+            1,
+            6
+          ],
+          [
+            3,
+            2,
+            2
+          ],
+          [
+            4,
+            3,
+            6
+          ]
+        ]
+      }
+    },
+    "4": {
+      "regime_id": 4,
+      "status": "trained",
+      "train_count_raw": 97,
+      "train_count_retained": 97,
+      "val_count": 44,
+      "cand0_retained_count": 55,
+      "cand1_retained_count": 42,
+      "best_epoch": 2,
+      "epochs_trained": 10,
+      "early_stopped": true,
+      "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_4\\clf_reg4.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_4\\train_report.json",
+      "train_label_distribution": {
+        "LONG": 14,
+        "SHORT": 28,
+        "PASS": 55
+      },
+      "val_label_distribution": {
+        "LONG": 10,
+        "SHORT": 10,
+        "PASS": 24
+      },
+      "train_metrics": {
+        "count": 97,
+        "label_distribution": {
+          "LONG": 14,
+          "SHORT": 28,
+          "PASS": 55
+        },
+        "pred_distribution": {
+          "LONG": 16,
+          "SHORT": 10,
+          "PASS": 71
+        },
+        "macro_f1": 0.6171539961013646,
+        "pass_precision": 0.6901408450704225,
+        "pass_recall": 0.8909090909090909,
+        "cand0_pass_recall": 0.8909090909090909,
+        "cand1_accuracy": 0.42857142857142855,
+        "cand0_mean_p_pass": 0.6002452969551086,
+        "cand0_std_p_pass": 0.19071055948734283,
+        "log_loss": 0.7034889986051205,
+        "confusion_matrix": [
+          [
+            9,
+            0,
+            5
+          ],
+          [
+            2,
+            9,
+            17
+          ],
+          [
+            5,
+            1,
+            49
+          ]
+        ]
+      },
+      "val_metrics": {
+        "count": 44,
+        "label_distribution": {
+          "LONG": 10,
+          "SHORT": 10,
+          "PASS": 24
+        },
+        "pred_distribution": {
+          "LONG": 10,
+          "SHORT": 1,
+          "PASS": 33
+        },
+        "macro_f1": 0.19707602339181285,
+        "pass_precision": 0.42424242424242425,
+        "pass_recall": 0.5833333333333334,
+        "cand0_pass_recall": 0.5833333333333334,
+        "cand1_accuracy": 0.05,
+        "cand0_mean_p_pass": 0.45066866278648376,
+        "cand0_std_p_pass": 0.2220352590084076,
+        "log_loss": 1.3218596166488918,
+        "confusion_matrix": [
+          [
+            1,
+            0,
+            9
+          ],
+          [
+            0,
+            0,
+            10
+          ],
+          [
+            9,
+            1,
+            14
+          ]
+        ]
+      }
+    },
+    "5": {
+      "regime_id": 5,
+      "status": "trained",
+      "train_count_raw": 89,
+      "train_count_retained": 89,
+      "val_count": 5,
+      "cand0_retained_count": 38,
+      "cand1_retained_count": 51,
+      "best_epoch": 1,
+      "epochs_trained": 9,
+      "early_stopped": true,
+      "model_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_5\\clf_reg5.joblib",
+      "report_path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step12_runtime_patch_out_v2_relaxed\\regime_5\\train_report.json",
+      "train_label_distribution": {
+        "LONG": 37,
+        "SHORT": 14,
+        "PASS": 38
+      },
+      "val_label_distribution": {
+        "LONG": 2,
+        "SHORT": 1,
+        "PASS": 2
+      },
+      "train_metrics": {
+        "count": 89,
+        "label_distribution": {
+          "LONG": 37,
+          "SHORT": 14,
+          "PASS": 38
+        },
+        "pred_distribution": {
+          "LONG": 25,
+          "SHORT": 24,
+          "PASS": 40
+        },
+        "macro_f1": 0.7256250634858444,
+        "pass_precision": 0.775,
+        "pass_recall": 0.8157894736842105,
+        "cand0_pass_recall": 0.8157894736842105,
+        "cand1_accuracy": 0.6666666666666666,
+        "cand0_mean_p_pass": 0.5789458155632019,
+        "cand0_std_p_pass": 0.204853355884552,
+        "log_loss": 0.7427522904761772,
+        "confusion_matrix": [
+          [
+            20,
+            8,
+            9
+          ],
+          [
+            0,
+            14,
+            0
+          ],
+          [
+            5,
+            2,
+            31
+          ]
+        ]
+      },
+      "val_metrics": {
+        "count": 5,
+        "label_distribution": {
+          "LONG": 2,
+          "SHORT": 1,
+          "PASS": 2
+        },
+        "pred_distribution": {
+          "LONG": 0,
+          "SHORT": 2,
+          "PASS": 3
+        },
+        "macro_f1": 0.0,
+        "pass_precision": 0.0,
+        "pass_recall": 0.0,
+        "cand0_pass_recall": 0.0,
+        "cand1_accuracy": 0.0,
+        "cand0_mean_p_pass": 0.16611400246620178,
+        "cand0_std_p_pass": 0.05747055262327194,
+        "log_loss": 1.652252010611749,
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            2,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "acceptance": {
+    "A1_no_time_leakage": true,
+    "A2_cand0_pass_recall_min": 0.0,
+    "A2_threshold": 0.5,
+    "A2_pass": false,
+    "A3_export_deferred_to_step15": true,
+    "evaluated_regimes": 6
+  }
+}

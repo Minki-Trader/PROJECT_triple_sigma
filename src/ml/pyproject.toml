@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "triplesigma-ml"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "joblib>=1.3",
+    "numpy>=1.24",
+    "onnx>=1.20",
+    "onnxruntime>=1.24",
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+    "scikit-learn>=1.8",
+    "skl2onnx>=1.20",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+step11-labeling = "triplesigma_ml.step11:main"
+step12-training = "triplesigma_ml.step12:main"
+step13-training = "triplesigma_ml.step13:main"
+step14-training = "triplesigma_ml.step14:main"
+step15-training = "triplesigma_ml.step15:main"
+
+[tool.setuptools.packages.find]
+include = ["triplesigma_ml*"]

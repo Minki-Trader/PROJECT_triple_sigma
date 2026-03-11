@@ -1,0 +1,194 @@
+# Campaign Manifest: C2026Q1 Stage1 Refresh
+# Created: 2026-03-10
+# Source: US100_RealTick_Backtest_Data_Policy.md + Step21 Ops Guide
+
+campaign_id: C2026Q1_stage1_refresh
+created: "2026-03-10"
+objective: >
+  Establish optimization baseline with real model pack (step15_q1),
+  diagnose current ML/EA performance, and decide ML-first vs EA-first
+  optimization direction.
+
+# --- Fixed tester conditions (from BACKTEST_BASELINE.md) ---
+tester_baseline:
+  symbol: US100
+  period: M5
+  model: 4  # Every tick based on real ticks
+  deposit: 500
+  currency: USD
+  leverage: 100
+
+# --- Control packs (from control_pack_registry.yaml) ---
+profitability_pack: triple_sigma_pack_step15_q1
+runtime_integrity_pack: triple_sigma_pack_long_step16
+
+# --- Data windows (from US100_RealTick_Backtest_Data_Policy.md) ---
+# IMPORTANT: All boundaries use the exact minute-level split points from the
+# data policy. Date-only values are NOT acceptable because they create
+# boundary-day overlap between adjacent windows.
+windows:
+  optimization_folds:
+    description: >
+      Clean actual-tick rolling pack for optimization/training.
+      No generated-tick substitution inside selected windows.
+      NOTE: The largest clean window (2024.06.04 17:25 -> 2025.04.02 09:00)
+      is reserved exclusively for benchmark and is NOT included here,
+      to keep benchmark independent from the optimization corpus.
+    folds:
+      - id: fold_1
+        from: "2022.09.13 17:15"
+        to: "2023.05.03 09:45"
+        note: "clean actual-tick window 1"
+      - id: fold_2
+        from: "2023.05.03 09:55"
+        to: "2024.02.26 20:05"
+        note: "clean actual-tick window 2 (10-min gap at fold_1 boundary)"
+      - id: fold_3
+        from: "2025.04.02 09:10"
+        to: "2025.11.24 14:50"
+        note: "clean actual-tick window (was fold_4 in data policy)"
+
+  benchmark:
+    description: >
+      Largest clean single actual-tick window for high-confidence comparison.
+      This window is NOT part of the optimization corpus. It is reserved
+      exclusively for independent selection-after-optimization comparison.
+    from: "2024.06.04 17:25"
+    to: "2025.04.02 09:00"
+    independence_note: >
+      Deliberately excluded from optimization_folds to prevent
+      data leakage into the selection decision.
+
+  oos_validation:
+    description: >
+      Recent data for out-of-sample validation.
+      Starts after fold_3 end + 10-min gap to guarantee no role overlap (WF0).
+      Includes one minor 10-minute gap (acceptable for practical OOS):
+        2025.11.28 05:00 -> 2025.11.28 05:10
+    from: "2025.11.24 15:00"
+    to: "2026.03.06 23:55"
+    independence_note: >
+      OOS start deliberately set to fold_3 end + 10min gap
+      to prevent optimization/validation role overlap per WF0.
+
+  stress:
+    description: >
+      Full contiguous actual-tick month span for broad sanity/stress runs.
+      Not for main optimization or selection.
+    from: "2022.08.01 00:00"
+    to: "2026.03.06 23:55"
+
+  disallowed:
+    description: >
+      Full long history with 37% generated-tick contamination.
+      MUST NOT be used as primary optimization or final Model=4 comparison range.
+    from: "2018.05.08 01:00"
+    to: "2026.03.06 23:55"
+
+# --- EA parameters for diagnostic baseline run ---
+diagnostic_baseline_params:
+  description: >
+    Starting EA parameters extracted from Step21 live_pass_regression preset.
+    These represent the current operational defaults before optimization.
+    WARNING: The source preset's own FromDate/ToDate (2025.04.02 -> 2026.03.06)
+    covers the OOS window, NOT the benchmark window. The diagnostic run MUST
+    override dates to the benchmark window (2024.06.04 17:25 -> 2025.04.02 09:00).
+    Do NOT clone the preset without explicit date overrides.
+  source_preset: _coord/tester/step21/step21_tester_live_pass_regression.ini
+  source_preset_dates_are: oos  # NOT benchmark - override required
+  params:
+    InpModelPackDir: triple_sigma_pack_step15_q1
+    InpPMinTrade: 0.55
+    InpDeltaFlip: 0.20
+    InpSpreadAtrMaxBase: 0.30
+    InpSpreadAtrMaxHard: 0.60
+    InpKTPScaleMin: 1.0
+    InpKTPScaleMax: 6.0
+    InpDevPointsBase: 3
+    InpDevPointsAddMax: 5
+    InpDevPointsHardMax: 10
+    InpRiskPctBase: 0.01
+    InpRiskPctHardMin: 0.002
+    InpRiskPctHardMax: 0.03
+    InpBlockWeekOpenMinutes: 5
+    InpBlockRolloverMinutes: 5
+    InpEarlyExitEnabled: true
+    InpEarlyExitLive: true
+    InpEarlyExitOppositeEnabled: false
+    InpPExitPass: 0.09
+    InpMinHoldBarsBeforeExit: 3
+    InpProtectiveAdjustEnabled: false
+    InpBreakEvenEnabled: false
+    InpTrailingEnabled: false
+    InpTPReshapeEnabled: false
+    InpTimePolicyEnabled: false
+    InpTxAuthorityEnabled: true
+    InpBrokerAuditEnabled: false
+    InpRuntimeHotReloadEnabled: false
+
+# --- Optimization priority order (from Ops Guide) ---
+optimization_order:
+  - layer: Data
+    description: "Window freeze + data quality audit"
+    status: ready  # data policy already defined
+  - layer: Stage1
+    description: "Stage1 classifier refresh (primary ML bottleneck)"
+    status: pending
+    note: "No eligible challenger at Step14. This is the #1 bottleneck."
+  - layer: Stage2
+    description: "Stage2 parameter regressor retuning"
+    status: pending
+    note: "Winner (stage2_c02) already exists. Lower priority than Stage1."
+  - layer: EA_gates
+    description: "Gate relaxation/conditioning"
+    status: pending
+  - layer: Early_exit
+    description: "Early-exit threshold tuning"
+    status: pending
+  - layer: Protective_modify
+    description: "Break-even / trailing / TP reshape / time policy tuning"
+    status: pending
+  - layer: Risk_sizing
+    description: "Risk sizing adjustment"
+    status: pending
+  - layer: Joint_sweep
+    description: "Limited joint interaction sweep (last)"
+    status: pending
+
+# --- First actions ---
+immediate_actions:
+  - action: diagnostic_single_run
+    description: >
+      Run single backtest with step15_q1 pack on benchmark window.
+      Parse results to establish performance baseline.
+    window: benchmark
+    pack: triple_sigma_pack_step15_q1
+  - action: direction_decision
+    description: >
+      Analyze diagnostic run results to decide ML-first vs EA-first.
+      Decision matrix in Ops Guide Section 8.
+    depends_on: diagnostic_single_run
+
+# --- Checkpoints (from Ops Guide Section 9) ---
+checkpoints:
+  CP0: "Build and schema integrity (compile clean, Step21 schema consistent)"
+  CP1: "Runtime invariants (dup non-modify=0, dup EXIT=0, same-ts EXIT->ENTRY=0)"
+  CP2: "Data readiness (windows frozen, gap policy documented)"
+  CP3: "Control-pack readiness (dual control separated, parity evidence present)"
+  CP4: "Parser readiness (master tables auto-build, schema sanity pass)"
+  CP5: "ML readiness (leakage-free split, Stage1 guardrails, Stage2 incumbent)"
+  CP6: "EA policy readiness (gate regret, exit trade-off, modify trade-off measurable)"
+  CP7: "Integrated benchmark/OOS/stress pass"
+  CP8: "Release candidate and rollback bundle complete"
+
+# --- Output directories ---
+output_dirs:
+  raw_tester_outputs: _coord/campaigns/C2026Q1_stage1_refresh/raw_tester_outputs/
+  parser_outputs: _coord/campaigns/C2026Q1_stage1_refresh/parser_outputs/
+  analytics: _coord/campaigns/C2026Q1_stage1_refresh/analytics/
+  benchmark: _coord/campaigns/C2026Q1_stage1_refresh/benchmark/
+  oos: _coord/campaigns/C2026Q1_stage1_refresh/oos/
+  stress: _coord/campaigns/C2026Q1_stage1_refresh/stress/
+  shortlist: _coord/campaigns/C2026Q1_stage1_refresh/shortlist/
+  reports: _coord/campaigns/C2026Q1_stage1_refresh/reports/
+  freeze: _coord/campaigns/C2026Q1_stage1_refresh/freeze/
