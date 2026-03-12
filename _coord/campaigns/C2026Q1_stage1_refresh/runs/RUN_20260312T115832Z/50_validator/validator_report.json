@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "run_id": "RUN_20260312T115832Z",
+  "campaign_id": "C2026Q1_stage1_refresh",
+  "validated_at": "2026-03-12T12:34:17.977026+00:00",
+  "verdict": "PASS",
+  "total_checks": 3,
+  "fails": 0,
+  "issues": [
+    {
+      "gate": "window_boundary",
+      "severity": "WARN",
+      "message": "Raw overcapture: bar data starts 2024.06.03 23:50 which is before manifest window_from 2024.06.04 17:25. Parser-level clipping required."
+    },
+    {
+      "gate": "window_boundary",
+      "severity": "WARN",
+      "message": "Trade log has 11 ENTRY trade(s) before manifest window_from 2024.06.04 17:25. Parser-level clipping will exclude these."
+    },
+    {
+      "gate": "window_boundary",
+      "severity": "INFO",
+      "message": "Bar range [2024.06.03 23:50 ~ 2025.04.01 23:50] vs manifest window [2024.06.04 17:25 ~ 2025.04.02 09:00]. Raw overcapture (if any) will be clipped at parser level."
+    }
+  ],
+  "gates_checked": [
+    "provenance",
+    "pack_admission",
+    "window_conformance",
+    "raw_completeness",
+    "compile_clean",
+    "window_boundary",
+    "hash_completeness",
+    "hash_integrity",
+    "schema_conformance"
+  ]
+}

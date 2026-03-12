@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "pack_id": "triple_sigma_pack_step15_q1",
+  "pack_dir": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Files\\triple_sigma_pack_step15_q1",
+  "sealed_at": "2026-03-12T12:09:51.451123+00:00",
+  "models": {
+    "clf_reg0_v0.1.0.onnx": {
+      "sha256": "b728563cfea34270b9468e56adb08ce46f360ec208f378a2ee84b4dfdbbd5da4",
+      "size": 371648
+    },
+    "clf_reg1_v0.1.0.onnx": {
+      "sha256": "e160bc684343496abe633c2a1e470a5f12d940c2b245363f4455ff02d497b18b",
+      "size": 371648
+    },
+    "clf_reg2_v0.1.0.onnx": {
+      "sha256": "0472ac6c21bef0de61e2b6000e799c8bfef71a87d5c55897e7d7fefb77d42117",
+      "size": 371648
+    },
+    "clf_reg3_v0.1.0.onnx": {
+      "sha256": "2d1516a9f0b4b581bd35300d2e4b123c17f222741d3fe8403aecbea35407a8bc",
+      "size": 371648
+    },
+    "clf_reg4_v0.1.0.onnx": {
+      "sha256": "9a8603f388010378885dc2391d4591ba12eebe1182d8336d11429dbc87fd0648",
+      "size": 371648
+    },
+    "clf_reg5_v0.1.0.onnx": {
+      "sha256": "652102d75b3644fd8b318f54a2ffdc4ba259bf4cc25682814ff77f5828283fae",
+      "size": 371648
+    },
+    "gate_config.json": {
+      "sha256": "d3d423611460da5e718a09c52cd93522fdea95ef70f00b69b403ddca92fae9bf",
+      "size": 283
+    },
+    "pack_meta.csv": {
+      "sha256": "cb1807c15486bd752f24508cf5dfa84062322d20ece3d6661028825e7b4ee417",
+      "size": 370
+    },
+    "prm_reg0_v0.1.0.onnx": {
+      "sha256": "b50d7914ae622208d6b5d2cce90ede1c1c9bd37b83f2b831d987d786363ace1f",
+      "size": 113650
+    },
+    "prm_reg1_v0.1.0.onnx": {
+      "sha256": "00effd5a39713bb3f95593c43a979629edaabfc753c6294116099fed2338e4e8",
+      "size": 158037
+    },
+    "prm_reg2_v0.1.0.onnx": {
+      "sha256": "67d775914d73903649851ba2ea2cccb7199a3733e2f1a5c716e1bacfe249d9fd",
+      "size": 180796
+    },
+    "prm_reg3_v0.1.0.onnx": {
+      "sha256": "aa3e5e271a87a0d8abba9759bc2aec69d2c27c6a95ead2fa64931a82157a93a5",
+      "size": 184437
+    },
+    "prm_reg4_v0.1.0.onnx": {
+      "sha256": "3541a3199d161a1930a471e047d7896e74a7a3201a1e5615f9066bfb87c5a266",
+      "size": 176248
+    },
+    "prm_reg5_v0.1.0.onnx": {
+      "sha256": "b2e7fddec04e04060b02e55dc1b03fcf35da3f0440e1a45602c5efc076b379a0",
+      "size": 189602
+    },
+    "scaler_stats.json": {
+      "sha256": "05f24d8a60fcc3186bd76226526493861dae9dfe2b08a5fe90921426ae9ee4e0",
+      "size": 670
+    }
+  },
+  "registry_ref": "_coord/ops/control_pack_registry.yaml"
+}

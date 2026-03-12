@@ -1,0 +1,87 @@
+{
+  "parser_version": "1.0",
+  "parse_timestamp": "2026-03-12T21:34:18.678398",
+  "raw_dir": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\20_raw",
+  "output_dir": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed",
+  "files_parsed": {
+    "trade_log": {
+      "rows": 6134,
+      "columns": 36,
+      "entry_count": 3067,
+      "exit_count": 3067,
+      "modify_count": 0
+    },
+    "bar_log": {
+      "files": 215,
+      "total_rows": 58307,
+      "columns": 90
+    }
+  },
+  "schema_version": "2.0",
+  "contract_version": "2.1",
+  "window_clipping": {
+    "bars_before": 58505,
+    "bars_after": 58307,
+    "bars_clipped": 198,
+    "trades_before": 6156,
+    "trades_after": 6134,
+    "trade_ids_clipped": 11,
+    "trade_rows_clipped": 22,
+    "window_from": "2024.06.04 17:25",
+    "window_to": "2025.04.02 09:00"
+  },
+  "step21_enforcement": {
+    "detected_schema_version": "2.0",
+    "step21_tail_enforced": true,
+    "tx_authority_validated": true
+  },
+  "issues": [],
+  "invariant_issues": [],
+  "pass": true,
+  "invariants_pass": true,
+  "master_tables": {
+    "trades_master": 3067,
+    "bars_master": 58307,
+    "modify_master": 0,
+    "execution_master": 6134,
+    "audit_master": 0
+  },
+  "master_table_issues": [],
+  "master_table_warnings": [],
+  "master_tables_pass": true,
+  "master_table_build_timestamp": "2026-03-12T21:34:22.955386",
+  "counterfactual_eval": {
+    "rows": 8193,
+    "horizon": 72,
+    "decision_types": {
+      "ENTRY": 3067,
+      "NO_EXIT": 1939,
+      "EARLY_EXIT": 1938,
+      "EXIT_SL": 1115,
+      "GATE_BLOCK": 120,
+      "EXIT_TP": 13,
+      "EXIT_FORCE": 1
+    },
+    "coverage_pass": true,
+    "unmapped_total": 0,
+    "exit_reason_taxonomy_used": true,
+    "build_timestamp": "2026-03-12T21:34:24.948453"
+  },
+  "daily_risk_metrics": {
+    "trading_days": 213,
+    "total_trades": 3067,
+    "total_gross_pnl": -458.85,
+    "total_net_pnl": -458.85,
+    "total_pnl": -458.8500000000001,
+    "final_drawdown": -458.8500000000001,
+    "max_equity_dd_pct": -4.6104,
+    "cost_model": {
+      "broker_commission_in_pnl": true,
+      "additional_commission_per_lot": 0.0,
+      "initial_equity": 10000.0
+    },
+    "avg_profit_factor": 0.9380906302322408,
+    "avg_win_rate": 0.3965375291515096,
+    "build_timestamp": "2026-03-12T21:34:25.821806"
+  }
+}
