@@ -2,13 +2,23 @@
 parse_step21_run.py - Step21 raw-run parser and schema validator.
 
 Reads raw tester outputs (trade_log.csv, bar_log_*.csv, broker_audit.csv)
-from a campaign's raw_tester_outputs/ directory, validates schema against
-BAR_LOG_SCHEMA v2.0, and emits a parse_manifest.json with validation results.
+from a raw directory, validates schema against BAR_LOG_SCHEMA v2.0, and
+emits a parse_manifest.json with validation results.
+
+Supports both:
+  - Campaign-native layout: runs/RUN_<ts>/20_raw/ -> runs/RUN_<ts>/30_parsed/
+  - Legacy flat layout: raw_tester_outputs/ -> parser_outputs/
 
 Usage:
-    python tools/parse_step21_run.py <raw_dir> <output_dir>
+    python tools/parse_step21_run.py <raw_dir> <output_dir> [--window-from ...] [--window-to ...]
 
-Example:
+Example (campaign-native with window clipping):
+    python tools/parse_step21_run.py \
+        _coord/campaigns/C2026Q1_stage1_refresh/runs/RUN_20260312T120000Z/20_raw \
+        _coord/campaigns/C2026Q1_stage1_refresh/runs/RUN_20260312T120000Z/30_parsed \
+        --window-from "2024.06.04 17:25" --window-to "2025.04.02 09:00"
+
+Example (legacy, no clipping):
     python tools/parse_step21_run.py \
         _coord/campaigns/C2026Q1_stage1_refresh/raw_tester_outputs \
         _coord/campaigns/C2026Q1_stage1_refresh/parser_outputs
@@ -315,12 +325,104 @@ def check_invariants(trade_df: pd.DataFrame) -> list[str]:
 # Main
 # ---------------------------------------------------------------------------
 
+def _parse_window_dt(s: str) -> "datetime | None":
+    """Parse MT5-style datetime for window clipping."""
+    for fmt in ("%Y.%m.%d %H:%M:%S", "%Y.%m.%d %H:%M", "%Y.%m.%d"):
+        try:
+            return datetime.strptime(s.strip(), fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def clip_to_window(
+    bar_df: pd.DataFrame,
+    trade_df: pd.DataFrame,
+    window_from: datetime,
+    window_to: datetime,
+) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    """Clip bar_df and trade_df to manifest window boundaries.
+
+    Bar clipping: drop rows where 'time' < window_from or 'time' > window_to.
+    Trade clipping: identify ENTRY trades outside window, then drop the entire
+    trade lifecycle (ENTRY+MODIFY+EXIT with same trade_id) for those trades.
+
+    Returns (clipped_bar_df, clipped_trade_df, clip_stats).
+    """
+    clip_stats: dict = {}
+
+    # --- Bar clipping ---
+    if not bar_df.empty and "time" in bar_df.columns:
+        bar_df = bar_df.copy()
+        bar_df["_ts"] = bar_df["time"].apply(
+            lambda x: _parse_window_dt(str(x)) if pd.notna(x) else None
+        )
+        before_count = len(bar_df)
+        mask = bar_df["_ts"].notna()
+        mask &= (bar_df["_ts"] >= window_from) & (bar_df["_ts"] <= window_to)
+        bar_df = bar_df[mask].drop(columns=["_ts"])
+        bar_df = bar_df.reset_index(drop=True)
+        bar_df["bar_index"] = range(len(bar_df))
+        clip_stats["bars_before"] = before_count
+        clip_stats["bars_after"] = len(bar_df)
+        clip_stats["bars_clipped"] = before_count - len(bar_df)
+    else:
+        clip_stats["bars_clipped"] = 0
+
+    # --- Trade clipping ---
+    if not trade_df.empty and "timestamp" in trade_df.columns and "trade_id" in trade_df.columns:
+        trade_df = trade_df.copy()
+        trade_df["_ts"] = trade_df["timestamp"].apply(
+            lambda x: _parse_window_dt(str(x)) if pd.notna(x) else None
+        )
+        # Find trade_ids to clip:
+        # 1. ENTRY outside window → remove entire lifecycle
+        # 2. Any row (EXIT/MODIFY) after window_to → remove entire lifecycle
+        #    (prevents in-window ENTRY with post-window EXIT leakage)
+        entries = trade_df[trade_df["event_type"] == "ENTRY"]
+        outside_ids = set()
+        for _, row in entries.iterrows():
+            ts = row["_ts"]
+            if ts is not None and (ts < window_from or ts > window_to):
+                outside_ids.add(row["trade_id"])
+
+        # Also clip trade_ids with any row after window_to
+        post_window = trade_df[trade_df["_ts"].notna() & (trade_df["_ts"] > window_to)]
+        outside_ids.update(post_window["trade_id"].unique())
+
+        before_count = len(trade_df)
+        if outside_ids:
+            trade_df = trade_df[~trade_df["trade_id"].isin(outside_ids)]
+        trade_df = trade_df.drop(columns=["_ts"]).reset_index(drop=True)
+        clip_stats["trades_before"] = before_count
+        clip_stats["trades_after"] = len(trade_df)
+        clip_stats["trade_ids_clipped"] = len(outside_ids)
+        clip_stats["trade_rows_clipped"] = before_count - len(trade_df)
+    else:
+        clip_stats["trade_ids_clipped"] = 0
+        clip_stats["trade_rows_clipped"] = 0
+
+    clip_stats["window_from"] = window_from.strftime("%Y.%m.%d %H:%M")
+    clip_stats["window_to"] = window_to.strftime("%Y.%m.%d %H:%M")
+
+    return bar_df, trade_df, clip_stats
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Parse Step21 raw backtest outputs and validate schema."
     )
     parser.add_argument("raw_dir", type=Path, help="Path to raw_tester_outputs/")
     parser.add_argument("output_dir", type=Path, help="Path to parser_outputs/")
+    parser.add_argument(
+        "--window-from", type=str, default=None,
+        help="Clip data to start at this timestamp (e.g. '2024.06.04 17:25'). "
+             "A' policy: trims raw MT5 overcapture to exact manifest boundary."
+    )
+    parser.add_argument(
+        "--window-to", type=str, default=None,
+        help="Clip data to end at this timestamp (e.g. '2025.04.02 09:00')."
+    )
     args = parser.parse_args()
 
     raw_dir = args.raw_dir
@@ -335,7 +437,7 @@ def main():
         "output_dir": str(output_dir),
         "files_parsed": {},
         "schema_version": "2.0",
-        "contract_version": "1.0",
+        "contract_version": "2.1",
     }
 
     # --- Parse trade_log ---
@@ -371,7 +473,24 @@ def main():
             "columns": len(audit_df.columns),
         }
 
-    # --- Invariant checks ---
+    # --- Window clipping (A' policy) ---
+    clip_stats = None
+    if args.window_from or args.window_to:
+        wf = _parse_window_dt(args.window_from) if args.window_from else None
+        wt = _parse_window_dt(args.window_to) if args.window_to else None
+        if wf is None and args.window_from:
+            all_issues.append(f"Cannot parse --window-from: {args.window_from}")
+        if wt is None and args.window_to:
+            all_issues.append(f"Cannot parse --window-to: {args.window_to}")
+        if wf and wt:
+            bar_df, trade_df, clip_stats = clip_to_window(bar_df, trade_df, wf, wt)
+            print(
+                f"Window clipping applied: "
+                f"bars {clip_stats.get('bars_clipped', 0)} removed, "
+                f"trade_ids {clip_stats.get('trade_ids_clipped', 0)} removed"
+            )
+
+    # --- Invariant checks (run after clipping so only in-window trades are checked) ---
     invariant_issues = check_invariants(trade_df)
     all_issues.extend(invariant_issues)
 
@@ -382,6 +501,21 @@ def main():
         bar_df.to_parquet(output_dir / "bars_raw.parquet", index=False)
     if not audit_df.empty:
         audit_df.to_parquet(output_dir / "broker_audit_parsed.parquet", index=False)
+
+    # --- Window clipping stats ---
+    if clip_stats:
+        manifest["window_clipping"] = clip_stats
+        # Update file counts to reflect post-clipping state
+        if not trade_df.empty:
+            manifest["files_parsed"]["trade_log"] = {
+                "rows": len(trade_df),
+                "columns": len(trade_df.columns),
+                "entry_count": int((trade_df["event_type"] == "ENTRY").sum()),
+                "exit_count": int((trade_df["event_type"] == "EXIT").sum()),
+                "modify_count": int((trade_df["event_type"] == "MODIFY").sum()),
+            }
+        if not bar_df.empty:
+            manifest["files_parsed"]["bar_log"]["total_rows"] = len(bar_df)
 
     # --- Step21 enforcement ---
     manifest["step21_enforcement"] = {

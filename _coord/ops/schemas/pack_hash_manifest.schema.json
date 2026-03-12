@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pack_hash_manifest.schema.json",
+  "title": "Pack Hash Manifest",
+  "description": "Schema for pack_hash_manifest.json. Seals external ONNX model pack payload with SHA-256 hashes for integrity verification.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "pack_id",
+    "pack_dir",
+    "sealed_at",
+    "models",
+    "registry_ref"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "description": "Schema version for forward compatibility."
+    },
+    "pack_id": {
+      "type": "string",
+      "description": "Pack identifier from control_pack_registry.yaml."
+    },
+    "pack_dir": {
+      "type": "string",
+      "description": "Absolute or relative path to the pack directory."
+    },
+    "sealed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when hashes were computed."
+    },
+    "models": {
+      "type": "object",
+      "description": "Map of model filename to hash+size+shape. Keys are filenames within pack directory.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["sha256", "size"],
+        "properties": {
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "SHA-256 hex digest of the model file."
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "File size in bytes."
+          },
+          "input_shape": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "description": "ONNX model input tensor shape (optional, for parity checks)."
+          },
+          "output_shape": {
+            "type": "array",
+            "items": { "type": "integer" },
+            "description": "ONNX model output tensor shape (optional, for parity checks)."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "registry_ref": {
+      "type": "string",
+      "description": "Relative path to control_pack_registry.yaml."
+    },
+    "model_lineage": {
+      "type": "object",
+      "description": "Version strings from pack registry (clf_version, prm_version, etc.).",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

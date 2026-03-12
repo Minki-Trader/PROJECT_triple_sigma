@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "campaign_run_manifest.schema.json",
+  "title": "Campaign Run Manifest",
+  "description": "Schema for run_manifest.json produced by run_campaign_backtest.py. Defines provenance and completeness of a single campaign backtest run.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "campaign_id",
+    "run_id",
+    "run_timestamp",
+    "manifest_ref",
+    "pack_id",
+    "window_alias",
+    "window_from",
+    "window_to",
+    "compile_result",
+    "raw_outputs",
+    "hash_manifests",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "description": "Schema version for forward compatibility."
+    },
+    "campaign_id": {
+      "type": "string",
+      "pattern": "^C[0-9]{4}Q[1-4]_",
+      "description": "Campaign identifier matching manifest.yaml campaign_id."
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^RUN_[0-9]{8}T[0-9]{6}Z$",
+      "description": "Run identifier in RUN_<UTCSTAMP> format."
+    },
+    "run_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when run was initiated."
+    },
+    "manifest_ref": {
+      "type": "string",
+      "description": "Relative path to the campaign manifest.yaml used for this run."
+    },
+    "pack_id": {
+      "type": "string",
+      "description": "Control pack identifier from control_pack_registry.yaml."
+    },
+    "pack_dir": {
+      "type": "string",
+      "description": "Absolute or relative path to the pack directory used."
+    },
+    "preset_snapshot": {
+      "type": "string",
+      "description": "Relative path to the frozen preset .ini used for this run."
+    },
+    "window_alias": {
+      "type": "string",
+      "enum": ["fold_1", "fold_2", "fold_3", "benchmark", "oos_validation", "stress"],
+      "description": "Window alias from campaign manifest."
+    },
+    "window_from": {
+      "type": "string",
+      "description": "Window start timestamp as defined in manifest."
+    },
+    "window_to": {
+      "type": "string",
+      "description": "Window end timestamp as defined in manifest."
+    },
+    "compile_result": {
+      "type": "object",
+      "required": ["errors", "warnings", "log_path"],
+      "properties": {
+        "errors": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of compilation errors."
+        },
+        "warnings": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of compilation warnings."
+        },
+        "log_path": {
+          "type": "string",
+          "description": "Relative path to compile_log.txt within run directory."
+        }
+      }
+    },
+    "raw_outputs": {
+      "type": "object",
+      "required": ["trade_log", "bar_logs", "exec_state"],
+      "properties": {
+        "trade_log": {
+          "type": "string",
+          "description": "Relative path to trade_log.csv."
+        },
+        "bar_logs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Relative paths to bar_log_YYYYMMDD.csv files."
+        },
+        "exec_state": {
+          "type": "string",
+          "description": "Relative path to exec_state.ini."
+        }
+      }
+    },
+    "hash_manifests": {
+      "type": "object",
+      "required": ["raw_hash_ref", "pack_hash_ref"],
+      "properties": {
+        "raw_hash_ref": {
+          "type": "string",
+          "description": "Relative path to raw_hash_manifest.json."
+        },
+        "pack_hash_ref": {
+          "type": ["string", "null"],
+          "description": "Relative path to pack_hash_manifest.json. Null if pack not available."
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "complete", "failed"],
+      "description": "Run lifecycle status."
+    },
+    "tester_baseline": {
+      "type": "object",
+      "description": "Frozen tester conditions (symbol, period, model, deposit, etc.) from manifest.",
+      "properties": {
+        "symbol": { "type": "string" },
+        "period": { "type": "string" },
+        "model": { "type": "string" },
+        "deposit": { "type": "number" },
+        "currency": { "type": "string" },
+        "leverage": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

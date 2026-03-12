@@ -2,7 +2,7 @@
 build_counterfactual_eval.py - H=72 forward ex-post evaluator.
 
 Reads bars_master and trades_master from parser_outputs/ and builds
-counterfactual_eval.parquet per MASTER_TABLE_CONTRACT.md v1.0.
+counterfactual_eval.parquet per MASTER_TABLE_CONTRACT.md v2.0.
 
 For each bar where a decision occurred (gate block, entry, exit, modify),
 looks forward H=72 bars to compute:
@@ -316,8 +316,14 @@ def _write_coverage_manifest(
     unresolved_no_exit: list,
     exit_reason_available: bool,
     has_exit_reason_col: bool,
+    entry_unmapped_threshold: int = 0,
 ) -> dict:
-    """Build and write coverage_manifest.json. Returns the manifest dict."""
+    """Build and write coverage_manifest.json. Returns the manifest dict.
+
+    Args:
+        entry_unmapped_threshold: Max allowed unmapped ENTRY events (F3 gate).
+            Default 0 = strict (any unmapped ENTRY fails coverage).
+    """
     # Raw event counts from trade_log
     raw_event_counts = {}
     if not trade_log_df.empty and "event_type" in trade_log_df.columns:
@@ -354,11 +360,13 @@ def _write_coverage_manifest(
     unmapped_exit = [e for e in unmapped_event_details if e["event_type"] == "EXIT"]
     unmapped_modify = [e for e in unmapped_event_details if e["event_type"] == "MODIFY"]
 
-    # Coverage pass gate: EXIT/MODIFY unmapped = 0 AND no unresolved directions
+    # Coverage pass gate: EXIT/MODIFY/ENTRY unmapped = 0 AND no unresolved directions
+    # F3 remediation: ENTRY unmapped now gated (was previously excluded)
     coverage_pass = (
         len(unmapped_exit) == 0
         and len(unmapped_modify) == 0
         and len(unresolved_no_exit) == 0
+        and len(unmapped_entry) <= entry_unmapped_threshold
     )
 
     manifest = {
@@ -400,6 +408,11 @@ def main():
     )
     parser.add_argument("parser_dir", type=Path, help="Path to parser_outputs/")
     parser.add_argument("--horizon", type=int, default=H_DEFAULT, help="Forward horizon in bars")
+    parser.add_argument(
+        "--entry-unmapped-threshold", type=int, default=0,
+        help="Max allowed unmapped ENTRY events before hard fail (default 0 = strict). "
+             "Set >0 only for edge cases in early bars of retained artifact replay."
+    )
     args = parser.parse_args()
 
     pdir = args.parser_dir
@@ -428,6 +441,7 @@ def main():
         coverage_info["unresolved_no_exit"],
         coverage_info["exit_reason_available"],
         coverage_info["has_exit_reason_col"],
+        entry_unmapped_threshold=args.entry_unmapped_threshold,
     )
 
     # Hard fail if coverage gate fails

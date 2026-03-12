@@ -1,10 +1,35 @@
 # Master Table Contract
 
+Version: 2.1 (updated 2026-03-12, A' window clipping policy)
+
 Status:
 - Defines the derived-table schema for Step21 backtest analytics.
 - Source schema: `design/BAR_LOG_SCHEMA.md` (log schema v2.0).
 - Core CSV files are retained as-emitted per `RETAINED_ARTIFACT_STANDARD.md`.
 - Derived tables are built by the parser pipeline, not by modifying core CSVs.
+- v2.0 changes: EXIT_SL/EXIT_TP/EXIT_FORCE taxonomy in counterfactual_eval (replaces EARLY_EXIT).
+- v2.1 changes: A' window clipping policy added (see below).
+
+## Window Clipping Policy (A')
+
+MT5 Strategy Tester accepts date-only `FromDate`/`ToDate` (no minute precision),
+but campaign manifest defines minute-level window boundaries. This creates
+unavoidable "raw overcapture" — bars and trades before `window_from` or after
+`window_to` appear in raw output.
+
+**Policy:**
+1. **Raw immutability**: files in `20_raw/` are never modified after seal.
+2. **Validator**: raw overcapture on the left (bar_min < window_from) is **WARN**,
+   not FAIL. Overcapture on the right (bar_max > window_to) remains **FAIL**.
+3. **Parser-level clipping**: `parse_step21_run.py --window-from --window-to`
+   trims both bar_log and trade_log to exact manifest boundaries before emitting
+   parsed parquet files. Clipping stats are recorded in `parse_manifest.json`
+   under `window_clipping`.
+4. **Trade lifecycle integrity**: when an ENTRY trade falls outside the window,
+   the entire trade lifecycle (ENTRY + MODIFY + EXIT rows with the same
+   `trade_id`) is removed. Partial lifecycle rows are never emitted.
+5. **Invariant checks** run on the post-clipping dataset, so only in-window
+   trades are validated.
 
 ## Source files per single backtest run
 
@@ -145,7 +170,11 @@ H=72 bar ex-post evaluator. One row per bar where a decision was made.
 
 Required columns:
 - `time` (datetime) - bar time
-- `decision_type` (str) - GATE_BLOCK / ENTRY / EARLY_EXIT / NO_EXIT / MODIFY
+- `decision_type` (str) - GATE_BLOCK / ENTRY / EXIT_SL / EXIT_TP / EXIT_FORCE / NO_EXIT / MODIFY
+  - EXIT_SL: exit via stop-loss trigger
+  - EXIT_TP: exit via take-profit trigger
+  - EXIT_FORCE: forced exit (TIME_POLICY, EARLY_EXIT, or other non-SL/TP reasons)
+  - Note: replaces the former single EARLY_EXIT category with exit-reason-aware taxonomy
 - `actual_outcome_72` (float) - price change over next 72 bars
 - `gate_regret` (float) - PnL of hypothetical entry if gate was relaxed
   (NULL if not a gate block)
@@ -195,6 +224,23 @@ Validation invariants:
 
 ## Parser output layout
 
+### Campaign-native layout (admissible — v2)
+
+```
+runs/RUN_<ts>/30_parsed/
+  trades_master.parquet
+  bars_master.parquet
+  modify_master.parquet
+  execution_master.parquet
+  audit_master.parquet          (optional)
+  counterfactual_eval.parquet
+  daily_risk_metrics.parquet
+  coverage_manifest.json
+  parse_manifest.json           (metadata + validation results)
+```
+
+### Legacy flat layout (retained artifact replay archive — non-admissible)
+
 ```
 parser_outputs/
   trades_master.parquet
@@ -209,6 +255,6 @@ parser_outputs/
 
 ## Schema versioning
 
-- Current contract version: `1.0`
+- Current contract version: `2.0`
 - Contract changes require version bump and manifest update.
 - Parser must validate emitted schema version against this contract.

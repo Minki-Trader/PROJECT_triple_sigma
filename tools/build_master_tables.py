@@ -2,7 +2,7 @@
 build_master_tables.py - Master-table materializer.
 
 Reads parsed outputs from parse_step21_run.py and builds derived tables
-per MASTER_TABLE_CONTRACT.md v1.0:
+per MASTER_TABLE_CONTRACT.md v2.0:
   - trades_master.parquet
   - bars_master.parquet
   - modify_master.parquet
@@ -10,11 +10,16 @@ per MASTER_TABLE_CONTRACT.md v1.0:
   - audit_master.parquet (optional)
 
 Usage:
-    python tools/build_master_tables.py <parser_outputs_dir>
+    python tools/build_master_tables.py <parser_outputs_dir> [--waiver-class synthetic_regression]
 
 Example:
     python tools/build_master_tables.py \
         _coord/campaigns/C2026Q1_stage1_refresh/parser_outputs
+
+    # Retained artifact replay (non-admissible, waiver mode):
+    python tools/build_master_tables.py \
+        _coord/campaigns/C2026Q1_stage1_refresh/parser_outputs \
+        --waiver-class synthetic_regression
 """
 
 import argparse
@@ -170,8 +175,13 @@ def build_bars_master(bar_df: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
     return result, issues
 
 
-def build_modify_master(trade_df: pd.DataFrame) -> tuple[pd.DataFrame, list[str], list[str]]:
-    """Build protective management ledger from MODIFY rows. Returns (df, issues, warnings)."""
+def build_modify_master(trade_df: pd.DataFrame, *, strict: bool = True) -> tuple[pd.DataFrame, list[str], list[str]]:
+    """Build protective management ledger from MODIFY rows. Returns (df, issues, warnings).
+
+    Args:
+        strict: If True (default), close-before-modify overlap is a hard fail (issue).
+                If False (synthetic regression waiver), overlap is a warning only.
+    """
     issues = []
     warnings = []
     modifies = trade_df[trade_df["event_type"] == "MODIFY"].copy()
@@ -200,7 +210,7 @@ def build_modify_master(trade_df: pd.DataFrame) -> tuple[pd.DataFrame, list[str]
 
     # Validate: close-before-modify precedence (contract line 111)
     # No MODIFY row should exist for a bar that also has an EXIT for the same trade_id.
-    # This is a data quality warning, not a structural error.
+    # F2 remediation: strict mode (admissible runs) → hard fail; waiver mode → warning only.
     if "trade_id" in result.columns and "timestamp" in result.columns:
         exits_df = trade_df[trade_df["event_type"] == "EXIT"]
         if not exits_df.empty and "timestamp" in exits_df.columns:
@@ -212,9 +222,14 @@ def build_modify_master(trade_df: pd.DataFrame) -> tuple[pd.DataFrame, list[str]
             )
             overlap = exit_keys & modify_keys
             if overlap:
-                warnings.append(
-                    f"modify_master: {len(overlap)} MODIFY rows share timestamp with EXIT for same trade_id (close-before-modify violation)"
+                msg = (
+                    f"modify_master: {len(overlap)} MODIFY rows share timestamp "
+                    f"with EXIT for same trade_id (close-before-modify violation)"
                 )
+                if strict:
+                    issues.append(msg)
+                else:
+                    warnings.append(f"[WAIVER:synthetic_regression] {msg}")
 
     return result, issues, warnings
 
@@ -277,6 +292,12 @@ def main():
         description="Build master tables from parsed Step21 outputs."
     )
     parser.add_argument("parser_dir", type=Path, help="Path to parser_outputs/")
+    parser.add_argument(
+        "--waiver-class", type=str, default=None,
+        choices=["synthetic_regression"],
+        help="If set, downgrades close-before-modify overlap from hard fail to warning. "
+             "Only 'synthetic_regression' is accepted (retained artifact replay diagnostics)."
+    )
     args = parser.parse_args()
 
     pdir = args.parser_dir
@@ -303,7 +324,8 @@ def main():
     if not bars_master.empty:
         bars_master.to_parquet(pdir / "bars_master.parquet", index=False)
 
-    modify_master, mi, mw = build_modify_master(trade_df)
+    strict_mode = args.waiver_class is None
+    modify_master, mi, mw = build_modify_master(trade_df, strict=strict_mode)
     all_issues.extend(mi)
     all_warnings.extend(mw)
     if not modify_master.empty:

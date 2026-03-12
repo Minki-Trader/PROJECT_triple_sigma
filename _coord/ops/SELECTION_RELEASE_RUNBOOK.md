@@ -22,7 +22,7 @@ This runbook covers:
 ## Step 1: Shortlist Assembly
 
 Inputs:
-- Parsed analytics from `parser_outputs/`.
+- Parsed analytics from `runs/RUN_<ts>/30_parsed/` (campaign-native).
 - KPI summaries from `daily_risk_metrics.parquet` and `counterfactual_eval.parquet`.
 
 Actions:

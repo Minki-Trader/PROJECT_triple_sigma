@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "raw_hash_manifest.schema.json",
+  "title": "Raw Hash Manifest",
+  "description": "Schema for raw_hash_manifest.json. Seals raw tester outputs with SHA-256 hashes for tamper detection.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "run_id",
+    "sealed_at",
+    "files"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "description": "Schema version for forward compatibility."
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^RUN_[0-9]{8}T[0-9]{6}Z$",
+      "description": "Run identifier matching the parent run directory."
+    },
+    "sealed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when hashes were computed."
+    },
+    "files": {
+      "type": "object",
+      "description": "Map of filename to hash+size. Keys are filenames within 20_raw/.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["sha256", "size"],
+        "properties": {
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "SHA-256 hex digest of the file."
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "File size in bytes."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

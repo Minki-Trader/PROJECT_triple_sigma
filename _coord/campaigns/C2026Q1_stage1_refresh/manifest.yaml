@@ -182,9 +182,19 @@ checkpoints:
   CP8: "Release candidate and rollback bundle complete"
 
 # --- Output directories ---
+# v2: Campaign-native runs use runs/RUN_<ts>/ structure (Audit Section 8.6).
+# Legacy flat directories retained as archive only (non-admissible).
 output_dirs:
-  raw_tester_outputs: _coord/campaigns/C2026Q1_stage1_refresh/raw_tester_outputs/
-  parser_outputs: _coord/campaigns/C2026Q1_stage1_refresh/parser_outputs/
+  # Campaign-native run workspace (admissible)
+  runs: _coord/campaigns/C2026Q1_stage1_refresh/runs/
+  # Per-run structure: runs/RUN_<ts>/00_request/ 10_compile/ 20_raw/ 21_hash/
+  #                    30_parsed/ 40_kpi/ 50_validator/ 60_decision/
+
+  # Legacy flat directories (retained artifact replay archive — NOT admissible)
+  raw_tester_outputs: _coord/campaigns/C2026Q1_stage1_refresh/raw_tester_outputs/  # ARCHIVE
+  parser_outputs: _coord/campaigns/C2026Q1_stage1_refresh/parser_outputs/  # ARCHIVE
+
+  # Shared output directories
   analytics: _coord/campaigns/C2026Q1_stage1_refresh/analytics/
   benchmark: _coord/campaigns/C2026Q1_stage1_refresh/benchmark/
   oos: _coord/campaigns/C2026Q1_stage1_refresh/oos/

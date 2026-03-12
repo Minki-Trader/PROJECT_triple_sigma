@@ -63,34 +63,38 @@ Inputs:
 - Selected data window and pack
 
 Actions:
-1. Build campaign-specific `.ini` preset from Step21 template.
-   - Set `InpModelPackDir` to profitability pack.
-   - Set `FromDate` / `ToDate` from campaign window.
-   - Set `Report` path to `raw_tester_outputs/` directory.
-2. Run backtest via MT5 Strategy Tester.
-3. Collect outputs: `trade_log.csv`, `bar_log_*.csv`, `exec_state.ini`.
-4. Copy raw outputs to `raw_tester_outputs/` immutably.
+1. Prepare run: `python tools/run_campaign_backtest.py prepare <manifest> --window <alias>`
+   - Creates `runs/RUN_<ts>/` scaffold with preset in `00_request/`
+   - Preset has `InpModelPackDir` set to profitability pack, dates from window.
+2. Run backtest via MT5 Strategy Tester using generated preset.
+3. Copy raw outputs to `runs/RUN_<ts>/20_raw/` (trade_log.csv, bar_log_*.csv, exec_state.ini).
+4. Copy compile_log.txt to `runs/RUN_<ts>/10_compile/`.
+5. Seal run: `python tools/run_campaign_backtest.py seal <run_dir>`
+   - Generates SHA-256 hash manifests in `21_hash/`.
+   - Generates `run_manifest.json` with full provenance.
 
-Output: raw tester results in `raw_tester_outputs/`
+Output: sealed run in `runs/RUN_<ts>/` with hash manifests.
 
-Pass condition: compile clean, raw-output files complete.
+Pass condition: compile clean, raw-output files complete, hash manifests sealed.
+
+Validation: `python tools/validate_campaign_run.py <run_dir>`
 
 ## WF3: Parsing and analytics
 
 Inputs:
-- Raw tester outputs from WF2
-- `MASTER_TABLE_CONTRACT.md`
+- Sealed raw tester outputs from WF2 (`runs/RUN_<ts>/20_raw/`)
+- `MASTER_TABLE_CONTRACT.md` v2.0
 
 Actions:
-1. Run `tools/parse_step21_run.py` on raw outputs.
-2. Run `tools/build_master_tables.py` to materialize derived tables.
-3. Run `tools/build_counterfactual_eval.py` for H=72 evaluation.
-4. Run `tools/build_daily_risk_metrics.py` for daily KPIs.
+1. Run `tools/parse_step21_run.py runs/RUN_<ts>/20_raw/ runs/RUN_<ts>/30_parsed/`
+2. Run `tools/build_master_tables.py runs/RUN_<ts>/30_parsed/`
+3. Run `tools/build_counterfactual_eval.py runs/RUN_<ts>/30_parsed/`
+4. Run `tools/build_daily_risk_metrics.py runs/RUN_<ts>/30_parsed/`
 5. Validate outputs against master table contract.
 
-Output: derived tables in `parser_outputs/`, `parse_manifest.json`
+Output: derived tables in `runs/RUN_<ts>/30_parsed/`, `parse_manifest.json`
 
-Pass condition: schema sanity pass, validation invariants hold.
+Pass condition: schema sanity pass, validation invariants hold, close-before-modify = 0 (strict mode).
 
 ## WF4: Branch decision
 
