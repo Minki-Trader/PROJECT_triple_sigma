@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "branch_decision_packet.schema.json",
+  "title": "WF4 Branch Decision Packet",
+  "description": "Schema for 60_decision/branch_decision_packet.json produced by build_branch_decision_packet.py.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "built_at",
+    "campaign_id",
+    "run_id",
+    "window_alias",
+    "pack_id",
+    "primary_branch",
+    "confidence",
+    "rationale",
+    "admissibility",
+    "scores",
+    "headline_metrics",
+    "triggered_rules",
+    "next_actions",
+    "source_artifacts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "built_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "campaign_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^RUN_[0-9]{8}T[0-9]{6}Z$"
+    },
+    "window_alias": {
+      "type": "string"
+    },
+    "pack_id": {
+      "type": "string"
+    },
+    "primary_branch": {
+      "type": "string",
+      "enum": ["ML-first", "EA-first", "runtime-fix-first"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "admissibility": {
+      "type": "object",
+      "required": [
+        "validator_verdict",
+        "parse_pass",
+        "invariants_pass",
+        "master_tables_pass",
+        "runtime_blockers"
+      ],
+      "properties": {
+        "validator_verdict": { "type": "string" },
+        "parse_pass": { "type": "boolean" },
+        "invariants_pass": { "type": "boolean" },
+        "master_tables_pass": { "type": "boolean" },
+        "runtime_blockers": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "scores": {
+      "type": "object",
+      "required": ["ml_score", "ea_score"],
+      "properties": {
+        "ml_score": { "type": "integer" },
+        "ea_score": { "type": "integer" }
+      },
+      "additionalProperties": false
+    },
+    "headline_metrics": {
+      "type": "object",
+      "required": [
+        "total_pnl",
+        "global_profit_factor",
+        "global_win_rate",
+        "max_equity_dd_pct",
+        "gate_regret_mean",
+        "gate_block_rate_candidate_bars",
+        "exit_cost_to_risk_ratio"
+      ],
+      "properties": {
+        "total_pnl": { "type": "number" },
+        "global_profit_factor": { "type": ["number", "null"] },
+        "global_win_rate": { "type": "number" },
+        "max_equity_dd_pct": { "type": "number" },
+        "gate_regret_mean": { "type": "number" },
+        "gate_block_rate_candidate_bars": { "type": "number" },
+        "exit_cost_to_risk_ratio": { "type": ["number", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "triggered_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["branch", "rule_id", "observed", "threshold", "rationale"],
+        "properties": {
+          "branch": { "type": "string" },
+          "rule_id": { "type": "string" },
+          "observed": {},
+          "threshold": {},
+          "rationale": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "source_artifacts": {
+      "type": "object",
+      "required": [
+        "kpi_summary",
+        "validator_report",
+        "parse_manifest",
+        "campaign_manifest"
+      ],
+      "properties": {
+        "kpi_summary": { "type": "string" },
+        "validator_report": { "type": "string" },
+        "parse_manifest": { "type": "string" },
+        "campaign_manifest": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

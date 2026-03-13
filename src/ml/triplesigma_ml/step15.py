@@ -65,6 +65,31 @@ LINEAGE_REQUIRED_KEYS = (
 STAGE1_PROB_TOLERANCE = 1e-4
 PARITY_RTOL = 1e-4
 PARITY_ATOL = 1e-4
+GATE_CONFIG_FILENAME = "gate_config.json"
+GATE_CONFIG_DEFAULTS = {
+    "spread_atr_max_base": 0.30,
+    "spread_atr_max_hard": 0.60,
+    "k_tp_scale_min": 1.0,
+    "k_tp_scale_max": 6.0,
+    "dev_points_base": 3,
+    "dev_points_add_max": 5,
+    "dev_points_hard_max": 10,
+    "risk_pct_base": 0.01,
+    "risk_pct_hard_min": 0.002,
+    "risk_pct_hard_max": 0.03,
+}
+GATE_CONFIG_RENDER_ORDER = (
+    ("spread_atr_max_base", "0.30"),
+    ("spread_atr_max_hard", "0.60"),
+    ("k_tp_scale_min", "1.0"),
+    ("k_tp_scale_max", "6.0"),
+    ("dev_points_base", "3"),
+    ("dev_points_add_max", "5"),
+    ("dev_points_hard_max", "10"),
+    ("risk_pct_base", "0.01"),
+    ("risk_pct_hard_min", "0.002"),
+    ("risk_pct_hard_max", "0.03"),
+)
 
 
 @dataclass(frozen=True)
@@ -317,6 +342,22 @@ def write_pack_meta(path: Path, payload: dict[str, Any]) -> None:
 def copy_scaler_stats(context: Step15Context, output_path: Path) -> None:
     payload = json.dumps(json_ready(context.selected_stage1_scaler_stats), indent=2, ensure_ascii=False) + "\n"
     output_path.write_text(payload, encoding="utf-8")
+
+
+def build_gate_config_dict() -> dict[str, Any]:
+    return dict(GATE_CONFIG_DEFAULTS)
+
+
+def write_gate_config(path: Path, payload: dict[str, Any]) -> None:
+    lines = ["{"]
+    last_index = len(GATE_CONFIG_RENDER_ORDER) - 1
+    for index, (key, rendered_value) in enumerate(GATE_CONFIG_RENDER_ORDER):
+        suffix = "," if index < last_index else ""
+        lines.append(f'  "{key}": {rendered_value}{suffix}')
+    lines.append("}")
+    serialized = "\n".join(lines) + "\r\n"
+    with open(path, "w", encoding="utf-8-sig", newline="") as handle:
+        handle.write(serialized)
 
 
 def replace_node_input(nodes: list[onnx.NodeProto], old_name: str, new_name: str) -> list[onnx.NodeProto]:
@@ -634,6 +675,27 @@ def validate_pack_meta(pack_meta: dict[str, Any], pack_meta_path: Path, source_s
     )
 
 
+def validate_gate_config(gate_config: dict[str, Any], gate_config_path: Path) -> dict[str, Any]:
+    expected_keys = list(GATE_CONFIG_DEFAULTS.keys())
+    actual_keys = list(gate_config.keys())
+    missing_required = [key for key in expected_keys if key not in gate_config]
+    unsupported_keys = [key for key in actual_keys if key not in GATE_CONFIG_DEFAULTS]
+    value_matches = {
+        key: gate_config.get(key) == GATE_CONFIG_DEFAULTS[key]
+        for key in expected_keys
+        if key in gate_config
+    }
+    return json_ready(
+        {
+            "path": str(gate_config_path),
+            "missing_required_keys": missing_required,
+            "unsupported_keys": unsupported_keys,
+            "value_matches_runtime_defaults": value_matches,
+            "runtime_compatible": not missing_required and not unsupported_keys and all(value_matches.values()),
+        }
+    )
+
+
 def collect_file_hashes(model_pack_dir: Path) -> dict[str, str]:
     hashes: dict[str, str] = {}
     for path in sorted(model_pack_dir.iterdir()):
@@ -686,6 +748,7 @@ def build_export_validation_report(
     stage1_validation: dict[str, Any],
     stage2_validation: dict[str, Any],
     pack_meta_validation: dict[str, Any],
+    gate_config_validation: dict[str, Any],
     scaler_validation: dict[str, Any],
     stage1_smoke: dict[str, Any],
     stage2_smoke: dict[str, Any],
@@ -697,6 +760,7 @@ def build_export_validation_report(
         "A2_stage1_onnx_export_complete": stage1_validation["all_passed"],
         "A3_stage2_onnx_export_complete": stage2_validation["all_passed"],
         "A4_pack_meta_complete_and_runtime_compatible": pack_meta_validation["runtime_compatible"],
+        "A4b_gate_config_runtime_compatible": gate_config_validation["runtime_compatible"],
         "A5_scaler_stats_packaged_and_valid": scaler_validation["schema_valid"] and scaler_validation["semantic_match_selected"],
         "A6_static_inference_smoke_pass": stage1_smoke["all_passed"] and stage2_smoke["all_passed"],
         "A7_source_parity_smoke_pass": stage1_smoke["all_passed"] and stage2_smoke["all_passed"],
@@ -711,6 +775,7 @@ def build_export_validation_report(
             "stage1_onnx_validation": stage1_validation,
             "stage2_onnx_validation": stage2_validation,
             "pack_meta_validation": pack_meta_validation,
+            "gate_config_validation": gate_config_validation,
             "scaler_validation": scaler_validation,
             "stage1_smoke": stage1_smoke,
             "stage2_smoke": stage2_smoke,
@@ -745,6 +810,7 @@ def validate_pack_layout(model_pack_dir: Path, context: Step15Context) -> dict[s
     ] + [
         "pack_meta.csv",
         "scaler_stats.json",
+        GATE_CONFIG_FILENAME,
     ]
     return json_ready({"files": files, "expected_files": expected, "runtime_compatible": files == sorted(expected)})
 
@@ -759,12 +825,15 @@ def main() -> int:
 
     source_bundle_audit = validate_source_bundle(context)
     pack_meta = build_pack_meta_dict(context)
+    gate_config = build_gate_config_dict()
     write_pack_meta(model_pack_dir / "pack_meta.csv", pack_meta)
     copy_scaler_stats(context, model_pack_dir / "scaler_stats.json")
+    write_gate_config(model_pack_dir / GATE_CONFIG_FILENAME, gate_config)
     exported_files = export_model_pack(context, config, model_pack_dir)
 
     stage1_validation, stage2_validation = validate_stage_exports(model_pack_dir, context)
     pack_meta_validation = validate_pack_meta(pack_meta, model_pack_dir / "pack_meta.csv", context.source_step11_metadata)
+    gate_config_validation = validate_gate_config(gate_config, model_pack_dir / GATE_CONFIG_FILENAME)
     scaler_validation = validate_scaler_stats_payload(load_json(model_pack_dir / "scaler_stats.json"))
     scaler_validation["semantic_match_selected"] = semantic_json_equal(load_json(model_pack_dir / "scaler_stats.json"), context.selected_stage1_scaler_stats)
     stage1_smoke = run_stage1_smoke(context, config, model_pack_dir)
@@ -786,6 +855,7 @@ def main() -> int:
         stage1_validation=stage1_validation,
         stage2_validation=stage2_validation,
         pack_meta_validation=pack_meta_validation,
+        gate_config_validation=gate_config_validation,
         scaler_validation=json_ready(scaler_validation),
         stage1_smoke=stage1_smoke,
         stage2_smoke=stage2_smoke,

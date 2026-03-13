@@ -22,6 +22,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import yaml
 
 
 def extract_date(ts_str: str) -> str:
@@ -37,6 +38,86 @@ def compute_hhi(pnl_series: pd.Series) -> float:
         return 0.0
     shares = (pnl_series.abs() / pnl_series.abs().sum()) ** 2
     return float(shares.sum())
+
+
+def compute_global_trade_metrics(
+    trades_df: pd.DataFrame,
+    commission_per_lot: float = 0.0,
+) -> dict:
+    """Compute campaign-level PF/WR from closed trades."""
+    closed = trades_df.dropna(subset=["pnl"]).copy()
+    if closed.empty:
+        return {
+            "total_trades": 0,
+            "winning_trades": 0,
+            "losing_trades": 0,
+            "global_profit_factor": 0.0,
+            "global_win_rate": 0.0,
+        }
+
+    pnl_values = pd.to_numeric(closed["pnl"], errors="coerce").fillna(0.0).to_numpy(dtype=float)
+    if commission_per_lot > 0 and "lot" in closed.columns:
+        lot_values = pd.to_numeric(closed["lot"], errors="coerce").fillna(0.0).to_numpy(dtype=float)
+        pnl_values = pnl_values - (lot_values * commission_per_lot)
+
+    wins = pnl_values[pnl_values > 0]
+    losses = pnl_values[pnl_values < 0]
+    gross_profit = float(wins.sum()) if len(wins) > 0 else 0.0
+    gross_loss = float(abs(losses.sum())) if len(losses) > 0 else 0.0
+
+    if gross_loss > 0:
+        profit_factor = gross_profit / gross_loss
+    elif gross_profit > 0:
+        profit_factor = np.inf
+    else:
+        profit_factor = 0.0
+
+    return {
+        "total_trades": int(len(pnl_values)),
+        "winning_trades": int(len(wins)),
+        "losing_trades": int(len(losses)),
+        "global_profit_factor": float(profit_factor),
+        "global_win_rate": float(len(wins) / len(pnl_values)) if len(pnl_values) > 0 else 0.0,
+    }
+
+
+def resolve_initial_equity(parser_dir: Path, explicit_initial_equity: float | None) -> tuple[float, str]:
+    """Resolve initial equity from run/campaign provenance when not provided."""
+    if explicit_initial_equity is not None:
+        return float(explicit_initial_equity), "cli_override"
+
+    run_dir = parser_dir.parent
+    run_manifest_path = run_dir / "run_manifest.json"
+    if run_manifest_path.exists():
+        try:
+            with open(run_manifest_path, encoding="utf-8") as f:
+                run_manifest = json.load(f)
+
+            tester_baseline = run_manifest.get("tester_baseline") or {}
+            deposit = tester_baseline.get("deposit")
+            if deposit is not None:
+                return float(deposit), "run_manifest.tester_baseline.deposit"
+
+            manifest_ref = run_manifest.get("manifest_ref")
+            if manifest_ref:
+                manifest_path = Path(manifest_ref)
+                if not manifest_path.exists():
+                    project_root = parser_dir.resolve()
+                    while project_root.name != "PROJECT_triple_sigma" and project_root.parent != project_root:
+                        project_root = project_root.parent
+                    manifest_path = project_root / manifest_ref
+                if manifest_path.exists():
+                    with open(manifest_path, encoding="utf-8") as f:
+                        campaign_manifest = yaml.safe_load(f) or {}
+                    deposit = (
+                        campaign_manifest.get("tester_baseline", {}) or {}
+                    ).get("deposit")
+                    if deposit is not None:
+                        return float(deposit), "campaign_manifest.tester_baseline.deposit"
+        except (OSError, json.JSONDecodeError, TypeError, ValueError, yaml.YAMLError):
+            pass
+
+    return 10000.0, "fallback_default"
 
 
 def build_daily_metrics(
@@ -215,8 +296,11 @@ def main():
         help="Additional commission per lot (broker commission already in pnl). Default: 0.0"
     )
     parser.add_argument(
-        "--initial-equity", type=float, default=10000.0,
-        help="Initial account equity for percentage drawdown normalization. Default: 10000"
+        "--initial-equity", type=float, default=None,
+        help=(
+            "Initial account equity for percentage drawdown normalization. "
+            "If omitted, auto-resolve from run_manifest/campaign manifest deposit."
+        ),
     )
     args = parser.parse_args()
 
@@ -228,10 +312,20 @@ def main():
         return
 
     trades_df = pd.read_parquet(trades_path)
-    daily = build_daily_metrics(trades_df, args.commission_per_lot, args.initial_equity)
+    initial_equity, initial_equity_source = resolve_initial_equity(
+        pdir,
+        args.initial_equity,
+    )
+    daily = build_daily_metrics(trades_df, args.commission_per_lot, initial_equity)
+    global_metrics = compute_global_trade_metrics(trades_df, args.commission_per_lot)
 
     if not daily.empty:
         daily.to_parquet(pdir / "daily_risk_metrics.parquet", index=False)
+
+    avg_daily_profit_factor = float(
+        daily.loc[daily["profit_factor"] != np.inf, "profit_factor"].mean()
+    ) if not daily.empty else 0.0
+    avg_daily_win_rate = float(daily["win_rate"].mean()) if not daily.empty else 0.0
 
     # Update manifest
     manifest_path = pdir / "parse_manifest.json"
@@ -253,12 +347,15 @@ def main():
         "cost_model": {
             "broker_commission_in_pnl": True,
             "additional_commission_per_lot": args.commission_per_lot,
-            "initial_equity": args.initial_equity,
+            "initial_equity": initial_equity,
+            "initial_equity_source": initial_equity_source,
         },
-        "avg_profit_factor": float(
-            daily.loc[daily["profit_factor"] != np.inf, "profit_factor"].mean()
-        ) if not daily.empty else 0.0,
-        "avg_win_rate": float(daily["win_rate"].mean()) if not daily.empty else 0.0,
+        "global_profit_factor": global_metrics["global_profit_factor"],
+        "global_win_rate": global_metrics["global_win_rate"],
+        "avg_daily_profit_factor": avg_daily_profit_factor,
+        "avg_daily_win_rate": avg_daily_win_rate,
+        "winning_trades": global_metrics["winning_trades"],
+        "losing_trades": global_metrics["losing_trades"],
         "build_timestamp": datetime.now().isoformat(),
     }
 
@@ -277,8 +374,11 @@ def main():
         print(f"  Max cumulative DD: {daily['cumulative_drawdown'].min():.2f}")
         if "max_equity_dd_pct" in daily.columns:
             print(f"  Max equity DD:    {daily['max_equity_dd_pct'].iloc[-1]:.2f}%")
-        print(f"  Avg win rate: {daily['win_rate'].mean():.2%}")
-        print(f"  Avg PF: {daily.loc[daily['profit_factor'] != np.inf, 'profit_factor'].mean():.2f}")
+        print(f"  Initial equity:   {initial_equity:.2f} ({initial_equity_source})")
+        print(f"  Global win rate:  {global_metrics['global_win_rate']:.2%}")
+        print(f"  Global PF:        {global_metrics['global_profit_factor']:.2f}")
+        print(f"  Avg daily WR:     {avg_daily_win_rate:.2%}")
+        print(f"  Avg daily PF:     {avg_daily_profit_factor:.2f}")
     else:
         print("No daily metrics generated.")
 

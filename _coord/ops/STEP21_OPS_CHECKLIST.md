@@ -1,7 +1,7 @@
 # PROJECT_triple_sigma Step21 Ops Checklist v2
 
 > Created: 2026-03-12
-> Basis: GPT Pro Audit Report (2026-03-12) + Codex gpt-5.4 cross-review + Claude Opus synthesis
+> Basis: GPT Pro Audit Report (2026-03-12) + Codex gpt-5.4 cross-review + Codex-only Phase B+ migration
 > Supersedes: STEP21_OPS_CHECKLIST.md (v1, 2026-03-10)
 > Purpose: Audit Finding F1~F7 remediation을 반영하고, 실제 파일시스템/코드와 교차 대조하여 갱신된 체크리스트
 
@@ -16,7 +16,7 @@
 | ML Export/Parity | **MED-HIGH** | MED-HIGH | **MED-HIGH** | Step15 ONNX 12개 모델, parity 증거 존재. pack payload hash 미검증 (F4) |
 | Optimization Ops | ~~HIGH~~ | HIGH | **PROVISIONAL → Phase A DONE** | F1/F2/F3 remediated: campaign runner+validator, strict gates, contract v2. Admissible run 대기 중 |
 | Release/Rollback Mgmt | ~~MODERATE~~ | MODERATE | **FAIL** | runbook만 존재, RC/RB 번들 미실체화 (F4), `_coord/releases/`, `_coord/rollback_points/` empty scaffold |
-| Agent Governance | **HIGH** | (없음) | **Phase B+ DONE** | AGENT_ROLE_POLICY.md (정책) + 11 skills + 2 hooks + CLAUDE.md |
+| Agent Governance | **HIGH** | (없음) | **Phase B+ DONE** | AGENT_ROLE_POLICY.md + AGENTS.md + CODEX_PHASE_B_PLUS_PLAYBOOK.md + Codex hook helpers |
 
 **핵심 결론 (v2)**: 최적화 시작 전 셋업은 **미완료**. admissible campaign lineage 생산, strict validator, agent 권한 분리가 선행 필요.
 
@@ -63,15 +63,15 @@
 - [x] `_coord/notebooks/` — empty scaffold
 - [x] `triple_sigma_runtime_patch/` — empty scaffold
 
-### 0.3 에이전트 구조 (신규 — Audit 섹션 8)
-- [x] `.claude/skills/` — 11개 skill 구현 완료 (Phase B+)
+### 0.3 에이전트 구조 (Codex-only Phase B+)
+- [x] `AGENTS.md` — repo-root Codex operating instructions
+- [x] `_coord/ops/CODEX_PHASE_B_PLUS_PLAYBOOK.md` — 11개 Codex workflow 정의
   - Tier 1: campaign-run-sealer, parser-replay, integrity-gate, codex-validator
   - Tier 2: campaign-bootstrap, mt5-preset-builder, kpi-branch-decision (skeleton)
   - Tier 3: ml-export-parity, pack-hash-capture, rc-bundle-assembly, rollback-bundle-verify (skeleton)
-- [x] `.claude/hooks/` — 2개 hook 구현 (post-seal-check, pre-promotion-guard)
-  - pre-run/post-rollback hooks deferred (tooling 미존재)
-- [x] agent 권한 분리 정책 문서 — `AGENT_ROLE_POLICY.md` (Phase A)
-- [x] `CLAUDE.md` — 프로젝트 컨텍스트 문서 (Phase B+)
+- [x] `tools/codex_hooks/` — 2개 Codex hook helper (post-seal-check, pre-promotion-guard)
+  - pre-run/post-rollback helpers deferred (tooling 미존재)
+- [x] agent 권한 분리 정책 문서 — `AGENT_ROLE_POLICY.md` (Codex-only)
 
 ---
 
@@ -236,9 +236,9 @@
 | # | Deliverable | 우선순위 | 시점 |
 |---|-------------|----------|------|
 | AG1 | Agent role/permission policy | P0 | Phase A | ✅ DONE |
-| AG2 | `.claude/skills/` 핵심 skills | P1 | Phase B+ | ✅ DONE (11개: 4 full + 3 partial + 4 skeleton) |
-| AG3 | `.claude/hooks/` 핵심 hooks | P1 | Phase B+ | ✅ DONE (2개: post-seal, pre-promotion) |
-| AG4 | Codex validator thread | P1 | Phase B+ | ✅ DONE (codex-validator skill) |
+| AG2 | Codex Phase B+ playbook workflows | P1 | Phase B+ | ✅ DONE (`CODEX_PHASE_B_PLUS_PLAYBOOK.md`, 11 workflows) |
+| AG3 | Codex hook helpers | P1 | Phase B+ | ✅ DONE (`tools/codex_hooks/`, 2 helpers) |
+| AG4 | Codex independent validator path | P1 | Phase B+ | ✅ DONE (Codex-only `codex-validator` workflow + `codex_validator_report.md`) |
 | AG5 | Artifact retention template | P0 | Phase A | ✅ DONE |
 
 ---
@@ -252,5 +252,5 @@
 | F3 | P0 | Counterfactual contract drift + ENTRY gate | A | **DONE** (contract v2 + ENTRY gate in build_counterfactual_eval.py) |
 | F4 | P0 | RC/Rollback 번들 미실체화 | C (skeleton) / D (full) | NOT STARTED |
 | F5 | P1 | Workstation-bound orchestration | D | NOT STARTED |
-| F6 | P0 | Independent validator 부재 | A (정책) / B+ (구현) | **DONE** (정책: AGENT_ROLE_POLICY.md + 구현: codex-validator skill + pre-promotion hook) |
+| F6 | P0 | Independent validator 부재 | A (정책) / B+ (구현) | **DONE** (정책: AGENT_ROLE_POLICY.md + 구현: Codex playbook + Codex pre-promotion guard) |
 | F7 | P1 | KPI semantics + short-side | B | NOT STARTED |

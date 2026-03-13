@@ -1,0 +1,12 @@
+﻿{
+  "spread_atr_max_base": 0.30,
+  "spread_atr_max_hard": 0.60,
+  "k_tp_scale_min": 1.0,
+  "k_tp_scale_max": 6.0,
+  "dev_points_base": 3,
+  "dev_points_add_max": 5,
+  "dev_points_hard_max": 10,
+  "risk_pct_base": 0.01,
+  "risk_pct_hard_min": 0.002,
+  "risk_pct_hard_max": 0.03
+}

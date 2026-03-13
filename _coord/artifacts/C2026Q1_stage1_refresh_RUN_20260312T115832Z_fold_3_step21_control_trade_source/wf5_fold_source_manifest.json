@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-03-12T17:48:11.184937+00:00",
+  "campaign_id": "C2026Q1_stage1_refresh",
+  "source_run_id": "RUN_20260312T115832Z",
+  "fold_id": "fold_3",
+  "window_from": "2025.04.02 09:10",
+  "window_to": "2025.11.24 14:50",
+  "generated_preset_path": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\reports\\generated_presets\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source.ini",
+  "generated_report_path": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\reports\\generated_reports\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source_report",
+  "artifact_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source",
+  "step11_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3",
+  "tester_root": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075",
+  "selected_agent_dir": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000",
+  "selected_agent_log": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\logs\\20260313.log",
+  "package_script_path": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\tools\\package_step21_artifacts.py",
+  "base_preset_path": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\tester\\step21\\step21_tester_control_trade.ini",
+  "package_manifest_ref": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source\\manifest.json",
+  "step11_metadata_ref": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3\\metadata.json",
+  "step11_total_labeled_samples": 34993
+}

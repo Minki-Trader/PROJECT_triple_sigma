@@ -5,6 +5,7 @@
     "A2_stage1_onnx_export_complete": true,
     "A3_stage2_onnx_export_complete": true,
     "A4_pack_meta_complete_and_runtime_compatible": true,
+    "A4b_gate_config_runtime_compatible": true,
     "A5_scaler_stats_packaged_and_valid": true,
     "A6_static_inference_smoke_pass": true,
     "A7_source_parity_smoke_pass": true,
@@ -40,7 +41,7 @@
     "all_passed": true,
     "by_regime": {
       "0": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg0_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg0_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -69,7 +70,7 @@
         "shape_contract_ok": true
       },
       "1": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg1_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg1_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -98,7 +99,7 @@
         "shape_contract_ok": true
       },
       "2": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg2_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg2_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -127,7 +128,7 @@
         "shape_contract_ok": true
       },
       "3": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg3_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg3_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -156,7 +157,7 @@
         "shape_contract_ok": true
       },
       "4": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg4_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg4_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -185,7 +186,7 @@
         "shape_contract_ok": true
       },
       "5": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg5_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\clf_reg5_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -219,7 +220,7 @@
     "all_passed": true,
     "by_regime": {
       "0": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg0_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg0_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -248,7 +249,7 @@
         "shape_contract_ok": true
       },
       "1": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg1_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg1_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -277,7 +278,7 @@
         "shape_contract_ok": true
       },
       "2": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg2_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg2_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -306,7 +307,7 @@
         "shape_contract_ok": true
       },
       "3": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg3_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg3_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -335,7 +336,7 @@
         "shape_contract_ok": true
       },
       "4": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg4_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg4_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -364,7 +365,7 @@
         "shape_contract_ok": true
       },
       "5": {
-        "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg5_v0.1.0.onnx",
+        "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\prm_reg5_v0.1.0.onnx",
         "checker_ok": true,
         "checker_error": "",
         "shape_inference_ok": true,
@@ -395,7 +396,7 @@
     }
   },
   "pack_meta_validation": {
-    "path": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv",
+    "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv",
     "missing_required_keys": [],
     "unsupported_keys": [],
     "value_matches_source_step11": {
@@ -417,6 +418,24 @@
       "dist_atr_max_clamp_hi": true
     },
     "format": "key_value_text",
+    "runtime_compatible": true
+  },
+  "gate_config_validation": {
+    "path": "_coord\\artifacts\\step15_export_q1_out\\model_pack\\gate_config.json",
+    "missing_required_keys": [],
+    "unsupported_keys": [],
+    "value_matches_runtime_defaults": {
+      "spread_atr_max_base": true,
+      "spread_atr_max_hard": true,
+      "k_tp_scale_min": true,
+      "k_tp_scale_max": true,
+      "dev_points_base": true,
+      "dev_points_add_max": true,
+      "dev_points_hard_max": true,
+      "risk_pct_base": true,
+      "risk_pct_hard_min": true,
+      "risk_pct_hard_max": true
+    },
     "runtime_compatible": true
   },
   "scaler_validation": {
@@ -566,6 +585,7 @@
       "clf_reg3_v0.1.0.onnx",
       "clf_reg4_v0.1.0.onnx",
       "clf_reg5_v0.1.0.onnx",
+      "gate_config.json",
       "pack_meta.csv",
       "prm_reg0_v0.1.0.onnx",
       "prm_reg1_v0.1.0.onnx",
@@ -589,12 +609,13 @@
       "prm_reg4_v0.1.0.onnx",
       "prm_reg5_v0.1.0.onnx",
       "pack_meta.csv",
-      "scaler_stats.json"
+      "scaler_stats.json",
+      "gate_config.json"
     ],
     "runtime_compatible": true
   },
   "export_manifest": {
-    "source_step14_dir": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step14_validation_q1_out",
+    "source_step14_dir": "_coord\\artifacts\\step14_validation_q1_out",
     "selected_candidate_ids": {
       "stage1": "stage1_baseline",
       "stage2": "stage2_c02"
@@ -615,7 +636,7 @@
     "dist_atr_max_clamp_lo": 0.5,
     "dist_atr_max_clamp_hi": 5.0,
     "target_opset": 17,
-    "model_pack_dir": "Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack",
+    "model_pack_dir": "_coord\\artifacts\\step15_export_q1_out\\model_pack",
     "stage1_files": [
       "clf_reg0_v0.1.0.onnx",
       "clf_reg1_v0.1.0.onnx",
@@ -657,6 +678,7 @@
       "clf_reg3_v0.1.0.onnx": "2d1516a9f0b4b581bd35300d2e4b123c17f222741d3fe8403aecbea35407a8bc",
       "clf_reg4_v0.1.0.onnx": "9a8603f388010378885dc2391d4591ba12eebe1182d8336d11429dbc87fd0648",
       "clf_reg5_v0.1.0.onnx": "652102d75b3644fd8b318f54a2ffdc4ba259bf4cc25682814ff77f5828283fae",
+      "gate_config.json": "d3d423611460da5e718a09c52cd93522fdea95ef70f00b69b403ddca92fae9bf",
       "pack_meta.csv": "cb1807c15486bd752f24508cf5dfa84062322d20ece3d6661028825e7b4ee417",
       "prm_reg0_v0.1.0.onnx": "b50d7914ae622208d6b5d2cce90ede1c1c9bd37b83f2b831d987d786363ace1f",
       "prm_reg1_v0.1.0.onnx": "00effd5a39713bb3f95593c43a979629edaabfc753c6294116099fed2338e4e8",

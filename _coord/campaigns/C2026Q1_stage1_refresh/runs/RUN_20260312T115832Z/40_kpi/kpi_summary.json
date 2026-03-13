@@ -1,0 +1,135 @@
+{
+  "schema_version": "1.0",
+  "built_at": "2026-03-12T16:35:40.070154+00:00",
+  "campaign_id": "C2026Q1_stage1_refresh",
+  "run_id": "RUN_20260312T115832Z",
+  "window_alias": "benchmark",
+  "window_from": "2024.06.04 17:25",
+  "window_to": "2025.04.02 09:00",
+  "pack_id": "triple_sigma_pack_step15_q1",
+  "source_artifacts": {
+    "run_manifest": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\run_manifest.json",
+    "parse_manifest": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed\\parse_manifest.json",
+    "trades_master": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed\\trades_master.parquet",
+    "bars_master": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed\\bars_master.parquet",
+    "counterfactual_eval": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed\\counterfactual_eval.parquet",
+    "daily_risk_metrics": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed\\daily_risk_metrics.parquet",
+    "validator_report": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\50_validator\\validator_report.json"
+  },
+  "admissibility": {
+    "validator_verdict": "PASS",
+    "parse_pass": true,
+    "invariants_pass": true,
+    "master_tables_pass": true,
+    "coverage_pass": true,
+    "window_clipping": {
+      "bars_before": 58505,
+      "bars_after": 58307,
+      "bars_clipped": 198,
+      "trades_before": 6156,
+      "trades_after": 6134,
+      "trade_ids_clipped": 11,
+      "trade_rows_clipped": 22,
+      "window_from": "2024.06.04 17:25",
+      "window_to": "2025.04.02 09:00"
+    }
+  },
+  "portfolio": {
+    "total_trades": 3067,
+    "winning_trades": 1227,
+    "losing_trades": 1814,
+    "total_pnl": -458.84999999999997,
+    "gross_profit": 1286.1299999999999,
+    "gross_loss": 1744.98,
+    "global_profit_factor": 0.7370456967988172,
+    "global_win_rate": 0.4000652103032279,
+    "payoff_ratio": 1.0896502803529373,
+    "expectancy_per_trade": -0.14960873818063253,
+    "median_trade_pnl": -0.15,
+    "p90_trade_pnl": 1.2,
+    "avg_bars_held": 3.32605151613955,
+    "p90_bars_held": 4.0,
+    "direction_breakdown": {
+      "LONG": {
+        "trades": 1155,
+        "net_pnl": -145.92,
+        "profit_factor": 0.7592555929518906,
+        "win_rate": 0.412987012987013,
+        "mean_pnl": -0.12633766233766233,
+        "median_pnl": -0.12,
+        "gross_profit": 460.19999999999993,
+        "gross_loss": 606.12
+      },
+      "SHORT": {
+        "trades": 1912,
+        "net_pnl": -312.93,
+        "profit_factor": 0.7252252252252251,
+        "win_rate": 0.3922594142259414,
+        "mean_pnl": -0.1636663179916318,
+        "median_pnl": -0.16,
+        "gross_profit": 825.9300000000001,
+        "gross_loss": 1138.8600000000001
+      }
+    },
+    "exit_reason_counts": {
+      "EARLY_EXIT": 1938,
+      "SL": 1115,
+      "TP": 13,
+      "FORCE_EXIT": 1
+    }
+  },
+  "risk": {
+    "trading_days": 213,
+    "max_drawdown_abs": 461.0400000000001,
+    "max_equity_dd_pct": -92.20800000000001,
+    "worst_day_net_pnl": -45.349999999999994,
+    "best_day_net_pnl": 26.02,
+    "daily_net_pnl_std": 7.401114367680636,
+    "avg_daily_profit_factor": 0.9380906302322408,
+    "avg_daily_win_rate": 0.3965375291515096,
+    "ulcer_index": 75.86846740872232,
+    "concentration_hhi_mean": 0.14532979795005618,
+    "concentration_hhi_p90": 0.24908285797845442,
+    "initial_equity": 500.0,
+    "initial_equity_source": "campaign_manifest.tester_baseline.deposit"
+  },
+  "signal": {
+    "candidate_bar_count": 17912,
+    "candidate_long_count": 10113,
+    "candidate_short_count": 7799,
+    "entry_allowed_rate_candidate": 1.0,
+    "gate_pass_rate_candidate": 0.9933005806163466,
+    "candidate_margin_mean": 0.43125882799240733,
+    "candidate_margin_p10": 0.06268739999999999,
+    "candidate_p_long_mean": 0.27354433770656544,
+    "candidate_p_short_mean": 0.3670434696292988,
+    "candidate_p_pass_mean": 0.35941218953774007
+  },
+  "counterfactual": {
+    "gate_block_count": 120,
+    "gate_block_rate_candidate_bars": 0.006699419383653417,
+    "candidate_conversion_rate": 0.17122599374720857,
+    "gate_regret_mean": 16.952666666666634,
+    "gate_regret_median": 1.7000000000007276,
+    "gate_regret_p90": 50.89599999999919,
+    "gate_regret_positive_rate": 0.5416666666666666,
+    "exit_opportunity_cost_mean": 46.218803390935754,
+    "exit_opportunity_cost_p90": 150.52799999999846,
+    "exit_risk_saved_mean": 88.91116400391259,
+    "exit_risk_saved_p90": 192.87399999999835,
+    "exit_cost_to_risk_ratio": 0.5198312710077878,
+    "no_exit_count": 1939,
+    "modify_count": 0,
+    "modify_alpha_loss_mean": 0.0,
+    "modify_save_ratio_mean": null,
+    "decision_type_counts": {
+      "ENTRY": 3067,
+      "NO_EXIT": 1939,
+      "EARLY_EXIT": 1938,
+      "EXIT_SL": 1115,
+      "GATE_BLOCK": 120,
+      "EXIT_TP": 13,
+      "EXIT_FORCE": 1
+    }
+  }
+}

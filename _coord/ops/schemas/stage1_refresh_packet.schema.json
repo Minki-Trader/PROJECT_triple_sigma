@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stage1_refresh_packet.schema.json",
+  "title": "WF5 Stage1 Refresh Packet",
+  "description": "Schema for campaign reports/stage1_refresh_packet_<run_id>.json produced by build_stage1_refresh_packet.py.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "built_at",
+    "campaign_id",
+    "source_run_id",
+    "primary_branch",
+    "confidence",
+    "wf5_ready",
+    "readiness_blockers",
+    "benchmark_diagnosis",
+    "campaign_windows",
+    "incumbent_stage1",
+    "regime_focus",
+    "launch_plan",
+    "recommended_focus",
+    "source_artifacts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "built_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "campaign_id": {
+      "type": "string"
+    },
+    "source_run_id": {
+      "type": "string",
+      "pattern": "^RUN_[0-9]{8}T[0-9]{6}Z$"
+    },
+    "primary_branch": {
+      "type": "string",
+      "enum": ["ML-first", "EA-first", "runtime-fix-first"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "wf5_ready": {
+      "type": "boolean"
+    },
+    "readiness_blockers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "benchmark_diagnosis": {
+      "type": "object",
+      "required": [
+        "total_pnl",
+        "global_profit_factor",
+        "global_win_rate",
+        "max_equity_dd_pct",
+        "gate_regret_mean",
+        "gate_block_rate_candidate_bars",
+        "candidate_margin_p10",
+        "long_profit_factor",
+        "short_profit_factor"
+      ],
+      "properties": {
+        "total_pnl": { "type": "number" },
+        "global_profit_factor": { "type": ["number", "null"] },
+        "global_win_rate": { "type": "number" },
+        "max_equity_dd_pct": { "type": "number" },
+        "gate_regret_mean": { "type": "number" },
+        "gate_block_rate_candidate_bars": { "type": "number" },
+        "candidate_margin_p10": { "type": "number" },
+        "long_profit_factor": { "type": ["number", "null"] },
+        "short_profit_factor": { "type": ["number", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "campaign_windows": {
+      "type": "object",
+      "required": [
+        "optimization_folds",
+        "benchmark",
+        "oos_validation"
+      ],
+      "properties": {
+        "optimization_folds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "from", "to", "note"],
+            "properties": {
+              "id": { "type": "string" },
+              "from": { "type": "string" },
+              "to": { "type": "string" },
+              "note": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "benchmark": {
+          "type": "object",
+          "required": ["from", "to"],
+          "properties": {
+            "from": { "type": "string" },
+            "to": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "oos_validation": {
+          "type": "object",
+          "required": ["from", "to"],
+          "properties": {
+            "from": { "type": "string" },
+            "to": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "incumbent_stage1": {
+      "type": "object",
+      "required": [
+        "step14_dir",
+        "selected_candidate_id",
+        "selected_candidate_source",
+        "eligible_candidate_count",
+        "used_control_fallback",
+        "final_handoff_is_baseline",
+        "architecture_baseline",
+        "training_config",
+        "source_data_window",
+        "source_input_dir",
+        "source_data_within_optimization_corpus",
+        "source_data_overlaps_oos_validation",
+        "total_labeled_samples",
+        "guardrail",
+        "outer_split",
+        "lineage_audit_passed",
+        "outer_split_audit_passed",
+        "smoke_pass"
+      ],
+      "properties": {
+        "step14_dir": { "type": "string" },
+        "selected_candidate_id": { "type": "string" },
+        "selected_candidate_source": { "type": "string" },
+        "eligible_candidate_count": { "type": "integer" },
+        "used_control_fallback": { "type": "boolean" },
+        "final_handoff_is_baseline": { "type": "boolean" },
+        "architecture_baseline": { "type": "object" },
+        "training_config": { "type": "object" },
+        "source_data_window": {
+          "type": "object",
+          "required": ["from", "to"],
+          "properties": {
+            "from": { "type": "string" },
+            "to": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "source_input_dir": { "type": "string" },
+        "source_data_within_optimization_corpus": { "type": "boolean" },
+        "source_data_overlaps_oos_validation": { "type": "boolean" },
+        "total_labeled_samples": { "type": "integer" },
+        "guardrail": {
+          "type": "object",
+          "required": [
+            "name",
+            "threshold",
+            "min_inner_fold_cand0_pass_recall",
+            "outer_refit_cand0_pass_recall_min",
+            "inner_selection_pass",
+            "outer_refit_pass"
+          ],
+          "properties": {
+            "name": { "type": "string" },
+            "threshold": { "type": "number" },
+            "min_inner_fold_cand0_pass_recall": { "type": "number" },
+            "outer_refit_cand0_pass_recall_min": { "type": "number" },
+            "inner_selection_pass": { "type": "boolean" },
+            "outer_refit_pass": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "outer_split": {
+          "type": "object",
+          "required": [
+            "embargo_bars",
+            "train_count",
+            "val_count",
+            "train_end_time",
+            "val_start_time",
+            "no_time_leakage"
+          ],
+          "properties": {
+            "embargo_bars": { "type": "integer" },
+            "train_count": { "type": "integer" },
+            "val_count": { "type": "integer" },
+            "train_end_time": { "type": "string" },
+            "val_start_time": { "type": "string" },
+            "no_time_leakage": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "lineage_audit_passed": { "type": "boolean" },
+        "outer_split_audit_passed": { "type": "boolean" },
+        "smoke_pass": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "regime_focus": {
+      "type": "object",
+      "required": [
+        "weakest_regime_id",
+        "weakest_regime_val_macro_f1",
+        "weakest_regime_val_cand0_pass_recall",
+        "weakest_regimes"
+      ],
+      "properties": {
+        "weakest_regime_id": { "type": "integer" },
+        "weakest_regime_val_macro_f1": { "type": "number" },
+        "weakest_regime_val_cand0_pass_recall": { "type": "number" },
+        "weakest_regimes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["regime_id", "val_macro_f1", "val_cand0_pass_recall"],
+            "properties": {
+              "regime_id": { "type": "integer" },
+              "val_macro_f1": { "type": "number" },
+              "val_cand0_pass_recall": { "type": "number" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "launch_plan": {
+      "type": "object",
+      "required": [
+        "artifact_root",
+        "pack_meta_path",
+        "bar_log_input_dir",
+        "fold_sources",
+        "available_fold_ids",
+        "missing_fold_ids",
+        "step11_fold_commands",
+        "step11_union_command",
+        "step12_command",
+        "step13_command",
+        "step14_command"
+      ],
+      "properties": {
+        "artifact_root": { "type": "string" },
+        "pack_meta_path": { "type": "string" },
+        "bar_log_input_dir": { "type": "string" },
+        "fold_sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "fold_id",
+              "window_from",
+              "window_to",
+              "source_dir",
+              "source_first_timestamp",
+              "source_last_timestamp",
+              "available"
+            ],
+            "properties": {
+              "fold_id": { "type": "string" },
+              "window_from": { "type": "string" },
+              "window_to": { "type": "string" },
+              "source_dir": { "type": "string" },
+              "source_first_timestamp": { "type": "string" },
+              "source_last_timestamp": { "type": "string" },
+              "available": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "available_fold_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "missing_fold_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "step11_fold_commands": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "step11_union_command": { "type": "string" },
+        "step12_command": { "type": "string" },
+        "step13_command": { "type": "string" },
+        "step14_command": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "recommended_focus": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "source_artifacts": {
+      "type": "object",
+      "required": [
+        "campaign_manifest",
+        "kpi_summary",
+        "branch_decision_packet",
+        "validator_report",
+        "stage1_selection_report",
+        "handoff_manifest",
+        "selected_stage1_training_metadata",
+        "selected_stage1_smoke",
+        "validation_metadata",
+        "regime_summary"
+      ],
+      "properties": {
+        "campaign_manifest": { "type": "string" },
+        "kpi_summary": { "type": "string" },
+        "branch_decision_packet": { "type": "string" },
+        "validator_report": { "type": "string" },
+        "stage1_selection_report": { "type": "string" },
+        "handoff_manifest": { "type": "string" },
+        "selected_stage1_training_metadata": { "type": "string" },
+        "selected_stage1_smoke": { "type": "string" },
+        "validation_metadata": { "type": "string" },
+        "regime_summary": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

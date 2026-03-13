@@ -1,0 +1,198 @@
+{
+  "schema_version": "1.0",
+  "built_at": "2026-03-12T17:48:11.717828+00:00",
+  "campaign_id": "C2026Q1_stage1_refresh",
+  "source_run_id": "RUN_20260312T115832Z",
+  "primary_branch": "ML-first",
+  "confidence": "high",
+  "wf5_ready": true,
+  "readiness_blockers": [],
+  "benchmark_diagnosis": {
+    "total_pnl": -458.84999999999997,
+    "global_profit_factor": 0.7370456967988172,
+    "global_win_rate": 0.4000652103032279,
+    "max_equity_dd_pct": -92.20800000000001,
+    "gate_regret_mean": 16.952666666666634,
+    "gate_block_rate_candidate_bars": 0.006699419383653417,
+    "candidate_margin_p10": 0.06268739999999999,
+    "long_profit_factor": 0.7592555929518906,
+    "short_profit_factor": 0.7252252252252251
+  },
+  "campaign_windows": {
+    "optimization_folds": [
+      {
+        "id": "fold_1",
+        "from": "2022.09.13 17:15",
+        "to": "2023.05.03 09:45",
+        "note": "clean actual-tick window 1"
+      },
+      {
+        "id": "fold_2",
+        "from": "2023.05.03 09:55",
+        "to": "2024.02.26 20:05",
+        "note": "clean actual-tick window 2 (10-min gap at fold_1 boundary)"
+      },
+      {
+        "id": "fold_3",
+        "from": "2025.04.02 09:10",
+        "to": "2025.11.24 14:50",
+        "note": "clean actual-tick window (was fold_4 in data policy)"
+      }
+    ],
+    "benchmark": {
+      "from": "2024.06.04 17:25",
+      "to": "2025.04.02 09:00"
+    },
+    "oos_validation": {
+      "from": "2025.11.24 15:00",
+      "to": "2026.03.06 23:55"
+    }
+  },
+  "incumbent_stage1": {
+    "step14_dir": "_coord\\artifacts\\step14_validation_q1_out",
+    "selected_candidate_id": "stage1_baseline",
+    "selected_candidate_source": "control_fallback",
+    "eligible_candidate_count": 0,
+    "used_control_fallback": true,
+    "final_handoff_is_baseline": true,
+    "architecture_baseline": {
+      "family": "sklearn_mlp",
+      "hidden_layers": [
+        64,
+        32
+      ]
+    },
+    "training_config": {
+      "train_ratio": 0.8,
+      "embargo_bars": 72,
+      "min_train_samples_per_regime": 24,
+      "min_val_samples_per_regime": 4,
+      "cand0_max_fraction": 0.95,
+      "cand0_sample_weight": 1.0,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 64,
+      "epochs": 40,
+      "patience": 8,
+      "min_delta": 0.0001,
+      "seed": 42,
+      "model_name": "step14_stage1_baseline"
+    },
+    "source_data_window": {
+      "from": "2025-11-28 20:10:00",
+      "to": "2026-02-27 23:50:00"
+    },
+    "source_input_dir": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Tester\\D0E8209F77C8CF37AD8BF550E51FF075\\Agent-127.0.0.1-3000\\MQL5\\Files\\triple_sigma_logs",
+    "source_data_within_optimization_corpus": false,
+    "source_data_overlaps_oos_validation": true,
+    "total_labeled_samples": 13042,
+    "guardrail": {
+      "name": "min_cand0_pass_recall",
+      "threshold": 0.5,
+      "min_inner_fold_cand0_pass_recall": 0.29770992366412213,
+      "outer_refit_cand0_pass_recall_min": 0.6291079812206573,
+      "inner_selection_pass": false,
+      "outer_refit_pass": true
+    },
+    "outer_split": {
+      "embargo_bars": 72,
+      "train_count": 10406,
+      "val_count": 2602,
+      "train_end_time": "2026-02-10 23:50:00",
+      "val_start_time": "2026-02-11 09:05:00",
+      "no_time_leakage": true
+    },
+    "lineage_audit_passed": true,
+    "outer_split_audit_passed": true,
+    "smoke_pass": true
+  },
+  "regime_focus": {
+    "weakest_regime_id": 1,
+    "weakest_regime_val_macro_f1": 0.3631338620523912,
+    "weakest_regime_val_cand0_pass_recall": 0.9497206703910616,
+    "weakest_regimes": [
+      {
+        "regime_id": 1,
+        "val_macro_f1": 0.3631338620523912,
+        "val_cand0_pass_recall": 0.9497206703910616
+      },
+      {
+        "regime_id": 3,
+        "val_macro_f1": 0.4221616273014122,
+        "val_cand0_pass_recall": 0.6291079812206573
+      },
+      {
+        "regime_id": 5,
+        "val_macro_f1": 0.4760357233244892,
+        "val_cand0_pass_recall": 0.7608695652173914
+      }
+    ]
+  },
+  "launch_plan": {
+    "artifact_root": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh",
+    "pack_meta_path": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv",
+    "bar_log_input_dir": "",
+    "fold_sources": [
+      {
+        "fold_id": "fold_1",
+        "window_from": "2022.09.13 17:15",
+        "window_to": "2023.05.03 09:45",
+        "source_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source",
+        "source_first_timestamp": "2022-09-12 23:50:00",
+        "source_last_timestamp": "2023-05-03 23:50:00",
+        "available": true
+      },
+      {
+        "fold_id": "fold_2",
+        "window_from": "2023.05.03 09:55",
+        "window_to": "2024.02.26 20:05",
+        "source_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source",
+        "source_first_timestamp": "2023-05-02 23:50:00",
+        "source_last_timestamp": "2024-02-26 23:50:00",
+        "available": true
+      },
+      {
+        "fold_id": "fold_3",
+        "window_from": "2025.04.02 09:10",
+        "window_to": "2025.11.24 14:50",
+        "source_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source",
+        "source_first_timestamp": "2025-04-01 23:50:00",
+        "source_last_timestamp": "2025-11-24 23:50:00",
+        "available": true
+      }
+    ],
+    "available_fold_ids": [
+      "fold_1",
+      "fold_2",
+      "fold_3"
+    ],
+    "missing_fold_ids": [],
+    "step11_fold_commands": [
+      "python src/ml/step11_labeling.py --input \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source\" --pack-meta \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_1\" --from \"2022.09.13 17:15\" --to \"2023.05.03 09:45\"",
+      "python src/ml/step11_labeling.py --input \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source\" --pack-meta \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_2\" --from \"2023.05.03 09:55\" --to \"2024.02.26 20:05\"",
+      "python src/ml/step11_labeling.py --input \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source\" --pack-meta \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3\" --from \"2025.04.02 09:10\" --to \"2025.11.24 14:50\""
+    ],
+    "step11_union_command": "python tools/build_step11_fold_union.py --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_1\" \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_2\" \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3\"",
+    "step12_command": "python src/ml/step12_training.py --input-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --fail-on-acceptance",
+    "step13_command": "python src/ml/step13_training.py --step11-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --step12-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step13_stage2_incumbent_refit\" --fail-on-acceptance",
+    "step14_command": "python src/ml/step14_training.py --step11-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --step12-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --step13-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step13_stage2_incumbent_refit\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step14_stage1_refresh_validation\" --fail-on-acceptance"
+  },
+  "recommended_focus": [
+    "Build Stage1 corpus only from frozen optimization_folds; do not reuse the current OOS-era training window.",
+    "Keep `min_cand0_pass_recall >= 0.5` as the hard Stage1 guardrail during WF5 search.",
+    "Expand Stage1 architecture/search before any EA threshold sweep because benchmark losses are broad across both directional books.",
+    "Re-run Step14 selection on the merged fold corpus before opening Stage2 retune."
+  ],
+  "source_artifacts": {
+    "campaign_manifest": "_coord\\campaigns\\C2026Q1_stage1_refresh\\manifest.yaml",
+    "kpi_summary": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\40_kpi\\kpi_summary.json",
+    "branch_decision_packet": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\60_decision\\branch_decision_packet.json",
+    "validator_report": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\50_validator\\validator_report.json",
+    "stage1_selection_report": "_coord\\artifacts\\step14_validation_q1_out\\stage1_selection_report.json",
+    "handoff_manifest": "_coord\\artifacts\\step14_validation_q1_out\\handoff_manifest.json",
+    "selected_stage1_training_metadata": "_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\training_metadata.json",
+    "selected_stage1_smoke": "_coord\\artifacts\\step14_validation_q1_out\\selected_stage1_smoke.json",
+    "validation_metadata": "_coord\\artifacts\\step14_validation_q1_out\\validation_metadata.json",
+    "regime_summary": "_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\regime_summary.csv"
+  }
+}

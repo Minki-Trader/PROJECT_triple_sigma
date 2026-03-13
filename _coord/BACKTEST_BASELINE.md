@@ -13,5 +13,5 @@ This file is the fixed default for all future Strategy Tester runs unless explic
 
 ## Notes
 
-- Keep these values locked for both Codex and Claude test runs.
+- Keep these values locked for all Codex-driven test runs.
 - If a task needs a temporary override, write it explicitly in `CHAT.md` and revert to this baseline after the run.
