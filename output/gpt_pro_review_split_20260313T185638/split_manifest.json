@@ -1,0 +1,41 @@
+{
+  "created_at": "2026-03-13T18:57:58",
+  "source_root": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma",
+  "source_root_name": "PROJECT_triple_sigma",
+  "excluded": [
+    ".git",
+    "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\output\\gpt_pro_review_split_20260313T185638"
+  ],
+  "parts": [
+    {
+      "zip": "PROJECT_triple_sigma_part1of5.zip",
+      "zip_bytes": 45560456,
+      "source_file_count": 1256,
+      "source_bytes": 272636279
+    },
+    {
+      "zip": "PROJECT_triple_sigma_part2of5.zip",
+      "zip_bytes": 53048948,
+      "source_file_count": 1260,
+      "source_bytes": 272636299
+    },
+    {
+      "zip": "PROJECT_triple_sigma_part3of5.zip",
+      "zip_bytes": 54413741,
+      "source_file_count": 1259,
+      "source_bytes": 272636298
+    },
+    {
+      "zip": "PROJECT_triple_sigma_part4of5.zip",
+      "zip_bytes": 80438916,
+      "source_file_count": 1258,
+      "source_bytes": 272636284
+    },
+    {
+      "zip": "PROJECT_triple_sigma_part5of5.zip",
+      "zip_bytes": 78858636,
+      "source_file_count": 1261,
+      "source_bytes": 272636302
+    }
+  ]
+}
