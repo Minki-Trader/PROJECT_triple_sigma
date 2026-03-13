@@ -1,6 +1,6 @@
 {
   "parser_version": "1.0",
-  "parse_timestamp": "2026-03-12T21:34:18.678398",
+  "parse_timestamp": "2026-03-13T01:35:03.881854",
   "raw_dir": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\20_raw",
   "output_dir": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed",
   "files_parsed": {
@@ -49,7 +49,7 @@
   "master_table_issues": [],
   "master_table_warnings": [],
   "master_tables_pass": true,
-  "master_table_build_timestamp": "2026-03-12T21:34:22.955386",
+  "master_table_build_timestamp": "2026-03-13T01:35:12.326053",
   "counterfactual_eval": {
     "rows": 8193,
     "horizon": 72,
@@ -65,7 +65,7 @@
     "coverage_pass": true,
     "unmapped_total": 0,
     "exit_reason_taxonomy_used": true,
-    "build_timestamp": "2026-03-12T21:34:24.948453"
+    "build_timestamp": "2026-03-13T01:35:18.583749"
   },
   "daily_risk_metrics": {
     "trading_days": 213,
@@ -74,14 +74,19 @@
     "total_net_pnl": -458.85,
     "total_pnl": -458.8500000000001,
     "final_drawdown": -458.8500000000001,
-    "max_equity_dd_pct": -4.6104,
+    "max_equity_dd_pct": -92.20800000000001,
     "cost_model": {
       "broker_commission_in_pnl": true,
       "additional_commission_per_lot": 0.0,
-      "initial_equity": 10000.0
+      "initial_equity": 500.0,
+      "initial_equity_source": "campaign_manifest.tester_baseline.deposit"
     },
-    "avg_profit_factor": 0.9380906302322408,
-    "avg_win_rate": 0.3965375291515096,
-    "build_timestamp": "2026-03-12T21:34:25.821806"
+    "global_profit_factor": 0.7370456967988172,
+    "global_win_rate": 0.4000652103032279,
+    "avg_daily_profit_factor": 0.9380906302322408,
+    "avg_daily_win_rate": 0.3965375291515096,
+    "winning_trades": 1227,
+    "losing_trades": 1814,
+    "build_timestamp": "2026-03-13T01:35:26.257890"
   }
 }

@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpi_summary.schema.json",
+  "title": "WF4 KPI Summary",
+  "description": "Schema for 40_kpi/kpi_summary.json produced by build_kpi_summary.py.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "built_at",
+    "campaign_id",
+    "run_id",
+    "window_alias",
+    "window_from",
+    "window_to",
+    "pack_id",
+    "source_artifacts",
+    "admissibility",
+    "portfolio",
+    "risk",
+    "signal",
+    "counterfactual"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "built_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "campaign_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^RUN_[0-9]{8}T[0-9]{6}Z$"
+    },
+    "window_alias": {
+      "type": "string"
+    },
+    "window_from": {
+      "type": "string"
+    },
+    "window_to": {
+      "type": "string"
+    },
+    "pack_id": {
+      "type": "string"
+    },
+    "source_artifacts": {
+      "type": "object",
+      "required": [
+        "run_manifest",
+        "parse_manifest",
+        "trades_master",
+        "bars_master",
+        "counterfactual_eval",
+        "daily_risk_metrics",
+        "validator_report"
+      ],
+      "properties": {
+        "run_manifest": { "type": "string" },
+        "parse_manifest": { "type": "string" },
+        "trades_master": { "type": "string" },
+        "bars_master": { "type": "string" },
+        "counterfactual_eval": { "type": "string" },
+        "daily_risk_metrics": { "type": "string" },
+        "validator_report": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "admissibility": {
+      "type": "object",
+      "required": [
+        "validator_verdict",
+        "parse_pass",
+        "invariants_pass",
+        "master_tables_pass",
+        "coverage_pass",
+        "window_clipping"
+      ],
+      "properties": {
+        "validator_verdict": { "type": "string" },
+        "parse_pass": { "type": "boolean" },
+        "invariants_pass": { "type": "boolean" },
+        "master_tables_pass": { "type": "boolean" },
+        "coverage_pass": { "type": "boolean" },
+        "window_clipping": {
+          "type": "object",
+          "required": ["window_from", "window_to"],
+          "properties": {
+            "window_from": { "type": "string" },
+            "window_to": { "type": "string" },
+            "bars_before": { "type": "integer" },
+            "bars_after": { "type": "integer" },
+            "bars_clipped": { "type": "integer" },
+            "trades_before": { "type": "integer" },
+            "trades_after": { "type": "integer" },
+            "trade_ids_clipped": { "type": "integer" },
+            "trade_rows_clipped": { "type": "integer" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "portfolio": {
+      "type": "object",
+      "required": [
+        "total_trades",
+        "winning_trades",
+        "losing_trades",
+        "total_pnl",
+        "gross_profit",
+        "gross_loss",
+        "global_profit_factor",
+        "global_win_rate",
+        "payoff_ratio",
+        "expectancy_per_trade",
+        "median_trade_pnl",
+        "p90_trade_pnl",
+        "avg_bars_held",
+        "p90_bars_held",
+        "direction_breakdown",
+        "exit_reason_counts"
+      ],
+      "properties": {
+        "total_trades": { "type": "integer" },
+        "winning_trades": { "type": "integer" },
+        "losing_trades": { "type": "integer" },
+        "total_pnl": { "type": "number" },
+        "gross_profit": { "type": "number" },
+        "gross_loss": { "type": "number" },
+        "global_profit_factor": { "type": ["number", "null"] },
+        "global_win_rate": { "type": "number" },
+        "payoff_ratio": { "type": ["number", "null"] },
+        "expectancy_per_trade": { "type": "number" },
+        "median_trade_pnl": { "type": "number" },
+        "p90_trade_pnl": { "type": "number" },
+        "avg_bars_held": { "type": "number" },
+        "p90_bars_held": { "type": "number" },
+        "direction_breakdown": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "trades",
+              "net_pnl",
+              "profit_factor",
+              "win_rate",
+              "mean_pnl",
+              "median_pnl",
+              "gross_profit",
+              "gross_loss"
+            ],
+            "properties": {
+              "trades": { "type": "integer" },
+              "net_pnl": { "type": "number" },
+              "profit_factor": { "type": ["number", "null"] },
+              "win_rate": { "type": "number" },
+              "mean_pnl": { "type": "number" },
+              "median_pnl": { "type": "number" },
+              "gross_profit": { "type": "number" },
+              "gross_loss": { "type": "number" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "exit_reason_counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "risk": {
+      "type": "object",
+      "required": [
+        "trading_days",
+        "max_drawdown_abs",
+        "max_equity_dd_pct",
+        "worst_day_net_pnl",
+        "best_day_net_pnl",
+        "daily_net_pnl_std",
+        "avg_daily_profit_factor",
+        "avg_daily_win_rate",
+        "ulcer_index",
+        "concentration_hhi_mean",
+        "concentration_hhi_p90",
+        "initial_equity",
+        "initial_equity_source"
+      ],
+      "properties": {
+        "trading_days": { "type": "integer" },
+        "max_drawdown_abs": { "type": "number" },
+        "max_equity_dd_pct": { "type": "number" },
+        "worst_day_net_pnl": { "type": "number" },
+        "best_day_net_pnl": { "type": "number" },
+        "daily_net_pnl_std": { "type": "number" },
+        "avg_daily_profit_factor": { "type": "number" },
+        "avg_daily_win_rate": { "type": "number" },
+        "ulcer_index": { "type": "number" },
+        "concentration_hhi_mean": { "type": "number" },
+        "concentration_hhi_p90": { "type": "number" },
+        "initial_equity": { "type": "number" },
+        "initial_equity_source": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "signal": {
+      "type": "object",
+      "required": [
+        "candidate_bar_count",
+        "candidate_long_count",
+        "candidate_short_count",
+        "entry_allowed_rate_candidate",
+        "gate_pass_rate_candidate",
+        "candidate_margin_mean",
+        "candidate_margin_p10",
+        "candidate_p_long_mean",
+        "candidate_p_short_mean",
+        "candidate_p_pass_mean"
+      ],
+      "properties": {
+        "candidate_bar_count": { "type": "integer" },
+        "candidate_long_count": { "type": "integer" },
+        "candidate_short_count": { "type": "integer" },
+        "entry_allowed_rate_candidate": { "type": "number" },
+        "gate_pass_rate_candidate": { "type": "number" },
+        "candidate_margin_mean": { "type": "number" },
+        "candidate_margin_p10": { "type": "number" },
+        "candidate_p_long_mean": { "type": "number" },
+        "candidate_p_short_mean": { "type": "number" },
+        "candidate_p_pass_mean": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "counterfactual": {
+      "type": "object",
+      "required": [
+        "gate_block_count",
+        "gate_block_rate_candidate_bars",
+        "candidate_conversion_rate",
+        "gate_regret_mean",
+        "gate_regret_median",
+        "gate_regret_p90",
+        "gate_regret_positive_rate",
+        "exit_opportunity_cost_mean",
+        "exit_opportunity_cost_p90",
+        "exit_risk_saved_mean",
+        "exit_risk_saved_p90",
+        "exit_cost_to_risk_ratio",
+        "no_exit_count",
+        "modify_count",
+        "modify_alpha_loss_mean",
+        "modify_save_ratio_mean",
+        "decision_type_counts"
+      ],
+      "properties": {
+        "gate_block_count": { "type": "integer" },
+        "gate_block_rate_candidate_bars": { "type": "number" },
+        "candidate_conversion_rate": { "type": "number" },
+        "gate_regret_mean": { "type": "number" },
+        "gate_regret_median": { "type": "number" },
+        "gate_regret_p90": { "type": "number" },
+        "gate_regret_positive_rate": { "type": "number" },
+        "exit_opportunity_cost_mean": { "type": "number" },
+        "exit_opportunity_cost_p90": { "type": "number" },
+        "exit_risk_saved_mean": { "type": "number" },
+        "exit_risk_saved_p90": { "type": "number" },
+        "exit_cost_to_risk_ratio": { "type": ["number", "null"] },
+        "no_exit_count": { "type": "integer" },
+        "modify_count": { "type": "integer" },
+        "modify_alpha_loss_mean": { "type": "number" },
+        "modify_save_ratio_mean": { "type": ["number", "null"] },
+        "decision_type_counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

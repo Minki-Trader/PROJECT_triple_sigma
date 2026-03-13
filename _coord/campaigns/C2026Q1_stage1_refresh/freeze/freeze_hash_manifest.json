@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "campaign_id": "C2026Q1_stage1_refresh",
+  "sealed_at": "2026-03-12T16:37:20.822074+00:00",
+  "role_overlap_pass": true,
+  "window_refs": {
+    "benchmark": {
+      "role": "benchmark",
+      "from": "2024.06.04 17:25",
+      "to": "2025.04.02 09:00",
+      "tick_quality": "clean_actual",
+      "bars_approx": 58000,
+      "independence_note": "Excluded from optimization_folds. Reserved exclusively for independent selection comparison.\n"
+    },
+    "oos_validation": {
+      "role": "oos",
+      "from": "2025.11.24 15:00",
+      "to": "2026.03.06 23:55",
+      "tick_quality": "practical_extension",
+      "bars_approx": 20000,
+      "known_gaps": [
+        {
+          "from": "2025.11.28 05:00",
+          "to": "2025.11.28 05:10",
+          "duration_minutes": 10,
+          "severity": "minor"
+        }
+      ]
+    },
+    "optimization_folds": [
+      {
+        "id": "fold_1",
+        "from": "2022.09.13 17:15",
+        "to": "2023.05.03 09:45",
+        "tick_quality": "clean_actual",
+        "bars_approx": 47000
+      },
+      {
+        "id": "fold_2",
+        "from": "2023.05.03 09:55",
+        "to": "2024.02.26 20:05",
+        "tick_quality": "clean_actual",
+        "bars_approx": 60000
+      },
+      {
+        "id": "fold_3",
+        "from": "2025.04.02 09:10",
+        "to": "2025.11.24 14:50",
+        "tick_quality": "clean_actual",
+        "bars_approx": 47000
+      }
+    ]
+  },
+  "files": {
+    "design/US100_RealTick_Backtest_Data_Policy.md": {
+      "sha256": "a40f7585e35bb0b17f32c66d8337eeb0cb3db060a307ac962025414f1580f2d9",
+      "size": 5089
+    },
+    "_coord/BACKTEST_BASELINE.md": {
+      "sha256": "ba3910a9cd70153385b00727fad70c3a640b005d82e53ca7b555b58c67adbefa",
+      "size": 533
+    },
+    "_coord/campaigns/C2026Q1_stage1_refresh/manifest.yaml": {
+      "sha256": "687cc39787c61459b8fc063feda44dc6734e51da46f754c4c1fea6120f57701d",
+      "size": 8336
+    },
+    "_coord/campaigns/C2026Q1_stage1_refresh/freeze/data_freeze_manifest.yaml": {
+      "sha256": "feee508b2c98c50c511f9644e6189b4942c7342e90fa8344e9db25a46ae2a4aa",
+      "size": 3695
+    },
+    "_coord/artifacts/us100_history_quality/US100_HISTORY_QUALITY_AUDIT.md": {
+      "sha256": "a802a9f854f274b9b9ae9504b49a0b272ec79ea9de30732f83f2966c008f8cfa",
+      "size": 4761
+    }
+  }
+}

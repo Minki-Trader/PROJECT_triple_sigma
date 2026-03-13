@@ -13,7 +13,7 @@ STEP15 turns the selected STEP14 artifacts into a runtime-compatible model-pack.
 
 - Input source: STEP14 `handoff_manifest.json` plus `selected_stage1/` and `selected_stage2/`
 - Export surface: 6 Stage1 ONNX files + 6 Stage2 ONNX files
-- Runtime pack files: `pack_meta.csv` and `scaler_stats.json`
+- Runtime pack files: `pack_meta.csv`, `scaler_stats.json`, and `gate_config.json`
 - Validation: ONNX checker, shape inference, ONNX Runtime smoke, and source-vs-ONNX parity smoke
 
 ## Input Contract
@@ -62,6 +62,7 @@ STEP15 writes a deployable `model_pack/` directory containing:
 - 12 ONNX files
 - `pack_meta.csv`
 - `scaler_stats.json`
+- `gate_config.json`
 
 `pack_meta.csv` remains a legacy filename for runtime compatibility, but the
 current runtime expects a `key=value` text format, one entry per line.
@@ -94,6 +95,20 @@ The expected schema remains:
 - `mean[12]`
 - `std[12]`
 - all `std > 0`
+
+`gate_config.json` is emitted in runtime-compatible JSON form using the
+current gate-default baseline:
+
+- `spread_atr_max_base`
+- `spread_atr_max_hard`
+- `k_tp_scale_min`
+- `k_tp_scale_max`
+- `dev_points_base`
+- `dev_points_add_max`
+- `dev_points_hard_max`
+- `risk_pct_base`
+- `risk_pct_hard_min`
+- `risk_pct_hard_max`
 
 ## Outputs
 
@@ -133,6 +148,7 @@ The implemented baseline tracks these hard acceptance flags:
 - `A2_stage1_onnx_export_complete`
 - `A3_stage2_onnx_export_complete`
 - `A4_pack_meta_complete_and_runtime_compatible`
+- `A4b_gate_config_runtime_compatible`
 - `A5_scaler_stats_packaged_and_valid`
 - `A6_static_inference_smoke_pass`
 - `A7_source_parity_smoke_pass`
@@ -148,7 +164,6 @@ The following remain outside the current STEP15 baseline:
 - ONNX graph optimization research
 - alternative model families
 - runtime or EA code changes
-- `gate_config.json`
 - STEP16 monitoring/optimization work
 - profitability or live-readiness evaluation
 

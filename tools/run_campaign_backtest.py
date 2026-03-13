@@ -226,6 +226,12 @@ def seal_pack(pack_dir: Path, pack_id: str) -> dict:
     return manifest
 
 
+def resolve_pack_dir(project_root: Path, pack_id: str) -> Path:
+    """Resolve an MT5 pack directory from the repo workspace root."""
+    mql5_files = project_root.parent.parent / "Files"
+    return mql5_files / pack_id
+
+
 # ---------------------------------------------------------------------------
 # Commands
 # ---------------------------------------------------------------------------
@@ -263,6 +269,7 @@ def cmd_prepare(args):
         "window_to": window_to,
         "pack_id": pack_id,
         "manifest_ref": str(manifest_path),
+        "tester_baseline": manifest.get("tester_baseline", {}),
         "prepared_at": datetime.now(timezone.utc).isoformat(),
     }
     (run_dir / "00_request" / "request_meta.json").write_text(
@@ -301,6 +308,12 @@ def cmd_seal(args):
 
     run_id = request_meta["run_id"]
     pack_id = request_meta["pack_id"]
+    tester_baseline = request_meta.get("tester_baseline", {})
+    manifest_ref = request_meta.get("manifest_ref")
+    if not tester_baseline and manifest_ref:
+        manifest_path = Path(manifest_ref)
+        if manifest_path.exists():
+            tester_baseline = load_manifest(manifest_path).get("tester_baseline", {})
 
     # Validate raw outputs exist
     raw_dir = run_dir / "20_raw"
@@ -325,21 +338,25 @@ def cmd_seal(args):
             print(f"  - {m}", file=sys.stderr)
         sys.exit(1)
 
+    # Resolve pack directory (PROJECT_triple_sigma → Experts → MQL5 → Files)
+    project_root = run_dir.resolve()
+    while project_root.name != "PROJECT_triple_sigma" and project_root.parent != project_root:
+        project_root = project_root.parent
+
+    pack_dir = resolve_pack_dir(project_root, pack_id)
+    if not pack_dir.exists() and not args.allow_pack_missing:
+        print(
+            f"FATAL: Pack directory not found at {pack_dir}. "
+            "Use --allow-pack-missing only for non-admissible diagnostic sealing.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
     # Seal raw outputs
     raw_hash = seal_raw_outputs(run_dir, run_id)
     raw_hash_path = run_dir / "21_hash" / "raw_hash_manifest.json"
     raw_hash_path.write_text(json.dumps(raw_hash, indent=2), encoding="utf-8")
     print(f"Raw hash manifest: {raw_hash_path} ({len(raw_hash['files'])} files)")
-
-    # Seal pack
-    # Resolve pack directory (MQL5/Files/<pack_id>)
-    project_root = run_dir.resolve()
-    while project_root.name != "PROJECT_triple_sigma" and project_root.parent != project_root:
-        project_root = project_root.parent
-
-    # PROJECT_triple_sigma → Experts → MQL5 → Files
-    mql5_files = project_root.parent.parent / "Files"
-    pack_dir = mql5_files / pack_id
 
     if pack_dir.exists():
         pack_hash = seal_pack(pack_dir, pack_id)
@@ -347,7 +364,10 @@ def cmd_seal(args):
         pack_hash_path.write_text(json.dumps(pack_hash, indent=2), encoding="utf-8")
         print(f"Pack hash manifest: {pack_hash_path} ({len(pack_hash['models'])} models)")
     else:
-        print(f"WARNING: Pack directory not found at {pack_dir}, skipping pack hash")
+        print(
+            f"WARNING: Pack directory not found at {pack_dir}, "
+            "skipping pack hash under --allow-pack-missing",
+        )
         pack_hash = None
 
     # Parse compile log for error/warning count (MT5 result line: "Result: N errors, N warnings")
@@ -388,7 +408,8 @@ def cmd_seal(args):
             "raw_hash_ref": "21_hash/raw_hash_manifest.json",
             "pack_hash_ref": "21_hash/pack_hash_manifest.json" if pack_hash else None,
         },
-        "status": "complete",
+        "status": "complete" if pack_hash else "failed",
+        "tester_baseline": tester_baseline,
     }
 
     manifest_path = run_dir / "run_manifest.json"
@@ -422,6 +443,10 @@ def cmd_seal(args):
     print()
     print(f"Run sealed: {run_id}")
     print(f"  Raw files: {len(raw_hash['files'])}")
+    if pack_hash:
+        print(f"  Pack files: {len(pack_hash['models'])}")
+    else:
+        print("  Pack files: missing (run marked failed/non-admissible)")
     print(f"  Compile: {compile_errors} errors, {compile_warnings} warnings")
     if compile_errors > 0:
         print("  WARNING: Compile errors detected — run may not be admissible")
@@ -492,6 +517,14 @@ def main():
     # seal
     seal = subparsers.add_parser("seal", help="Seal raw outputs and generate run manifest")
     seal.add_argument("run_dir", type=str, help="Path to RUN_<ts> directory")
+    seal.add_argument(
+        "--allow-pack-missing",
+        action="store_true",
+        help=(
+            "Allow sealing without pack_hash_manifest.json for diagnostic/archive workflows. "
+            "The run will be marked failed and validator will reject admissibility."
+        ),
+    )
 
     args = parser.parse_args()
 

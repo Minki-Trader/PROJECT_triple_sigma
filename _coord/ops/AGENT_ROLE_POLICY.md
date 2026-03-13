@@ -10,7 +10,7 @@
 
 ## 1. Role Definitions
 
-### 1.1 writer-orchestrator (Claude Code Opus)
+### 1.1 codex-writer-orchestrator
 
 | Attribute | Detail |
 |-----------|--------|
@@ -46,17 +46,17 @@
 | Outputs | validation reports, export validation report, pack hash manifest |
 | Scope | `src/ml/` write, pack directory write, `21_hash/pack_hash_manifest.json` write |
 
-### 1.5 independent-validator (Codex CLI or equivalent second thread)
+### 1.5 codex-validator (separate Codex validation thread)
 
 | Attribute | Detail |
 |-----------|--------|
 | Authority | Frozen evidence bundle read-only |
 | Prohibition | Source code write, operator config change |
-| Outputs | validator_report.json, validator_signature.json |
+| Outputs | `codex_validator_report.md`, `validator_signature.json` |
 | Scope | `runs/RUN_<ts>/` read-only, `50_validator/` write |
-| Implementation | `codex exec --full-auto -m gpt-5.4` with frozen evidence bundle as context |
+| Implementation | Separate Codex thread/session with frozen evidence bundle only |
 
-### 1.6 release-gatekeeper
+### 1.6 codex-gatekeeper
 
 | Attribute | Detail |
 |-----------|--------|
@@ -80,12 +80,12 @@
 
 This is the foundational governance constraint for the agent topology.
 
-1. **Writer proposes only** — writer-orchestrator can create candidates but cannot approve them for promotion.
-2. **Validator re-verifies** — independent-validator checks writer outputs against frozen evidence only. No live code access.
-3. **Gatekeeper releases** — release-gatekeeper passes WF8/WF9 only when writer + validator manifests, hashes, and signatures match.
+1. **Writer proposes only** — `codex-writer-orchestrator` can create candidates but cannot approve them for promotion.
+2. **Validator re-verifies** — `codex-validator` checks writer outputs against frozen evidence only. No live code access.
+3. **Gatekeeper releases** — `codex-gatekeeper` passes WF8/WF9 only when machine validator evidence and Codex validator evidence both clear.
 4. **Human override** — permitted but must be retained in `override_record.yaml` with justification and timestamp.
 
-**Prohibited path:** Writer approving own candidate in same thread → always rejected.
+**Prohibited path:** `codex-writer-orchestrator` approving its own candidate in the same thread/session → always rejected.
 
 ---
 
@@ -101,7 +101,7 @@ _coord/campaigns/<campaign_id>/runs/RUN_<UTCSTAMP>/
   21_hash/       — raw_hash_manifest.json, pack_hash_manifest.json
   30_parsed/     — parser outputs (master tables, parse_manifest.json, coverage_manifest.json)
   40_kpi/        — kpi_summary.json, branch_decision_packet.json
-  50_validator/  — validator_report.json, validator_signature.json
+  50_validator/  — validator_report.json, codex_validator_report.md, validator_signature.json
   60_decision/   — pass/fail decision, override_record.yaml (if applicable)
 ```
 
@@ -116,10 +116,10 @@ _coord/campaigns/<campaign_id>/runs/RUN_<UTCSTAMP>/
 
 | Trigger | Escalation |
 |---------|-----------|
-| Operator infra failure | mt5-operator retry budget → writer-orchestrator + human |
-| Integrity failure | Immediate: independent-validator + human, optimization halted |
+| Operator infra failure | mt5-operator retry budget → codex-writer-orchestrator + human |
+| Integrity failure | Immediate: codex-validator + human, optimization halted |
 | Writer/validator disagreement | human-principal arbitration |
-| Promotion failure | Gatekeeper reject → writer revision → new candidate re-entry |
+| Promotion failure | codex-gatekeeper reject → writer revision → new candidate re-entry |
 
 ---
 
@@ -142,23 +142,26 @@ Required schema validators (repo-resident):
 
 ## 6. Future Infrastructure (Phase B+)
 
-### 6.1 Custom Skills (`.claude/skills/`)
+### 6.1 Codex Playbook Workflows
 
-11 skills to implement after admissible baseline is established:
+Active workflow definitions live in:
+- `AGENTS.md`
+- `_coord/ops/CODEX_PHASE_B_PLUS_PLAYBOOK.md`
 
+Phase B+ workflows:
 1. **campaign-bootstrap** — initialize campaign workspace from manifest
-2. **mt5-preset-builder** — generate .ini from manifest params
+2. **mt5-preset-builder** — generate or inspect tester presets
 3. **campaign-run-sealer** — seal raw outputs + hash manifests
 4. **parser-replay** — re-run parser pipeline on sealed run
-5. **integrity-gate** — CP1/CP4 strict validation
-6. **kpi-branch-decision** — compute KPIs and route to branch
-7. **ml-export-parity** — verify ONNX export matches training
-8. **pack-hash-capture** — seal external pack payload
-9. **rc-bundle-assembly** — assemble release candidate bundle
-10. **rollback-bundle-verify** — verify rollback point integrity
-11. **stale-doc-detector** — detect outdated documentation references
+5. **integrity-gate** — CP0-CP4 strict validation
+6. **codex-validator** — independent read-only evidence review
+7. **kpi-branch-decision** — compute KPIs and route to branch
+8. **ml-export-parity** — verify ONNX export matches training
+9. **pack-hash-capture** — seal external pack payload
+10. **rc-bundle-assembly** — assemble release candidate bundle
+11. **rollback-bundle-verify** — verify rollback point integrity
 
-### 6.2 Hooks (`.claude/hooks/`)
+### 6.2 Codex Hook Helpers (`tools/codex_hooks/`)
 
 5-stage hook pipeline:
 
@@ -196,14 +199,14 @@ Required schema validators (repo-resident):
 3. **mt5-runner MCP** — compile/test backtest control
 4. **parquet-json MCP** — parser outputs inspection
 5. **onnx-inspector MCP** — pack contents, shape, hash verification
-6. **thread-bridge MCP** — Claude Code <> Codex cross-review packet exchange
+6. **thread-bridge MCP** — Codex writer <> Codex validator packet exchange
 7. **signing/hash MCP** — SHA-256 + optional signature sealing
 
 ---
 
 ## 7. Quantitative Acceptance Criteria Reference
 
-Full thresholds are defined in the Audit Report Section 10. Key gates for validator/gatekeeper:
+Full thresholds are defined in the Audit Report Section 10. Key gates for `codex-validator` and `codex-gatekeeper`:
 
 ### Hard Gates (zero tolerance)
 - duplicate EXIT = 0

@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "built_at": "2026-03-12T16:35:44.957758+00:00",
+  "campaign_id": "C2026Q1_stage1_refresh",
+  "run_id": "RUN_20260312T115832Z",
+  "window_alias": "benchmark",
+  "pack_id": "triple_sigma_pack_step15_q1",
+  "primary_branch": "ML-first",
+  "confidence": "high",
+  "rationale": "Losses are broad across both directional books while gate/exit pressure is not dominant. The benchmark points upstream to Stage1/Stage2 quality before EA relaxation.",
+  "admissibility": {
+    "validator_verdict": "PASS",
+    "parse_pass": true,
+    "invariants_pass": true,
+    "master_tables_pass": true,
+    "runtime_blockers": []
+  },
+  "scores": {
+    "ml_score": 8,
+    "ea_score": 0
+  },
+  "headline_metrics": {
+    "total_pnl": -458.84999999999997,
+    "global_profit_factor": 0.7370456967988172,
+    "global_win_rate": 0.4000652103032279,
+    "max_equity_dd_pct": -92.20800000000001,
+    "gate_regret_mean": 16.952666666666634,
+    "gate_block_rate_candidate_bars": 0.006699419383653417,
+    "exit_cost_to_risk_ratio": 0.5198312710077878
+  },
+  "triggered_rules": [
+    {
+      "branch": "ML-first",
+      "rule_id": "pf_below_one",
+      "observed": 0.7370456967988172,
+      "threshold": "< 1.0",
+      "rationale": "Portfolio PF is below break-even."
+    },
+    {
+      "branch": "ML-first",
+      "rule_id": "negative_total_pnl",
+      "observed": -458.84999999999997,
+      "threshold": "< 0",
+      "rationale": "Benchmark baseline is losing money."
+    },
+    {
+      "branch": "ML-first",
+      "rule_id": "both_directions_weak",
+      "observed": {
+        "LONG": 0.7592555929518906,
+        "SHORT": 0.7252252252252251
+      },
+      "threshold": "both < 0.9",
+      "rationale": "Both directional books are weak, pointing upstream to model quality rather than a single EA layer."
+    },
+    {
+      "branch": "ML-first",
+      "rule_id": "gate_block_rate_low",
+      "observed": 0.006699419383653417,
+      "threshold": "< 0.02",
+      "rationale": "Gate rejection rate is too low to explain the benchmark loss by itself."
+    },
+    {
+      "branch": "ML-first",
+      "rule_id": "exit_cost_not_dominant",
+      "observed": 0.5198312710077878,
+      "threshold": "<= 1.0",
+      "rationale": "Exit opportunity cost does not exceed risk saved, so EA exits are not the primary deficit."
+    },
+    {
+      "branch": "ML-first",
+      "rule_id": "candidate_margin_tail_thin",
+      "observed": 0.06268739999999999,
+      "threshold": "< 0.10",
+      "rationale": "Low tail margin suggests weak classifier separation on the weakest candidate decile."
+    }
+  ],
+  "next_actions": [
+    "Prioritize Stage1 refresh on the frozen optimization folds before changing EA thresholds.",
+    "Keep Stage2 retune secondary unless post-refresh branch metrics still show weak exit/gate attribution.",
+    "Re-stage the benchmark run after ML refresh and compare PF, drawdown, and directional PF symmetry."
+  ],
+  "source_artifacts": {
+    "kpi_summary": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\40_kpi\\kpi_summary.json",
+    "validator_report": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\50_validator\\validator_report.json",
+    "parse_manifest": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\30_parsed\\parse_manifest.json",
+    "campaign_manifest": "_coord\\campaigns\\C2026Q1_stage1_refresh\\manifest.yaml"
+  }
+}

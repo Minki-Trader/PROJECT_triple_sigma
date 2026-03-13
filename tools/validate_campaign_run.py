@@ -9,12 +9,12 @@ Validates that a sealed campaign run meets admissibility requirements:
   5. Compile clean: 0 errors, 0 warnings
   6. Window boundary: bar log date range within manifest window (minute-level hard check)
   7. Hash completeness: raw_hash_manifest.json + pack_hash_manifest.json present
-  8. Hash integrity: SHA-256 verification of raw files against manifest
+  8. Hash integrity: SHA-256 verification of raw + pack files against manifests
 
 Output: validator_report.json in runs/RUN_<ts>/50_validator/
 
 Usage:
-    python tools/validate_campaign_run.py <run_dir> [--campaign-manifest <path>]
+    python tools/validate_campaign_run.py <run_dir> [--campaign-manifest <path>] [--require-parse]
 
 Findings: F1 (provenance), F6 (independent validator)
 Phase: A2
@@ -41,6 +41,11 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: handle.read(65536), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _load_json(path: Path) -> dict:
+    with open(path, encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 def validate_provenance(run_dir: Path, campaign_dir: Path) -> list[dict]:
@@ -499,25 +504,57 @@ def validate_schema_conformance(run_dir: Path, run_manifest: dict) -> list[dict]
     return issues
 
 
-def validate_hash_integrity(run_dir: Path) -> list[dict]:
-    """Recompute SHA-256 of raw files and compare to manifest."""
+def _validate_snapshot_dir(
+    base_dir: Path,
+    manifest_entries: dict,
+    gate: str,
+    label: str,
+) -> list[dict]:
+    """Validate an exact sealed file snapshot against the current directory."""
     issues = []
-    raw_hash_path = run_dir / "21_hash" / "raw_hash_manifest.json"
+    if not base_dir.exists():
+        issues.append({
+            "gate": gate,
+            "severity": "FAIL",
+            "message": f"{label} directory not found: {base_dir}",
+        })
+        return issues
 
-    if not raw_hash_path.exists():
-        return issues  # Already caught by hash_completeness
+    expected_files = set(manifest_entries.keys())
+    actual_files = {path.name for path in base_dir.iterdir() if path.is_file()}
 
-    with open(raw_hash_path, encoding="utf-8") as f:
-        raw_hash = json.load(f)
+    unexpected_files = sorted(actual_files - expected_files)
+    for filename in unexpected_files:
+        issues.append({
+            "gate": gate,
+            "severity": "FAIL",
+            "message": (
+                f"Unexpected file present in sealed {label} snapshot: {filename}. "
+                "Directory contents changed after sealing."
+            ),
+        })
 
-    raw_dir = run_dir / "20_raw"
-    for filename, entry in raw_hash.get("files", {}).items():
-        file_path = raw_dir / filename
+    for filename in sorted(expected_files):
+        entry = manifest_entries.get(filename, {})
+        file_path = base_dir / filename
         if not file_path.exists():
             issues.append({
-                "gate": "hash_integrity",
+                "gate": gate,
                 "severity": "FAIL",
-                "message": f"File listed in hash manifest but missing: {filename}",
+                "message": f"File listed in {label} hash manifest but missing: {filename}",
+            })
+            continue
+
+        expected_size = entry.get("size")
+        actual_size = file_path.stat().st_size
+        if expected_size is not None and actual_size != expected_size:
+            issues.append({
+                "gate": gate,
+                "severity": "FAIL",
+                "message": (
+                    f"Size mismatch for {label} file {filename}: "
+                    f"expected {expected_size}, got {actual_size}"
+                ),
             })
             continue
 
@@ -525,11 +562,162 @@ def validate_hash_integrity(run_dir: Path) -> list[dict]:
         expected_hash = entry.get("sha256", "")
         if actual_hash != expected_hash:
             issues.append({
-                "gate": "hash_integrity",
+                "gate": gate,
                 "severity": "FAIL",
                 "message": (
-                    f"Hash mismatch for {filename}: "
+                    f"Hash mismatch for {label} file {filename}: "
                     f"expected {expected_hash[:16]}..., got {actual_hash[:16]}..."
+                ),
+            })
+
+    return issues
+
+
+def validate_hash_integrity(run_dir: Path, run_manifest: dict) -> list[dict]:
+    """Recompute SHA-256 of raw + pack files and compare to manifests."""
+    issues = []
+    raw_hash_path = run_dir / "21_hash" / "raw_hash_manifest.json"
+    pack_hash_path = run_dir / "21_hash" / "pack_hash_manifest.json"
+
+    if not raw_hash_path.exists():
+        return issues  # Already caught by hash_completeness
+
+    try:
+        raw_hash = _load_json(raw_hash_path)
+    except (json.JSONDecodeError, OSError) as exc:
+        issues.append({
+            "gate": "hash_integrity",
+            "severity": "FAIL",
+            "message": f"Cannot read raw hash manifest: {exc}",
+        })
+        return issues
+
+    run_id = run_manifest.get("run_id", "")
+    if raw_hash.get("run_id") != run_id:
+        issues.append({
+            "gate": "hash_integrity",
+            "severity": "FAIL",
+            "message": (
+                f"raw_hash_manifest run_id {raw_hash.get('run_id')} does not match "
+                f"run_manifest run_id {run_id}"
+            ),
+        })
+
+    issues.extend(_validate_snapshot_dir(
+        run_dir / "20_raw",
+        raw_hash.get("files", {}),
+        "hash_integrity",
+        "raw",
+    ))
+
+    if not pack_hash_path.exists():
+        return issues  # Already caught by hash_completeness
+
+    try:
+        pack_hash = _load_json(pack_hash_path)
+    except (json.JSONDecodeError, OSError) as exc:
+        issues.append({
+            "gate": "hash_integrity",
+            "severity": "FAIL",
+            "message": f"Cannot read pack hash manifest: {exc}",
+        })
+        return issues
+
+    pack_id = run_manifest.get("pack_id", "")
+    if pack_hash.get("pack_id") != pack_id:
+        issues.append({
+            "gate": "hash_integrity",
+            "severity": "FAIL",
+            "message": (
+                f"pack_hash_manifest pack_id {pack_hash.get('pack_id')} does not match "
+                f"run_manifest pack_id {pack_id}"
+            ),
+        })
+
+    pack_dir_str = pack_hash.get("pack_dir") or run_manifest.get("pack_dir", "")
+    if not pack_dir_str:
+        issues.append({
+            "gate": "hash_integrity",
+            "severity": "FAIL",
+            "message": "Pack directory is missing from both pack_hash_manifest and run_manifest.",
+        })
+        return issues
+
+    issues.extend(_validate_snapshot_dir(
+        Path(pack_dir_str),
+        pack_hash.get("models", {}),
+        "hash_integrity",
+        "pack",
+    ))
+
+    return issues
+
+
+def validate_parsed_outputs(run_dir: Path, run_manifest: dict) -> list[dict]:
+    """Validate parse_manifest for exact clipping and parser-stage pass conditions."""
+    issues = []
+    parse_manifest_path = run_dir / "30_parsed" / "parse_manifest.json"
+
+    if not parse_manifest_path.exists():
+        issues.append({
+            "gate": "parsed_outputs",
+            "severity": "FAIL",
+            "message": "Missing 30_parsed/parse_manifest.json",
+        })
+        return issues
+
+    try:
+        parse_manifest = _load_json(parse_manifest_path)
+    except (json.JSONDecodeError, OSError) as exc:
+        issues.append({
+            "gate": "parsed_outputs",
+            "severity": "FAIL",
+            "message": f"Cannot read parse_manifest.json: {exc}",
+        })
+        return issues
+
+    if not parse_manifest.get("pass", False):
+        issues.append({
+            "gate": "parsed_outputs",
+            "severity": "FAIL",
+            "message": "parse_manifest.json reports pass=false",
+        })
+
+    if not parse_manifest.get("invariants_pass", False):
+        issues.append({
+            "gate": "parsed_outputs",
+            "severity": "FAIL",
+            "message": "parse_manifest.json reports invariants_pass=false",
+        })
+
+    if "master_tables_pass" in parse_manifest and not parse_manifest.get("master_tables_pass", False):
+        issues.append({
+            "gate": "parsed_outputs",
+            "severity": "FAIL",
+            "message": "parse_manifest.json reports master_tables_pass=false",
+        })
+
+    clipping = parse_manifest.get("window_clipping")
+    if not isinstance(clipping, dict):
+        issues.append({
+            "gate": "parsed_outputs",
+            "severity": "FAIL",
+            "message": (
+                "parse_manifest.json is missing window_clipping. "
+                "Parser must run with exact window boundaries before promotion."
+            ),
+        })
+    else:
+        expected_from = run_manifest.get("window_from", "")
+        expected_to = run_manifest.get("window_to", "")
+        if clipping.get("window_from") != expected_from or clipping.get("window_to") != expected_to:
+            issues.append({
+                "gate": "parsed_outputs",
+                "severity": "FAIL",
+                "message": (
+                    "parse_manifest window_clipping does not match run_manifest window: "
+                    f"{clipping.get('window_from')}->{clipping.get('window_to')} vs "
+                    f"{expected_from}->{expected_to}"
                 ),
             })
 
@@ -544,6 +732,11 @@ def main():
     parser.add_argument(
         "--campaign-manifest", type=Path, default=None,
         help="Path to campaign manifest.yaml (auto-detected from run_manifest if omitted)"
+    )
+    parser.add_argument(
+        "--require-parse",
+        action="store_true",
+        help="Also require 30_parsed/parse_manifest.json to pass exact clipping and parser invariants.",
     )
     args = parser.parse_args()
 
@@ -583,6 +776,17 @@ def main():
     campaign_dir = campaign_manifest_path.parent
 
     # Run all validation gates
+    gates_checked = [
+        "provenance",
+        "pack_admission",
+        "window_conformance",
+        "raw_completeness",
+        "compile_clean",
+        "window_boundary",
+        "hash_completeness",
+        "hash_integrity",
+        "schema_conformance",
+    ]
     all_issues = []
 
     all_issues.extend(validate_provenance(run_dir, campaign_dir))
@@ -591,8 +795,11 @@ def main():
     all_issues.extend(validate_compile_clean(run_dir))
     all_issues.extend(validate_window_boundary(run_dir, run_manifest))
     all_issues.extend(validate_hash_completeness(run_dir))
-    all_issues.extend(validate_hash_integrity(run_dir))
+    all_issues.extend(validate_hash_integrity(run_dir, run_manifest))
     all_issues.extend(validate_schema_conformance(run_dir, run_manifest))
+    if args.require_parse:
+        gates_checked.append("parsed_outputs")
+        all_issues.extend(validate_parsed_outputs(run_dir, run_manifest))
 
     # Compute verdict
     fails = [i for i in all_issues if i["severity"] == "FAIL"]
@@ -605,20 +812,12 @@ def main():
         "campaign_id": run_manifest.get("campaign_id", "unknown"),
         "validated_at": datetime.now(timezone.utc).isoformat(),
         "verdict": verdict,
-        "total_checks": len(all_issues) if all_issues else 7,
+        "total_checks": len(gates_checked),
+        "total_issues": len(all_issues),
         "fails": len(fails),
         "issues": all_issues,
-        "gates_checked": [
-            "provenance",
-            "pack_admission",
-            "window_conformance",
-            "raw_completeness",
-            "compile_clean",
-            "window_boundary",
-            "hash_completeness",
-            "hash_integrity",
-            "schema_conformance",
-        ],
+        "gates_checked": gates_checked,
+        "require_parse": args.require_parse,
     }
 
     # Write report
