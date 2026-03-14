@@ -55,6 +55,7 @@ from .step13 import build_training_metadata as build_step13_training_metadata
 REPRO_DEFAULT_TOLERANCE = 1e-8
 STAGE1_PROB_TOLERANCE = 1e-6
 STAGE1_PRIMARY_METRIC = "mean_macro_f1"
+STAGE1_PRIMARY_METRIC_TOLERANCE = 1e-3
 STAGE2_PRIMARY_METRIC = "mean_normalized_effective_mae_mean"
 
 
@@ -71,6 +72,7 @@ class Step14Config:
     min_train_samples_per_head: int
     min_val_samples_per_head: int
     stage1_hidden_layer_options: tuple[tuple[int, ...], ...]
+    stage1_targeted_variants: tuple[dict[str, Any], ...]
     cand0_max_fractions: tuple[float, ...]
     cand0_sample_weights: tuple[float, ...]
     gbr_n_estimators_grid: tuple[int, ...]
@@ -188,7 +190,19 @@ def parse_args() -> Step14Config:
         min_val_samples_per_regime=4,
         min_train_samples_per_head=12,
         min_val_samples_per_head=4,
-        stage1_hidden_layer_options=((64, 32), (96, 48), (128, 64, 32)),
+        stage1_hidden_layer_options=((64, 32), (80, 40), (96, 48), (128, 64, 32)),
+        stage1_targeted_variants=(
+            {
+                "hidden_layers": (96, 48),
+                "learning_rate": 0.0005,
+                "weight_decay": 0.0005,
+            },
+            {
+                "hidden_layers": (128, 64, 32),
+                "learning_rate": 0.0005,
+                "weight_decay": 0.001,
+            },
+        ),
         cand0_max_fractions=(0.95, 0.75, 0.50),
         cand0_sample_weights=(1.0, 0.3),
         gbr_n_estimators_grid=(120, 180),
@@ -585,7 +599,16 @@ def build_stage1_candidate_registry(config: Step14Config) -> list[CandidateSpec]
         }
         for hidden_layers in config.stage1_hidden_layer_options[1:]
     ]
-    ordered = dedupe_candidate_params([baseline_params, *cand0_variants, *architecture_variants])
+    targeted_variants = [
+        {
+            "cand0_max_fraction": baseline_params["cand0_max_fraction"],
+            "cand0_sample_weight": baseline_params["cand0_sample_weight"],
+            **variant,
+            "hidden_layers": tuple(int(value) for value in variant.get("hidden_layers", baseline_hidden_layers)),
+        }
+        for variant in config.stage1_targeted_variants
+    ]
+    ordered = dedupe_candidate_params([baseline_params, *cand0_variants, *architecture_variants, *targeted_variants])
     return [
         CandidateSpec(
             stage="stage1",
@@ -638,6 +661,12 @@ def candidate_registry_df(candidates: list[CandidateSpec], *, seed: int) -> pd.D
 
 def build_stage1_config(base_config: dict[str, Any], candidate: CandidateSpec, output_dir: Path, seed: int) -> Step12Config:
     hidden_layers = candidate.params.get("hidden_layers", base_config.get("hidden_layers", [64, 32]))
+    learning_rate = candidate.params.get("learning_rate", base_config["learning_rate"])
+    weight_decay = candidate.params.get("weight_decay", base_config["weight_decay"])
+    batch_size = candidate.params.get("batch_size", base_config["batch_size"])
+    epochs = candidate.params.get("epochs", base_config["epochs"])
+    patience = candidate.params.get("patience", base_config["patience"])
+    min_delta = candidate.params.get("min_delta", base_config["min_delta"])
     return Step12Config(
         input_dir=Path("."),
         output_dir=output_dir,
@@ -648,12 +677,12 @@ def build_stage1_config(base_config: dict[str, Any], candidate: CandidateSpec, o
         cand0_max_fraction=float(candidate.params["cand0_max_fraction"]),
         cand0_sample_weight=float(candidate.params["cand0_sample_weight"]),
         hidden_layers=tuple(int(value) for value in hidden_layers),
-        learning_rate=float(base_config["learning_rate"]),
-        weight_decay=float(base_config["weight_decay"]),
-        batch_size=int(base_config["batch_size"]),
-        epochs=int(base_config["epochs"]),
-        patience=int(base_config["patience"]),
-        min_delta=float(base_config["min_delta"]),
+        learning_rate=float(learning_rate),
+        weight_decay=float(weight_decay),
+        batch_size=int(batch_size),
+        epochs=int(epochs),
+        patience=int(patience),
+        min_delta=float(min_delta),
         seed=int(seed),
         model_name=str(base_config.get("model_name", "mlp_v1")),
         fail_on_acceptance=False,
@@ -984,12 +1013,17 @@ def build_stage1_selection_report(summary_df: pd.DataFrame, candidates: list[Can
     provisional_winner_source = "eligible_set"
     used_control_fallback = False
     if eligible_rows:
+        best_macro_f1 = max(row["mean_macro_f1"] for row in eligible_rows)
+        tolerance_window = [
+            row for row in eligible_rows if row["mean_macro_f1"] >= best_macro_f1 - STAGE1_PRIMARY_METRIC_TOLERANCE
+        ]
         provisional_winner = min(
-            eligible_rows,
+            tolerance_window,
             key=lambda row: (
-                -row["mean_macro_f1"],
                 -row["mean_cand0_pass_recall"],
+                -row["min_cand0_pass_recall"],
                 row["mean_log_loss"],
+                -row["mean_macro_f1"],
                 0 if row["is_baseline"] else 1,
                 row["search_rank"],
             ),
@@ -1002,9 +1036,12 @@ def build_stage1_selection_report(summary_df: pd.DataFrame, candidates: list[Can
     return json_ready(
         {
             "primary_metric": STAGE1_PRIMARY_METRIC,
+            "primary_metric_tolerance": STAGE1_PRIMARY_METRIC_TOLERANCE,
             "tie_breakers": [
                 "higher_mean_cand0_pass_recall",
+                "higher_min_cand0_pass_recall",
                 "lower_mean_log_loss",
+                "higher_mean_macro_f1_within_tolerance_window",
                 "baseline_preferred",
             ],
             "baseline_candidate_id": baseline_row["candidate_id"],
