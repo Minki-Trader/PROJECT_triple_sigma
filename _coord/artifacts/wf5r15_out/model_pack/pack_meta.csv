@@ -1,0 +1,16 @@
+model_pack_version=0.1.0
+schema_version=1.0
+regime_policy_version=0.1.0q
+candidate_policy_version=0.1.2
+cost_model_version=0.1
+atr_thr=0.0005
+adx_thr1=20
+adx_thr2=30
+thr_method=manual
+thr_seed=0
+thr_notes=step06_candidate_adaptive
+dist_atr_max_mode=adaptive_quantile
+dist_atr_max_q=0.8
+dist_atr_max_w=63
+dist_atr_max_clamp_lo=0.5
+dist_atr_max_clamp_hi=5

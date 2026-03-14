@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "candidate_policy_version": "0.1.2",
+  "regime_policy_version": "0.1.0q",
+  "cost_model_version": "0.1",
+  "search_space_version": "0.1.0",
+  "atr_thr": 0.0005,
+  "adx_thr1": 20.0,
+  "adx_thr2": 30.0,
+  "step14_outer_split": {
+    "target_split_index": 90384,
+    "selected_split_index": 90398,
+    "boundary_window_end_idx": 118608,
+    "target_train_ratio": 0.8,
+    "effective_train_ratio": 0.799996457292663,
+    "embargo_bars": 72,
+    "train_count": 90326,
+    "val_count": 22582,
+    "dropped_count": 72,
+    "requested_min_val_samples_per_regime": 4,
+    "effective_min_val_samples_per_regime": 4,
+    "relaxed_min_val_requirement": false,
+    "train_end_time": "2025-06-25 15:25:00",
+    "val_start_time": "2025-06-25 21:30:00",
+    "no_time_leakage": true,
+    "fallback_used": false,
+    "train_counts_by_regime": {
+      "0": 4047,
+      "1": 11792,
+      "2": 8854,
+      "3": 26352,
+      "4": 8379,
+      "5": 30902
+    },
+    "val_counts_by_regime": {
+      "0": 1822,
+      "1": 2176,
+      "2": 3849,
+      "3": 4888,
+      "4": 4000,
+      "5": 5847
+    },
+    "dropped_counts_by_regime": {
+      "0": 0,
+      "1": 15,
+      "2": 0,
+      "3": 30,
+      "4": 12,
+      "5": 15
+    }
+  },
+  "stage1": {
+    "selected_candidate_id": "stage1_c09",
+    "selected_candidate_params": {
+      "cand0_max_fraction": 0.95,
+      "cand0_sample_weight": 1.0,
+      "hidden_layers": [
+        96,
+        48
+      ],
+      "learning_rate": 0.0005,
+      "weight_decay": 0.0005
+    },
+    "final_handoff_candidate_id": "stage1_c09",
+    "final_handoff_is_baseline": false,
+    "clf_version": "step14_stage1_c09",
+    "expected_future_pack_filenames": [
+      "clf_reg0_v0.1.0.onnx",
+      "clf_reg1_v0.1.0.onnx",
+      "clf_reg2_v0.1.0.onnx",
+      "clf_reg3_v0.1.0.onnx",
+      "clf_reg4_v0.1.0.onnx",
+      "clf_reg5_v0.1.0.onnx"
+    ]
+  },
+  "stage2": {
+    "selected_candidate_id": "stage2_c03",
+    "selected_candidate_params": {
+      "gbr_n_estimators": 120,
+      "gbr_learning_rate": 0.03,
+      "gbr_max_depth": 3
+    },
+    "final_handoff_candidate_id": "stage2_c03",
+    "final_handoff_is_baseline": false,
+    "prm_version": "step14_stage2_c03",
+    "expected_future_pack_filenames": [
+      "prm_reg0_v0.1.0.onnx",
+      "prm_reg1_v0.1.0.onnx",
+      "prm_reg2_v0.1.0.onnx",
+      "prm_reg3_v0.1.0.onnx",
+      "prm_reg4_v0.1.0.onnx",
+      "prm_reg5_v0.1.0.onnx"
+    ]
+  }
+}

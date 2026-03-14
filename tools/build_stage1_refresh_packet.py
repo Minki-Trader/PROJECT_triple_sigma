@@ -16,6 +16,7 @@ from typing import Any
 
 import pandas as pd
 import yaml
+from pack_registry import resolve_pack_meta_path, resolve_step14_dir
 
 
 REQUIRED_BAR_LOG_COLUMNS = {
@@ -41,6 +42,9 @@ REQUIRED_BAR_LOG_COLUMNS = {
     "cost_model_version",
     *[f"feature_{idx}" for idx in range(22)],
 }
+
+# Keep the STEP14 output folder short enough for Windows path-length limits.
+WF5_STAGE14_DIRNAME = "s14"
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -70,6 +74,13 @@ def _determine_project_root(path: Path) -> Path:
     while root.name != "PROJECT_triple_sigma" and root.parent != root:
         root = root.parent
     return root
+
+
+def _repo_ref(project_root: Path, path: Path) -> str:
+    try:
+        return path.resolve().relative_to(project_root.resolve()).as_posix()
+    except ValueError:
+        return str(path)
 
 
 def _resolve_campaign_manifest(run_dir: Path, run_manifest: dict[str, Any]) -> tuple[Path, dict[str, Any]]:
@@ -143,37 +154,46 @@ def _read_last_timestamp(path: Path) -> pd.Timestamp | None:
     return pd.Timestamp(last_row[0])
 
 
-def _discover_bar_log_directories(project_root: Path) -> list[dict[str, Any]]:
-    candidate_dirs: list[Path] = []
-
-    tester_root = Path.home() / "AppData" / "Roaming" / "MetaQuotes" / "Tester" / "D0E8209F77C8CF37AD8BF550E51FF075"
-    if tester_root.exists():
-        for agent_dir in sorted(tester_root.glob("Agent-*")):
-            log_dir = agent_dir / "MQL5" / "Files" / "triple_sigma_logs"
-            if log_dir.exists():
-                candidate_dirs.append(log_dir)
-
+def _discover_bar_log_directories(
+    project_root: Path,
+    *,
+    campaign_id: str,
+    source_run_id: str,
+) -> list[dict[str, Any]]:
     artifacts_root = project_root / "_coord" / "artifacts"
-    if artifacts_root.exists():
-        for artifact_dir in sorted(artifacts_root.iterdir()):
-            if artifact_dir.is_dir():
-                candidate_dirs.append(artifact_dir)
+    if not artifacts_root.exists():
+        return []
 
-    seen: set[str] = set()
     discovered: list[dict[str, Any]] = []
-    for directory in candidate_dirs:
-        key = str(directory.resolve())
-        if key in seen:
+    for artifact_dir in sorted(artifacts_root.iterdir()):
+        if not artifact_dir.is_dir():
             continue
-        seen.add(key)
 
-        files = sorted(directory.glob("bar_log_*.csv"))
+        manifest_path = artifact_dir / "manifest.json"
+        wf5_manifest_path = artifact_dir / "wf5_fold_source_manifest.json"
+        if not manifest_path.exists() or not wf5_manifest_path.exists():
+            continue
+
+        manifest = _load_json(manifest_path)
+        wf5_manifest = _load_json(wf5_manifest_path)
+
+        if str(manifest.get("validation_class", "")).strip() != "wf5-fold-source":
+            continue
+        if str(wf5_manifest.get("campaign_id", "")).strip() != campaign_id:
+            continue
+        if str(wf5_manifest.get("source_run_id", "")).strip() != source_run_id:
+            continue
+
+        fold_id = str(wf5_manifest.get("fold_id", "")).strip()
+        if not fold_id:
+            continue
+
+        files = sorted(artifact_dir.glob("bar_log_*.csv"))
         if not files:
             continue
 
         header = _read_csv_header(files[0])
-        header_set = set(header)
-        if not REQUIRED_BAR_LOG_COLUMNS.issubset(header_set):
+        if not REQUIRED_BAR_LOG_COLUMNS.issubset(set(header)):
             continue
 
         first_ts = _read_first_timestamp(files[0])
@@ -183,10 +203,13 @@ def _discover_bar_log_directories(project_root: Path) -> list[dict[str, Any]]:
 
         discovered.append(
             {
-                "path": str(directory),
+                "fold_id": fold_id,
+                "path": _repo_ref(project_root, artifact_dir),
                 "first_timestamp": first_ts,
                 "last_timestamp": last_ts,
                 "file_count": len(files),
+                "source_manifest_ref": _repo_ref(project_root, manifest_path),
+                "source_wf5_manifest_ref": _repo_ref(project_root, wf5_manifest_path),
             }
         )
     return discovered
@@ -196,13 +219,18 @@ def _select_fold_sources(
     optimization_folds: list[dict[str, str]],
     candidates: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
+    candidates_by_fold: dict[str, list[dict[str, Any]]] = {}
+    for candidate in candidates:
+        candidates_by_fold.setdefault(str(candidate["fold_id"]), []).append(candidate)
+
     fold_sources = []
     for fold in optimization_folds:
+        fold_id = str(fold["id"])
         fold_from = pd.Timestamp(fold["from"])
         fold_to = pd.Timestamp(fold["to"])
         covering = [
             candidate
-            for candidate in candidates
+            for candidate in candidates_by_fold.get(fold_id, [])
             if candidate["first_timestamp"] <= fold_from and candidate["last_timestamp"] >= fold_to
         ]
         covering.sort(
@@ -214,12 +242,14 @@ def _select_fold_sources(
         selected = covering[0] if covering else None
         fold_sources.append(
             {
-                "fold_id": str(fold["id"]),
+                "fold_id": fold_id,
                 "window_from": str(fold["from"]),
                 "window_to": str(fold["to"]),
                 "source_dir": selected["path"] if selected else "",
                 "source_first_timestamp": selected["first_timestamp"].strftime("%Y-%m-%d %H:%M:%S") if selected else "",
                 "source_last_timestamp": selected["last_timestamp"].strftime("%Y-%m-%d %H:%M:%S") if selected else "",
+                "source_manifest_ref": selected["source_manifest_ref"] if selected else "",
+                "source_wf5_manifest_ref": selected["source_wf5_manifest_ref"] if selected else "",
                 "available": selected is not None,
             }
         )
@@ -247,9 +277,17 @@ def _format_step11_commands(
     return commands
 
 
-def build_packet(run_dir: Path, step14_dir: Path) -> tuple[dict[str, Any], Path, Path]:
+def build_packet(run_dir: Path, step14_dir: Path | None) -> tuple[dict[str, Any], Path, Path]:
     project_root = _determine_project_root(run_dir)
     run_manifest = _load_json(run_dir / "run_manifest.json")
+    if step14_dir is None:
+        step14_dir = resolve_step14_dir(project_root, str(run_manifest.get("pack_id", "")))
+    elif not step14_dir.is_absolute():
+        step14_dir = project_root / step14_dir
+
+    if not step14_dir.exists():
+        raise FileNotFoundError(f"STEP14 artifact directory not found: {step14_dir}")
+
     kpi_summary = _load_json(run_dir / "40_kpi" / "kpi_summary.json")
     branch_packet = _load_json(run_dir / "60_decision" / "branch_decision_packet.json")
     validator_report = _load_json(run_dir / "50_validator" / "validator_report.json")
@@ -289,8 +327,12 @@ def build_packet(run_dir: Path, step14_dir: Path) -> tuple[dict[str, Any], Path,
     ]
 
     artifact_root = _artifact_root(project_root, run_manifest.get("campaign_id", ""), run_manifest.get("run_id", ""))
-    pack_meta_path = project_root / "_coord" / "artifacts" / "step15_export_q1_out" / "model_pack" / "pack_meta.csv"
-    candidate_log_dirs = _discover_bar_log_directories(project_root)
+    pack_meta_path = resolve_pack_meta_path(project_root, str(run_manifest.get("pack_id", "")))
+    candidate_log_dirs = _discover_bar_log_directories(
+        project_root,
+        campaign_id=str(run_manifest.get("campaign_id", "")),
+        source_run_id=str(run_manifest.get("run_id", "")),
+    )
     fold_sources = _select_fold_sources(optimization_folds, candidate_log_dirs)
     available_fold_ids = [fold["fold_id"] for fold in fold_sources if fold["available"]]
     missing_fold_ids = [fold["fold_id"] for fold in fold_sources if not fold["available"]]
@@ -303,7 +345,7 @@ def build_packet(run_dir: Path, step14_dir: Path) -> tuple[dict[str, Any], Path,
     step11_union_dir = artifact_root / "step11_union"
     step12_dir = artifact_root / "step12_stage1_refresh"
     step13_dir = artifact_root / "step13_stage2_incumbent_refit"
-    step14_out_dir = artifact_root / "step14_stage1_refresh_validation"
+    step14_out_dir = artifact_root / WF5_STAGE14_DIRNAME
 
     readiness_blockers = []
     if branch_packet.get("primary_branch") != "ML-first":
@@ -412,8 +454,8 @@ def build_packet(run_dir: Path, step14_dir: Path) -> tuple[dict[str, Any], Path,
             "weakest_regimes": weakest_rows,
         },
         "launch_plan": {
-            "artifact_root": str(artifact_root),
-            "pack_meta_path": str(pack_meta_path),
+            "artifact_root": _repo_ref(project_root, artifact_root),
+            "pack_meta_path": _repo_ref(project_root, pack_meta_path),
             "bar_log_input_dir": source_input_dir if len(set(fold["source_dir"] for fold in fold_sources if fold["available"])) == 1 else "",
             "fold_sources": fold_sources,
             "available_fold_ids": available_fold_ids,
@@ -543,8 +585,8 @@ def main() -> int:
     parser.add_argument(
         "--step14-dir",
         type=Path,
-        default=Path("_coord/artifacts/step14_validation_q1_out"),
-        help="Accepted STEP14 artifact directory to use as the incumbent baseline",
+        default=None,
+        help="Override accepted STEP14 artifact directory. Default: resolve from control_pack_registry.yaml via run_manifest.pack_id",
     )
     args = parser.parse_args()
 

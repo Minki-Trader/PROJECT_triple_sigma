@@ -1,0 +1,4 @@
+[STEP14] validation_metadata=_coord\artifacts\wf5r14\validation_metadata.json
+[STEP14] stage1_final=stage1_baseline
+[STEP14] stage2_final=stage2_c03
+[STEP14] acceptance={"A1_lineage_audit_pass": true, "A2_outer_holdout_matches_step12": true, "A3_inner_split_manifest_valid": true, "A4_candidate_registries_complete": true, "A5_stage1_cv_complete_and_valid": true, "A6_stage2_cv_complete_and_valid": true, "A7_selected_final_artifacts_exist_and_smoke_pass": true, "A8_outer_holdout_handoff_decision_valid": true, "A9_reproducibility_pass": true}

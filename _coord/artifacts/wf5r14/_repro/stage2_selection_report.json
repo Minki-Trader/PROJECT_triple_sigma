@@ -1,0 +1,140 @@
+{
+  "primary_metric": "mean_normalized_effective_mae_mean",
+  "tie_breakers": [
+    "higher_share_beating_default_baseline",
+    "lower_mean_hold_boundary_rate",
+    "baseline_preferred"
+  ],
+  "baseline_candidate_id": "stage2_baseline",
+  "baseline_candidate_score": 0.22319354713141462,
+  "provisional_winner_candidate_id": "stage2_c03",
+  "provisional_winner_aggregate_score": 0.22220282384541926,
+  "eligibility_guardrails": {
+    "all_finite": true,
+    "contract_valid": true,
+    "no_sparse_fallback": true,
+    "max_hold_boundary_rate": 0.05
+  },
+  "candidate_rows": [
+    {
+      "candidate_id": "stage2_baseline",
+      "search_rank": 0,
+      "is_baseline": true,
+      "params": {
+        "gbr_n_estimators": 120,
+        "gbr_learning_rate": 0.05,
+        "gbr_max_depth": 2
+      },
+      "mean_normalized_effective_mae_mean": 0.22319354713141462,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage2_c01",
+      "search_rank": 1,
+      "is_baseline": false,
+      "params": {
+        "gbr_n_estimators": 120,
+        "gbr_learning_rate": 0.05,
+        "gbr_max_depth": 3
+      },
+      "mean_normalized_effective_mae_mean": 0.2236287763506111,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage2_c02",
+      "search_rank": 2,
+      "is_baseline": false,
+      "params": {
+        "gbr_n_estimators": 120,
+        "gbr_learning_rate": 0.03,
+        "gbr_max_depth": 2
+      },
+      "mean_normalized_effective_mae_mean": 0.22239309257835602,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage2_c03",
+      "search_rank": 3,
+      "is_baseline": false,
+      "params": {
+        "gbr_n_estimators": 120,
+        "gbr_learning_rate": 0.03,
+        "gbr_max_depth": 3
+      },
+      "mean_normalized_effective_mae_mean": 0.22220282384541926,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage2_c04",
+      "search_rank": 4,
+      "is_baseline": false,
+      "params": {
+        "gbr_n_estimators": 180,
+        "gbr_learning_rate": 0.05,
+        "gbr_max_depth": 2
+      },
+      "mean_normalized_effective_mae_mean": 0.22409993010420523,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0010834236186348862,
+      "mean_hold_boundary_rate": 4.514265077645359e-05,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage2_c05",
+      "search_rank": 5,
+      "is_baseline": false,
+      "params": {
+        "gbr_n_estimators": 180,
+        "gbr_learning_rate": 0.05,
+        "gbr_max_depth": 3
+      },
+      "mean_normalized_effective_mae_mean": 0.22415663725248267,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.001444564824846515,
+      "mean_hold_boundary_rate": 6.019020103527146e-05,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage2_c06",
+      "search_rank": 6,
+      "is_baseline": false,
+      "params": {
+        "gbr_n_estimators": 180,
+        "gbr_learning_rate": 0.03,
+        "gbr_max_depth": 2
+      },
+      "mean_normalized_effective_mae_mean": 0.22294862215588251,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage2_c07",
+      "search_rank": 7,
+      "is_baseline": false,
+      "params": {
+        "gbr_n_estimators": 180,
+        "gbr_learning_rate": 0.03,
+        "gbr_max_depth": 3
+      },
+      "mean_normalized_effective_mae_mean": 0.22276853388459764,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "eligible": true
+    }
+  ]
+}

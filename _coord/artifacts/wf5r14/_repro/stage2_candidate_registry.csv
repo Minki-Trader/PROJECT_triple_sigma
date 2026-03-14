@@ -1,0 +1,9 @@
+stage,candidate_id,search_rank,is_baseline,gbr_n_estimators,gbr_learning_rate,gbr_max_depth,seed
+stage2,stage2_baseline,0,True,120,0.05,2,42
+stage2,stage2_c01,1,False,120,0.05,3,42
+stage2,stage2_c02,2,False,120,0.03,2,42
+stage2,stage2_c03,3,False,120,0.03,3,42
+stage2,stage2_c04,4,False,180,0.05,2,42
+stage2,stage2_c05,5,False,180,0.05,3,42
+stage2,stage2_c06,6,False,180,0.03,2,42
+stage2,stage2_c07,7,False,180,0.03,3,42

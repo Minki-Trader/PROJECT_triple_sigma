@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "campaign_id": "C2026Q1_stage1_refresh",
+  "pack_id": "triple_sigma_pack_step15_wf5r",
+  "checked_at": "2026-03-13T22:05:45.166213+00:00",
+  "registry_ref": "_coord/ops/control_pack_registry.yaml",
+  "export_validation_report": "_coord/artifacts/wf5r15_out/export_validation_report.json",
+  "run_pack_hash_ref": "_coord/campaigns/C2026Q1_stage1_refresh/runs_wf5r/RUN_20260313T215823Z/21_hash/pack_hash_manifest.json",
+  "export_report_accepted": true,
+  "stage1_all_passed": true,
+  "stage2_all_passed": true,
+  "stage1_smoke_all_passed": true,
+  "stage2_smoke_all_passed": true,
+  "matched_files": [
+    "clf_reg0_v0.1.0.onnx",
+    "clf_reg1_v0.1.0.onnx",
+    "clf_reg2_v0.1.0.onnx",
+    "clf_reg3_v0.1.0.onnx",
+    "clf_reg4_v0.1.0.onnx",
+    "clf_reg5_v0.1.0.onnx",
+    "gate_config.json",
+    "pack_meta.csv",
+    "prm_reg0_v0.1.0.onnx",
+    "prm_reg1_v0.1.0.onnx",
+    "prm_reg2_v0.1.0.onnx",
+    "prm_reg3_v0.1.0.onnx",
+    "prm_reg4_v0.1.0.onnx",
+    "prm_reg5_v0.1.0.onnx",
+    "scaler_stats.json"
+  ],
+  "matched_file_count": 15,
+  "missing_in_runtime": [],
+  "missing_in_export_manifest": [],
+  "mismatched_hashes": [],
+  "retained_evidence": [
+    "_coord/artifacts/wf5r14/",
+    "_coord/artifacts/wf5r15_out/",
+    "_coord/campaigns/C2026Q1_stage1_refresh/runs_wf5r/"
+  ],
+  "verdict": "PASS"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "built_at": "2026-03-12T17:48:11.717828+00:00",
+  "built_at": "2026-03-14T05:24:44.748954+00:00",
   "campaign_id": "C2026Q1_stage1_refresh",
   "source_run_id": "RUN_20260312T115832Z",
   "primary_branch": "ML-first",
@@ -129,35 +129,41 @@
     ]
   },
   "launch_plan": {
-    "artifact_root": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh",
-    "pack_meta_path": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv",
+    "artifact_root": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh",
+    "pack_meta_path": "_coord/artifacts/step15_export_q1_out/model_pack/pack_meta.csv",
     "bar_log_input_dir": "",
     "fold_sources": [
       {
         "fold_id": "fold_1",
         "window_from": "2022.09.13 17:15",
         "window_to": "2023.05.03 09:45",
-        "source_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source",
+        "source_dir": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source",
         "source_first_timestamp": "2022-09-12 23:50:00",
         "source_last_timestamp": "2023-05-03 23:50:00",
+        "source_manifest_ref": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source/manifest.json",
+        "source_wf5_manifest_ref": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source/wf5_fold_source_manifest.json",
         "available": true
       },
       {
         "fold_id": "fold_2",
         "window_from": "2023.05.03 09:55",
         "window_to": "2024.02.26 20:05",
-        "source_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source",
+        "source_dir": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source",
         "source_first_timestamp": "2023-05-02 23:50:00",
         "source_last_timestamp": "2024-02-26 23:50:00",
+        "source_manifest_ref": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source/manifest.json",
+        "source_wf5_manifest_ref": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source/wf5_fold_source_manifest.json",
         "available": true
       },
       {
         "fold_id": "fold_3",
         "window_from": "2025.04.02 09:10",
         "window_to": "2025.11.24 14:50",
-        "source_dir": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source",
+        "source_dir": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source",
         "source_first_timestamp": "2025-04-01 23:50:00",
         "source_last_timestamp": "2025-11-24 23:50:00",
+        "source_manifest_ref": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source/manifest.json",
+        "source_wf5_manifest_ref": "_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source/wf5_fold_source_manifest.json",
         "available": true
       }
     ],
@@ -168,14 +174,14 @@
     ],
     "missing_fold_ids": [],
     "step11_fold_commands": [
-      "python src/ml/step11_labeling.py --input \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source\" --pack-meta \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_1\" --from \"2022.09.13 17:15\" --to \"2023.05.03 09:45\"",
-      "python src/ml/step11_labeling.py --input \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source\" --pack-meta \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_2\" --from \"2023.05.03 09:55\" --to \"2024.02.26 20:05\"",
-      "python src/ml/step11_labeling.py --input \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source\" --pack-meta \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3\" --from \"2025.04.02 09:10\" --to \"2025.11.24 14:50\""
+      "python src/ml/step11_labeling.py --input \"_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_1_step21_control_trade_source\" --pack-meta \"_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_1\" --from \"2022.09.13 17:15\" --to \"2023.05.03 09:45\"",
+      "python src/ml/step11_labeling.py --input \"_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_2_step21_control_trade_source\" --pack-meta \"_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_2\" --from \"2023.05.03 09:55\" --to \"2024.02.26 20:05\"",
+      "python src/ml/step11_labeling.py --input \"_coord/artifacts/C2026Q1_stage1_refresh_RUN_20260312T115832Z_fold_3_step21_control_trade_source\" --pack-meta \"_coord\\artifacts\\step15_export_q1_out\\model_pack\\pack_meta.csv\" --output-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3\" --from \"2025.04.02 09:10\" --to \"2025.11.24 14:50\""
     ],
-    "step11_union_command": "python tools/build_step11_fold_union.py --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_1\" \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_2\" \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3\"",
-    "step12_command": "python src/ml/step12_training.py --input-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --fail-on-acceptance",
-    "step13_command": "python src/ml/step13_training.py --step11-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --step12-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step13_stage2_incumbent_refit\" --fail-on-acceptance",
-    "step14_command": "python src/ml/step14_training.py --step11-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --step12-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --step13-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step13_stage2_incumbent_refit\" --output-dir \"C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step14_stage1_refresh_validation\" --fail-on-acceptance"
+    "step11_union_command": "python tools/build_step11_fold_union.py --output-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_1\" \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_2\" \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11\\fold_3\"",
+    "step12_command": "python src/ml/step12_training.py --input-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --output-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --fail-on-acceptance",
+    "step13_command": "python src/ml/step13_training.py --step11-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --step12-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --output-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step13_stage2_incumbent_refit\" --fail-on-acceptance",
+    "step14_command": "python src/ml/step14_training.py --step11-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step11_union\" --step12-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step12_stage1_refresh\" --step13-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\step13_stage2_incumbent_refit\" --output-dir \"C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\C2026Q1_stage1_refresh_RUN_20260312T115832Z_wf5_stage1_refresh\\s14\" --fail-on-acceptance"
   },
   "recommended_focus": [
     "Build Stage1 corpus only from frozen optimization_folds; do not reuse the current OOS-era training window.",
@@ -185,9 +191,9 @@
   ],
   "source_artifacts": {
     "campaign_manifest": "_coord\\campaigns\\C2026Q1_stage1_refresh\\manifest.yaml",
-    "kpi_summary": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\40_kpi\\kpi_summary.json",
-    "branch_decision_packet": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\60_decision\\branch_decision_packet.json",
-    "validator_report": "C:\\Users\\awdse\\.codex\\worktrees\\0fc9\\PROJECT_triple_sigma\\_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\50_validator\\validator_report.json",
+    "kpi_summary": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\40_kpi\\kpi_summary.json",
+    "branch_decision_packet": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\60_decision\\branch_decision_packet.json",
+    "validator_report": "_coord\\campaigns\\C2026Q1_stage1_refresh\\runs\\RUN_20260312T115832Z\\50_validator\\validator_report.json",
     "stage1_selection_report": "_coord\\artifacts\\step14_validation_q1_out\\stage1_selection_report.json",
     "handoff_manifest": "_coord\\artifacts\\step14_validation_q1_out\\handoff_manifest.json",
     "selected_stage1_training_metadata": "_coord\\artifacts\\step14_validation_q1_out\\selected_stage1\\training_metadata.json",

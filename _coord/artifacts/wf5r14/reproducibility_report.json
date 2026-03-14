@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "comparisons": {
+    "outer_split_plan_match": true,
+    "inner_split_manifest_match": true,
+    "stage1_candidate_registry_match": true,
+    "stage2_candidate_registry_match": true,
+    "stage1_provisional_winner_match": true,
+    "stage2_provisional_winner_match": true,
+    "stage1_final_handoff_match": true,
+    "stage2_final_handoff_match": true,
+    "stage1_primary_metric_close": true,
+    "stage2_primary_metric_close": true,
+    "stage1_outer_holdout_metric_close": true,
+    "stage2_outer_holdout_metric_close": true
+  },
+  "tolerance": 1e-08
+}

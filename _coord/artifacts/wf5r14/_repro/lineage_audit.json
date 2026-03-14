@@ -1,0 +1,17 @@
+{
+  "step12_no_time_leakage": true,
+  "step13_acceptance": {
+    "A1_split_match_step12": true,
+    "A2_step12_no_time_leakage": true,
+    "A3_cand1_only": true,
+    "A4_masking_integrity": true,
+    "A5_bundle_predict_shape_and_finite": true,
+    "A6_postprocess_contract_valid": true,
+    "A7_export_deferred_to_step15": true
+  },
+  "split_plan_byte_equal": true,
+  "scaler_stats_byte_equal": true,
+  "required_threshold_metadata_present": true,
+  "missing_threshold_metadata_keys": [],
+  "passed": true
+}

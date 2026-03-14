@@ -1,0 +1,442 @@
+{
+  "stage1": {
+    "baseline": {
+      "row_count": 6,
+      "mean_macro_f1": 0.6015566900833133,
+      "mean_cand0_pass_recall": 0.9580264745294644,
+      "min_cand0_pass_recall": 0.8775298391281785,
+      "mean_log_loss": 0.47462937562374213,
+      "guardrail_pass": true,
+      "rows": [
+        {
+          "regime_id": 0,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.4852465943932751,
+          "pass_precision": 0.9562087582483503,
+          "pass_recall": 0.9573573573573574,
+          "cand0_pass_recall": 0.9573573573573574,
+          "log_loss": 0.36807831038150207
+        },
+        {
+          "regime_id": 1,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.558984161434242,
+          "pass_precision": 0.9591836734693877,
+          "pass_recall": 0.9771309771309772,
+          "cand0_pass_recall": 0.9771309771309772,
+          "log_loss": 0.40329449155714103
+        },
+        {
+          "regime_id": 2,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.5997062006735243,
+          "pass_precision": 0.9160346695557963,
+          "pass_recall": 0.8775298391281785,
+          "cand0_pass_recall": 0.8775298391281785,
+          "log_loss": 0.6810041265829203
+        },
+        {
+          "regime_id": 3,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.6676553665805282,
+          "pass_precision": 0.9941052631578947,
+          "pass_recall": 0.9920168067226891,
+          "cand0_pass_recall": 0.9920168067226891,
+          "log_loss": 0.41354082685221677
+        },
+        {
+          "regime_id": 4,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.6481949802455045,
+          "pass_precision": 0.9763663220088626,
+          "pass_recall": 0.957046332046332,
+          "cand0_pass_recall": 0.957046332046332,
+          "log_loss": 0.5802067417276351
+        },
+        {
+          "regime_id": 5,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.6495528371728057,
+          "pass_precision": 0.9949899799599199,
+          "pass_recall": 0.9870775347912525,
+          "cand0_pass_recall": 0.9870775347912525,
+          "log_loss": 0.40165175664103747
+        }
+      ]
+    },
+    "provisional": {
+      "row_count": 6,
+      "mean_macro_f1": 0.6050695489142132,
+      "mean_cand0_pass_recall": 0.973397603917693,
+      "min_cand0_pass_recall": 0.9387649195640893,
+      "mean_log_loss": 0.4506306641006978,
+      "guardrail_pass": true,
+      "rows": [
+        {
+          "regime_id": 0,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.48350643531137666,
+          "pass_precision": 0.9414862492685782,
+          "pass_recall": 0.9663663663663664,
+          "cand0_pass_recall": 0.9663663663663664,
+          "log_loss": 0.35717586774240934
+        },
+        {
+          "regime_id": 1,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.5591106880401928,
+          "pass_precision": 0.9618949536560247,
+          "pass_recall": 0.9708939708939709,
+          "cand0_pass_recall": 0.9708939708939709,
+          "log_loss": 0.34547193500318457
+        },
+        {
+          "regime_id": 2,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.6067377799224601,
+          "pass_precision": 0.9456351280710925,
+          "pass_recall": 0.9387649195640893,
+          "cand0_pass_recall": 0.9387649195640893,
+          "log_loss": 0.6322726556417309
+        },
+        {
+          "regime_id": 3,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.6746899914984542,
+          "pass_precision": 0.9928929765886287,
+          "pass_recall": 0.9978991596638656,
+          "cand0_pass_recall": 0.9978991596638656,
+          "log_loss": 0.3996661544163531
+        },
+        {
+          "regime_id": 4,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.6466528143058735,
+          "pass_precision": 0.9557353641123275,
+          "pass_recall": 0.9691119691119691,
+          "cand0_pass_recall": 0.9691119691119691,
+          "log_loss": 0.5637088586638401
+        },
+        {
+          "regime_id": 5,
+          "prob_all_finite": true,
+          "prob_sum_close": true,
+          "macro_f1": 0.6597195844069215,
+          "pass_precision": 0.9976798143851509,
+          "pass_recall": 0.9973492379058979,
+          "cand0_pass_recall": 0.9973492379058979,
+          "log_loss": 0.4054885131366687
+        }
+      ]
+    },
+    "baseline_candidate_id": "stage1_baseline",
+    "provisional_winner_candidate_id": "stage1_c09",
+    "final_handoff_candidate_id": "stage1_c09",
+    "final_handoff_is_baseline": false,
+    "provisional_strictly_beats_baseline": true,
+    "arbitration_result": "provisional_winner"
+  },
+  "stage2": {
+    "baseline": {
+      "row_count": 12,
+      "mean_normalized_effective_mae_mean": 0.22348657964941251,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "guardrail_pass": true,
+      "rows": [
+        {
+          "regime_id": 0,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.25473612618686065,
+          "baseline_normalized_effective_mae_mean": 0.28112034214119874,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 0,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.24955245726348455,
+          "baseline_normalized_effective_mae_mean": 0.32110088432807354,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 1,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.22495569887575587,
+          "baseline_normalized_effective_mae_mean": 0.2731781697024768,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 1,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.20766696488654554,
+          "baseline_normalized_effective_mae_mean": 0.23813257923695005,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 2,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.23255349431510264,
+          "baseline_normalized_effective_mae_mean": 0.2966684215745441,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 2,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.2279893206722419,
+          "baseline_normalized_effective_mae_mean": 0.30399110875139884,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 3,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.20321346753734582,
+          "baseline_normalized_effective_mae_mean": 0.25110729007250054,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 3,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.21088667671015363,
+          "baseline_normalized_effective_mae_mean": 0.252449326546081,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 4,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.22605484627773867,
+          "baseline_normalized_effective_mae_mean": 0.2994024375106279,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 4,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.23962357625773612,
+          "baseline_normalized_effective_mae_mean": 0.2968665414580263,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 5,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.20221949582302257,
+          "baseline_normalized_effective_mae_mean": 0.24427790866119184,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 5,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.20238683098696209,
+          "baseline_normalized_effective_mae_mean": 0.2505054091632385,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        }
+      ]
+    },
+    "provisional": {
+      "row_count": 12,
+      "mean_normalized_effective_mae_mean": 0.22272546017222314,
+      "beat_default_share": 1.0,
+      "max_hold_boundary_rate": 0.0,
+      "mean_hold_boundary_rate": 0.0,
+      "guardrail_pass": true,
+      "rows": [
+        {
+          "regime_id": 0,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.25432904641244475,
+          "baseline_normalized_effective_mae_mean": 0.28112034214119874,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 0,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.2444745121499685,
+          "baseline_normalized_effective_mae_mean": 0.32110088432807354,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 1,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.2248842565156982,
+          "baseline_normalized_effective_mae_mean": 0.2731781697024768,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 1,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.2059580385172549,
+          "baseline_normalized_effective_mae_mean": 0.23813257923695005,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 2,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.2313697203690892,
+          "baseline_normalized_effective_mae_mean": 0.2966684215745441,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 2,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.2263032944038763,
+          "baseline_normalized_effective_mae_mean": 0.30399110875139884,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 3,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.20353307609382817,
+          "baseline_normalized_effective_mae_mean": 0.25110729007250054,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 3,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.2102188321305949,
+          "baseline_normalized_effective_mae_mean": 0.252449326546081,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 4,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.22677219767129328,
+          "baseline_normalized_effective_mae_mean": 0.2994024375106279,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 4,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.24019097760206673,
+          "baseline_normalized_effective_mae_mean": 0.2968665414580263,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 5,
+          "side": "LONG",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.20220824808057614,
+          "baseline_normalized_effective_mae_mean": 0.24427790866119184,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        },
+        {
+          "regime_id": 5,
+          "side": "SHORT",
+          "fallback_used": false,
+          "effective_all_finite": true,
+          "contract_valid": true,
+          "normalized_effective_mae_mean": 0.20246332211998674,
+          "baseline_normalized_effective_mae_mean": 0.2505054091632385,
+          "beats_default_baseline": true,
+          "hold_boundary_rate": 0.0
+        }
+      ]
+    },
+    "baseline_candidate_id": "stage2_baseline",
+    "provisional_winner_candidate_id": "stage2_c03",
+    "final_handoff_candidate_id": "stage2_c03",
+    "final_handoff_is_baseline": false,
+    "provisional_strictly_beats_baseline": true,
+    "arbitration_result": "provisional_winner"
+  }
+}

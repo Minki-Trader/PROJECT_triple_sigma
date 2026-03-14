@@ -1,0 +1,81 @@
+{
+  "0": {
+    "tested": true,
+    "row_count": 8,
+    "shape_ok": true,
+    "raw_all_finite": true,
+    "effective_all_finite": true,
+    "contract_valid": true,
+    "holds_integral": true,
+    "target_side_counts": {
+      "LONG": 4,
+      "SHORT": 4
+    }
+  },
+  "1": {
+    "tested": true,
+    "row_count": 8,
+    "shape_ok": true,
+    "raw_all_finite": true,
+    "effective_all_finite": true,
+    "contract_valid": true,
+    "holds_integral": true,
+    "target_side_counts": {
+      "LONG": 4,
+      "SHORT": 4
+    }
+  },
+  "2": {
+    "tested": true,
+    "row_count": 8,
+    "shape_ok": true,
+    "raw_all_finite": true,
+    "effective_all_finite": true,
+    "contract_valid": true,
+    "holds_integral": true,
+    "target_side_counts": {
+      "LONG": 4,
+      "SHORT": 4
+    }
+  },
+  "3": {
+    "tested": true,
+    "row_count": 8,
+    "shape_ok": true,
+    "raw_all_finite": true,
+    "effective_all_finite": true,
+    "contract_valid": true,
+    "holds_integral": true,
+    "target_side_counts": {
+      "LONG": 4,
+      "SHORT": 4
+    }
+  },
+  "4": {
+    "tested": true,
+    "row_count": 8,
+    "shape_ok": true,
+    "raw_all_finite": true,
+    "effective_all_finite": true,
+    "contract_valid": true,
+    "holds_integral": true,
+    "target_side_counts": {
+      "LONG": 4,
+      "SHORT": 4
+    }
+  },
+  "5": {
+    "tested": true,
+    "row_count": 8,
+    "shape_ok": true,
+    "raw_all_finite": true,
+    "effective_all_finite": true,
+    "contract_valid": true,
+    "holds_integral": true,
+    "target_side_counts": {
+      "LONG": 4,
+      "SHORT": 4
+    }
+  },
+  "all_passed": true
+}

@@ -1,0 +1,692 @@
+{
+  "accepted": true,
+  "acceptance": {
+    "A1_source_bundle_complete_and_consistent": true,
+    "A2_stage1_onnx_export_complete": true,
+    "A3_stage2_onnx_export_complete": true,
+    "A4_pack_meta_complete_and_runtime_compatible": true,
+    "A4b_gate_config_runtime_compatible": true,
+    "A5_scaler_stats_packaged_and_valid": true,
+    "A6_static_inference_smoke_pass": true,
+    "A7_source_parity_smoke_pass": true,
+    "A8_pack_layout_runtime_compatible": true,
+    "A9_export_reports_complete": true
+  },
+  "source_bundle_audit": {
+    "required_files_present": true,
+    "handoff_stage1_matches_selected": true,
+    "handoff_stage2_matches_selected": true,
+    "missing_stage1_lineage_keys": [],
+    "missing_stage2_lineage_keys": [],
+    "lineage_matches": {
+      "schema_version": true,
+      "model_pack_version": true,
+      "candidate_policy_version": true,
+      "regime_policy_version": true,
+      "cost_model_version": true,
+      "atr_thr": true,
+      "adx_thr1": true,
+      "adx_thr2": true,
+      "dist_atr_max_mode": true,
+      "dist_atr_max_q": true,
+      "dist_atr_max_w": true,
+      "dist_atr_max_clamp_lo": true,
+      "dist_atr_max_clamp_hi": true
+    },
+    "selected_scaler_stats_equal": true,
+    "selected_split_plan_equal": true,
+    "A1_source_bundle_complete_and_consistent": true
+  },
+  "stage1_onnx_validation": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\clf_reg0_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "1": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\clf_reg1_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "2": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\clf_reg2_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "3": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\clf_reg3_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "4": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\clf_reg4_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "5": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\clf_reg5_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              3
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      }
+    }
+  },
+  "stage2_onnx_validation": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\prm_reg0_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "1": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\prm_reg1_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "2": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\prm_reg2_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "3": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\prm_reg3_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "4": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\prm_reg4_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      },
+      "5": {
+        "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\prm_reg5_v0.1.0.onnx",
+        "checker_ok": true,
+        "checker_error": "",
+        "shape_inference_ok": true,
+        "shape_inference_error": "",
+        "inputs": [
+          {
+            "name": "input",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              64,
+              22
+            ]
+          }
+        ],
+        "outputs": [
+          {
+            "name": "output",
+            "dtype": "FLOAT",
+            "shape": [
+              1,
+              6
+            ]
+          }
+        ],
+        "shape_contract_ok": true
+      }
+    }
+  },
+  "pack_meta_validation": {
+    "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\pack_meta.csv",
+    "missing_required_keys": [],
+    "unsupported_keys": [],
+    "value_matches_source_step11": {
+      "model_pack_version": true,
+      "schema_version": true,
+      "regime_policy_version": true,
+      "candidate_policy_version": true,
+      "cost_model_version": true,
+      "atr_thr": true,
+      "adx_thr1": true,
+      "adx_thr2": true,
+      "thr_method": true,
+      "thr_seed": true,
+      "thr_notes": true,
+      "dist_atr_max_mode": true,
+      "dist_atr_max_q": true,
+      "dist_atr_max_w": true,
+      "dist_atr_max_clamp_lo": true,
+      "dist_atr_max_clamp_hi": true
+    },
+    "format": "key_value_text",
+    "runtime_compatible": true
+  },
+  "gate_config_validation": {
+    "path": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack\\gate_config.json",
+    "missing_required_keys": [],
+    "unsupported_keys": [],
+    "value_matches_runtime_defaults": {
+      "spread_atr_max_base": true,
+      "spread_atr_max_hard": true,
+      "k_tp_scale_min": true,
+      "k_tp_scale_max": true,
+      "dev_points_base": true,
+      "dev_points_add_max": true,
+      "dev_points_hard_max": true,
+      "risk_pct_base": true,
+      "risk_pct_hard_min": true,
+      "risk_pct_hard_max": true
+    },
+    "runtime_compatible": true
+  },
+  "scaler_validation": {
+    "schema_valid": true,
+    "mean_length": 12,
+    "std_length": 12,
+    "all_mean_finite": true,
+    "all_std_finite": true,
+    "all_std_positive": true,
+    "semantic_match_selected": true
+  },
+  "stage1_smoke": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 1.1920928955078125e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "1": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 2.086162567138672e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "2": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.725290298461914e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "3": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 1.7881393432617188e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "4": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 4.76837158203125e-07,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "5": {
+        "shape_ok": true,
+        "prob_all_finite": true,
+        "prob_sum_close": true,
+        "parity_allclose": true,
+        "max_abs_diff": 1.9371509552001953e-07,
+        "samples_tested": 8,
+        "passed": true
+      }
+    }
+  },
+  "stage2_smoke": {
+    "all_passed": true,
+    "by_regime": {
+      "0": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "1": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "2": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "3": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "4": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      },
+      "5": {
+        "shape_ok": true,
+        "raw_all_finite": true,
+        "effective_all_finite": true,
+        "contract_valid": true,
+        "holds_integral": true,
+        "parity_allclose": true,
+        "max_abs_diff": 3.814697265625e-06,
+        "samples_tested": 8,
+        "passed": true
+      }
+    }
+  },
+  "pack_layout_validation": {
+    "files": [
+      "clf_reg0_v0.1.0.onnx",
+      "clf_reg1_v0.1.0.onnx",
+      "clf_reg2_v0.1.0.onnx",
+      "clf_reg3_v0.1.0.onnx",
+      "clf_reg4_v0.1.0.onnx",
+      "clf_reg5_v0.1.0.onnx",
+      "gate_config.json",
+      "pack_meta.csv",
+      "prm_reg0_v0.1.0.onnx",
+      "prm_reg1_v0.1.0.onnx",
+      "prm_reg2_v0.1.0.onnx",
+      "prm_reg3_v0.1.0.onnx",
+      "prm_reg4_v0.1.0.onnx",
+      "prm_reg5_v0.1.0.onnx",
+      "scaler_stats.json"
+    ],
+    "expected_files": [
+      "clf_reg0_v0.1.0.onnx",
+      "clf_reg1_v0.1.0.onnx",
+      "clf_reg2_v0.1.0.onnx",
+      "clf_reg3_v0.1.0.onnx",
+      "clf_reg4_v0.1.0.onnx",
+      "clf_reg5_v0.1.0.onnx",
+      "prm_reg0_v0.1.0.onnx",
+      "prm_reg1_v0.1.0.onnx",
+      "prm_reg2_v0.1.0.onnx",
+      "prm_reg3_v0.1.0.onnx",
+      "prm_reg4_v0.1.0.onnx",
+      "prm_reg5_v0.1.0.onnx",
+      "pack_meta.csv",
+      "scaler_stats.json",
+      "gate_config.json"
+    ],
+    "runtime_compatible": true
+  },
+  "export_manifest": {
+    "source_step14_dir": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r14",
+    "selected_candidate_ids": {
+      "stage1": "stage1_c09",
+      "stage2": "stage2_c03"
+    },
+    "clf_version": "step14_stage1_c09",
+    "prm_version": "step14_stage2_c03",
+    "model_pack_version": "0.1.0",
+    "schema_version": "1.0",
+    "candidate_policy_version": "0.1.2",
+    "regime_policy_version": "0.1.0q",
+    "cost_model_version": "0.1",
+    "atr_thr": 0.0005,
+    "adx_thr1": 20.0,
+    "adx_thr2": 30.0,
+    "dist_atr_max_mode": "adaptive_quantile",
+    "dist_atr_max_q": 0.8,
+    "dist_atr_max_w": 63,
+    "dist_atr_max_clamp_lo": 0.5,
+    "dist_atr_max_clamp_hi": 5.0,
+    "target_opset": 17,
+    "model_pack_dir": "C:\\Users\\awdse\\AppData\\Roaming\\MetaQuotes\\Terminal\\D0E8209F77C8CF37AD8BF550E51FF075\\MQL5\\Experts\\PROJECT_triple_sigma\\_coord\\artifacts\\wf5r15_out\\model_pack",
+    "stage1_files": [
+      "clf_reg0_v0.1.0.onnx",
+      "clf_reg1_v0.1.0.onnx",
+      "clf_reg2_v0.1.0.onnx",
+      "clf_reg3_v0.1.0.onnx",
+      "clf_reg4_v0.1.0.onnx",
+      "clf_reg5_v0.1.0.onnx"
+    ],
+    "stage2_files": [
+      "prm_reg0_v0.1.0.onnx",
+      "prm_reg1_v0.1.0.onnx",
+      "prm_reg2_v0.1.0.onnx",
+      "prm_reg3_v0.1.0.onnx",
+      "prm_reg4_v0.1.0.onnx",
+      "prm_reg5_v0.1.0.onnx"
+    ],
+    "pack_meta": {
+      "model_pack_version": "0.1.0",
+      "schema_version": "1.0",
+      "regime_policy_version": "0.1.0q",
+      "candidate_policy_version": "0.1.2",
+      "cost_model_version": "0.1",
+      "atr_thr": 0.0005,
+      "adx_thr1": 20.0,
+      "adx_thr2": 30.0,
+      "thr_method": "manual",
+      "thr_seed": "0",
+      "thr_notes": "step06_candidate_adaptive",
+      "dist_atr_max_mode": "adaptive_quantile",
+      "dist_atr_max_q": 0.8,
+      "dist_atr_max_w": 63,
+      "dist_atr_max_clamp_lo": 0.5,
+      "dist_atr_max_clamp_hi": 5.0
+    },
+    "file_sha256": {
+      "clf_reg0_v0.1.0.onnx": "9d0829e228af8c8cdbdd0215d33e66410c004dbe25cfda20ec2f966e3fd19a0e",
+      "clf_reg1_v0.1.0.onnx": "c70330fd7966c92dd96bb60447ce02315438d55d60d6b99c323cc709b8ad5dae",
+      "clf_reg2_v0.1.0.onnx": "eac868ab5f8a0ba19aa4dadf28f355733ddc2d7581b1db00f9ac2c7a2ac57ade",
+      "clf_reg3_v0.1.0.onnx": "5d7ccfa957b7f8d631ef77d62a3a4b97f06b1589abbf8a7022820a3344734c58",
+      "clf_reg4_v0.1.0.onnx": "2495ead917c56738b542024ae1065d5a952ee051e94a857b6813549127460b84",
+      "clf_reg5_v0.1.0.onnx": "dd78f94b7d652c86570a920658182134af992aed8a6e0e6377ca2bf2f6b97ea1",
+      "gate_config.json": "d3d423611460da5e718a09c52cd93522fdea95ef70f00b69b403ddca92fae9bf",
+      "pack_meta.csv": "cb1807c15486bd752f24508cf5dfa84062322d20ece3d6661028825e7b4ee417",
+      "prm_reg0_v0.1.0.onnx": "e76b02cbe72b1bf40485bd7abcb51ecbbff192b0cc90e0df951baddfb521607f",
+      "prm_reg1_v0.1.0.onnx": "93fd358e93c53823a93f7842005b9e9b4d375e87d9dbd0ba13a5a6fffaf60365",
+      "prm_reg2_v0.1.0.onnx": "5449d2b1e7d65a1ff8f63cd0d34f112086fa566c4224f33f3f9c634b71730e10",
+      "prm_reg3_v0.1.0.onnx": "911c642035939d4f86e89e8ce8195467cd507a0a351b64ec4d5b6de90ec23b6e",
+      "prm_reg4_v0.1.0.onnx": "71db9d5c0c1b754bf6f8a8a8824f1e476d7b2ba3adaa35aed702b472ce8d791d",
+      "prm_reg5_v0.1.0.onnx": "0314f5087050458c91824853d7673c8d606c13cbc089dce7f192f9c616cb70af",
+      "scaler_stats.json": "d5d3eb8ee40e8a0cb037c0a77b551c2b9412ae8ae054b1bd03e0d40a790a3669"
+    }
+  }
+}

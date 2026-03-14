@@ -61,3 +61,48 @@ profitability_control:
     stage2_status: >
       Winner: stage2_c02.
       Stage2 already has a viable candidate.
+
+wf5_refresh_candidate:
+  pack: triple_sigma_pack_step15_wf5r
+  location: MQL5/Files/triple_sigma_pack_step15_wf5r
+  purpose: >
+    WF5 refreshed Step15 candidate pack retained under promotion hold.
+    Used for benchmark/OOS/stress replay and governance hardening only
+    until campaign-level release packet and independent validation clear.
+  model_lineage:
+    clf_version: step14_stage1_c09
+    prm_version: step14_stage2_c03
+    model_pack_version: "0.1.0"
+    schema_version: "1.0"
+    candidate_policy_version: "0.1.2"
+    regime_policy_version: "0.1.0q"
+    cost_model_version: "0.1"
+    stage1_input_shape: [1, 64, 22]
+    stage1_output_shape: [1, 3]
+    stage2_input_shape: [1, 64, 22]
+    stage2_output_shape: [1, 6]
+    regimes: 6
+  parity_evidence: _coord/artifacts/wf5r15_out/export_validation_report.json
+  selection_evidence:
+    stage1: _coord/artifacts/wf5r14/stage1_selection_report.json
+    stage2: _coord/artifacts/wf5r14/stage2_selection_report.json
+  retained_evidence:
+    - _coord/artifacts/wf5r14/
+    - _coord/artifacts/wf5r15_out/
+    - _coord/campaigns/C2026Q1_stage1_refresh/runs_wf5r/
+  allowed_uses:
+    - benchmark / OOS / stress replay under promotion hold
+    - campaign release packet construction
+    - review-only RC / rollback bundle assembly
+  prohibited_uses:
+    - active promotion without independent validator signature
+    - direct runtime swap into production
+  notes:
+    stage1_status: >
+      Winner: stage1_c09.
+      Selected from the tolerance-window Stage1 search with
+      hidden_layers=[96,48], learning_rate=0.0005, weight_decay=0.0005.
+      Outer holdout beat the retained baseline on macro_f1, cand0 recall,
+      and log_loss.
+    stage2_status: >
+      Winner unchanged: stage2_c03.

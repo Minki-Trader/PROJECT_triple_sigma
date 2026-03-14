@@ -1,0 +1,228 @@
+{
+  "primary_metric": "mean_macro_f1",
+  "primary_metric_tolerance": 0.001,
+  "tie_breakers": [
+    "higher_mean_cand0_pass_recall",
+    "higher_min_cand0_pass_recall",
+    "lower_mean_log_loss",
+    "higher_mean_macro_f1_within_tolerance_window",
+    "baseline_preferred"
+  ],
+  "baseline_candidate_id": "stage1_baseline",
+  "baseline_candidate_score": 0.5908485250564367,
+  "eligible_candidate_count": 10,
+  "used_control_fallback": false,
+  "provisional_winner_source": "eligible_set",
+  "provisional_winner_candidate_id": "stage1_c09",
+  "provisional_winner_aggregate_score": 0.5962480691928361,
+  "eligibility_guardrail": {
+    "name": "min_cand0_pass_recall",
+    "threshold": 0.5
+  },
+  "candidate_rows": [
+    {
+      "candidate_id": "stage1_baseline",
+      "search_rank": 0,
+      "is_baseline": true,
+      "params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          64,
+          32
+        ]
+      },
+      "mean_macro_f1": 0.5908485250564367,
+      "mean_cand0_pass_recall": 0.9585859152203516,
+      "min_cand0_pass_recall": 0.9002590673575129,
+      "mean_log_loss": 0.45434500255812665,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c01",
+      "search_rank": 1,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 0.3,
+        "hidden_layers": [
+          64,
+          32
+        ]
+      },
+      "mean_macro_f1": 0.5851374003662372,
+      "mean_cand0_pass_recall": 0.9396647048809389,
+      "min_cand0_pass_recall": 0.8815896188158961,
+      "mean_log_loss": 0.5295424761535649,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c02",
+      "search_rank": 2,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.75,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          64,
+          32
+        ]
+      },
+      "mean_macro_f1": 0.5729510728090785,
+      "mean_cand0_pass_recall": 0.9295088233519989,
+      "min_cand0_pass_recall": 0.8266596417281349,
+      "mean_log_loss": 0.5137388531451578,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c03",
+      "search_rank": 3,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.75,
+        "cand0_sample_weight": 0.3,
+        "hidden_layers": [
+          64,
+          32
+        ]
+      },
+      "mean_macro_f1": 0.5714527335226635,
+      "mean_cand0_pass_recall": 0.9029272965467006,
+      "min_cand0_pass_recall": 0.7908324552160169,
+      "mean_log_loss": 0.5977302468716538,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c04",
+      "search_rank": 4,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.5,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          64,
+          32
+        ]
+      },
+      "mean_macro_f1": 0.5452304073690134,
+      "mean_cand0_pass_recall": 0.8729032111639045,
+      "min_cand0_pass_recall": 0.5553213909378293,
+      "mean_log_loss": 0.6216425705715745,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c05",
+      "search_rank": 5,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.5,
+        "cand0_sample_weight": 0.3,
+        "hidden_layers": [
+          64,
+          32
+        ]
+      },
+      "mean_macro_f1": 0.5275267574950228,
+      "mean_cand0_pass_recall": 0.8163478223342366,
+      "min_cand0_pass_recall": 0.4610115911485774,
+      "mean_log_loss": 0.7657429774497108,
+      "eligible": false
+    },
+    {
+      "candidate_id": "stage1_c06",
+      "search_rank": 6,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          80,
+          40
+        ]
+      },
+      "mean_macro_f1": 0.5966817543575097,
+      "mean_cand0_pass_recall": 0.9550545872266993,
+      "min_cand0_pass_recall": 0.8937823834196891,
+      "mean_log_loss": 0.4586083265283576,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c07",
+      "search_rank": 7,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          96,
+          48
+        ]
+      },
+      "mean_macro_f1": 0.5854834652147648,
+      "mean_cand0_pass_recall": 0.9615500318341333,
+      "min_cand0_pass_recall": 0.9045768566493955,
+      "mean_log_loss": 0.46328917728771474,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c08",
+      "search_rank": 8,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          128,
+          64,
+          32
+        ]
+      },
+      "mean_macro_f1": 0.5964682677890315,
+      "mean_cand0_pass_recall": 0.9541014212542325,
+      "min_cand0_pass_recall": 0.9244386873920553,
+      "mean_log_loss": 0.4768355642775448,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c09",
+      "search_rank": 9,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          96,
+          48
+        ],
+        "learning_rate": 0.0005,
+        "weight_decay": 0.0005
+      },
+      "mean_macro_f1": 0.5962480691928361,
+      "mean_cand0_pass_recall": 0.9658894257524101,
+      "min_cand0_pass_recall": 0.9257907542579076,
+      "mean_log_loss": 0.44073091475149134,
+      "eligible": true
+    },
+    {
+      "candidate_id": "stage1_c10",
+      "search_rank": 10,
+      "is_baseline": false,
+      "params": {
+        "cand0_max_fraction": 0.95,
+        "cand0_sample_weight": 1.0,
+        "hidden_layers": [
+          128,
+          64,
+          32
+        ],
+        "learning_rate": 0.0005,
+        "weight_decay": 0.001
+      },
+      "mean_macro_f1": 0.5969233573119359,
+      "mean_cand0_pass_recall": 0.9568622609275836,
+      "min_cand0_pass_recall": 0.883419689119171,
+      "mean_log_loss": 0.4464278241476393,
+      "eligible": true
+    }
+  ]
+}

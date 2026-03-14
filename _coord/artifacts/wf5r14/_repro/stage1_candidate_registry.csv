@@ -1,0 +1,12 @@
+stage,candidate_id,search_rank,is_baseline,cand0_max_fraction,cand0_sample_weight,hidden_layers,seed,learning_rate,weight_decay
+stage1,stage1_baseline,0,True,0.95,1.0,"(64, 32)",42,,
+stage1,stage1_c01,1,False,0.95,0.3,"(64, 32)",42,,
+stage1,stage1_c02,2,False,0.75,1.0,"(64, 32)",42,,
+stage1,stage1_c03,3,False,0.75,0.3,"(64, 32)",42,,
+stage1,stage1_c04,4,False,0.5,1.0,"(64, 32)",42,,
+stage1,stage1_c05,5,False,0.5,0.3,"(64, 32)",42,,
+stage1,stage1_c06,6,False,0.95,1.0,"(80, 40)",42,,
+stage1,stage1_c07,7,False,0.95,1.0,"(96, 48)",42,,
+stage1,stage1_c08,8,False,0.95,1.0,"(128, 64, 32)",42,,
+stage1,stage1_c09,9,False,0.95,1.0,"(96, 48)",42,0.0005,0.0005
+stage1,stage1_c10,10,False,0.95,1.0,"(128, 64, 32)",42,0.0005,0.001

@@ -25,6 +25,7 @@ from .step12 import (
     compute_metrics,
     compute_scaler,
     count_by_regime,
+    counts_to_regime_dict,
     json_ready,
     load_step11_bundle,
     select_retained_train_rows,
@@ -54,6 +55,7 @@ from .step13 import build_training_metadata as build_step13_training_metadata
 REPRO_DEFAULT_TOLERANCE = 1e-8
 STAGE1_PROB_TOLERANCE = 1e-6
 STAGE1_PRIMARY_METRIC = "mean_macro_f1"
+STAGE1_PRIMARY_METRIC_TOLERANCE = 1e-3
 STAGE2_PRIMARY_METRIC = "mean_normalized_effective_mae_mean"
 
 
@@ -69,6 +71,8 @@ class Step14Config:
     min_val_samples_per_regime: int
     min_train_samples_per_head: int
     min_val_samples_per_head: int
+    stage1_hidden_layer_options: tuple[tuple[int, ...], ...]
+    stage1_targeted_variants: tuple[dict[str, Any], ...]
     cand0_max_fractions: tuple[float, ...]
     cand0_sample_weights: tuple[float, ...]
     gbr_n_estimators_grid: tuple[int, ...]
@@ -186,6 +190,19 @@ def parse_args() -> Step14Config:
         min_val_samples_per_regime=4,
         min_train_samples_per_head=12,
         min_val_samples_per_head=4,
+        stage1_hidden_layer_options=((64, 32), (80, 40), (96, 48), (128, 64, 32)),
+        stage1_targeted_variants=(
+            {
+                "hidden_layers": (96, 48),
+                "learning_rate": 0.0005,
+                "weight_decay": 0.0005,
+            },
+            {
+                "hidden_layers": (128, 64, 32),
+                "learning_rate": 0.0005,
+                "weight_decay": 0.001,
+            },
+        ),
         cand0_max_fractions=(0.95, 0.75, 0.50),
         cand0_sample_weights=(1.0, 0.3),
         gbr_n_estimators_grid=(120, 180),
@@ -358,81 +375,111 @@ def choose_single_inner_fold(
     if len(outer_indices) < 2:
         raise ValueError("outer train split is too small to create inner folds")
 
+    outer_window_end = window_end[outer_indices]
+    outer_regimes = regimes[outer_indices]
+    outer_label_times = label_times[outer_indices]
+    observed_regime_array = np.asarray(observed_regimes, dtype=np.int64)
+    regime_positions = np.searchsorted(observed_regime_array, outer_regimes)
+    if not np.array_equal(observed_regime_array[regime_positions], outer_regimes):
+        raise ValueError("outer_train_mask contains regimes outside observed_regimes")
+
+    regime_one_hot = np.zeros((len(outer_indices), len(observed_regimes)), dtype=np.int32)
+    regime_one_hot[np.arange(len(outer_indices)), regime_positions] = 1
+    cumulative_regime_counts = np.zeros((len(outer_indices) + 1, len(observed_regimes)), dtype=np.int32)
+    np.cumsum(regime_one_hot, axis=0, dtype=np.int32, out=cumulative_regime_counts[1:])
+    total_regime_counts = cumulative_regime_counts[-1]
+
+    stage2_keys = [f"{regime}_{side}" for regime in range(6) for side in ("LONG", "SHORT")]
+    stage2_key_to_position = {key: idx for idx, key in enumerate(stage2_keys)}
+    stage2_label_counts = np.zeros((len(labels), len(stage2_keys)), dtype=np.int16)
+    for row in stage2_all.itertuples(index=False):
+        key = f"{int(row.regime_id)}_{str(row.target_side)}"
+        stage2_label_counts[int(row.label_row_idx), stage2_key_to_position[key]] += 1
+    outer_stage2_counts = stage2_label_counts[outer_indices]
+    cumulative_stage2_counts = np.zeros((len(outer_indices) + 1, len(stage2_keys)), dtype=np.int32)
+    np.cumsum(outer_stage2_counts, axis=0, dtype=np.int32, out=cumulative_stage2_counts[1:])
+    total_stage2_counts = cumulative_stage2_counts[-1]
+
+    def counts_to_stage2_dict(counts: np.ndarray) -> dict[str, int]:
+        return {key: int(count) for key, count in zip(stage2_keys, counts.tolist())}
+
     target_outer_position = max(1, min(len(outer_indices) - 1, int(round(len(outer_indices) * target_train_ratio))))
     target_label_index = int(outer_indices[target_outer_position])
 
-    candidates: list[dict[str, Any]] = []
+    selected: dict[str, Any] | None = None
+    selected_key: tuple[float, int, int] | None = None
     for selected_outer_position in range(1, len(outer_indices)):
         selected_label_index = int(outer_indices[selected_outer_position])
-        boundary_window_end_idx = int(window_end[selected_label_index])
-        train_mask = outer_train_mask & (window_end + config.embargo_bars < boundary_window_end_idx)
-        val_mask = outer_train_mask & (window_end >= boundary_window_end_idx)
-        dropped_mask = outer_train_mask & ~(train_mask | val_mask)
-        if not train_mask.any() or not val_mask.any():
+        boundary_window_end_idx = int(outer_window_end[selected_outer_position])
+        train_count = int(np.searchsorted(outer_window_end, boundary_window_end_idx - config.embargo_bars, side="left"))
+        val_start_position = int(np.searchsorted(outer_window_end, boundary_window_end_idx, side="left"))
+        val_count = len(outer_indices) - val_start_position
+        if train_count <= 0 or val_count <= 0:
             continue
 
-        train_counts = count_by_regime(regimes, train_mask, observed_regimes)
-        val_counts = count_by_regime(regimes, val_mask, observed_regimes)
-        if any(train_counts[str(rid)] < config.min_train_samples_per_regime for rid in observed_regimes):
+        train_counts_array = cumulative_regime_counts[train_count]
+        val_counts_array = total_regime_counts - cumulative_regime_counts[val_start_position]
+        if np.any(train_counts_array < config.min_train_samples_per_regime):
             continue
-        if any(val_counts[str(rid)] < config.min_val_samples_per_regime for rid in observed_regimes):
+        if np.any(val_counts_array < config.min_val_samples_per_regime):
             continue
 
-        stage2_train_counts = count_stage2_by_regime_side(stage2_all, train_mask)
-        stage2_val_counts = count_stage2_by_regime_side(stage2_all, val_mask)
+        stage2_train_counts_array = cumulative_stage2_counts[train_count]
+        stage2_val_counts_array = total_stage2_counts - cumulative_stage2_counts[val_start_position]
+        stage2_train_counts = counts_to_stage2_dict(stage2_train_counts_array)
+        stage2_val_counts = counts_to_stage2_dict(stage2_val_counts_array)
         if not stage2_counts_meet_minimums(stage2_train_counts, minimum=config.min_train_samples_per_head):
             continue
         if not stage2_counts_meet_minimums(stage2_val_counts, minimum=config.min_val_samples_per_head):
             continue
 
-        max_train_end = int(window_end[train_mask].max())
-        min_val_end = int(window_end[val_mask].min())
+        max_train_end = int(outer_window_end[train_count - 1])
+        min_val_end = int(outer_window_end[val_start_position])
         no_time_leakage = bool(max_train_end + config.embargo_bars < min_val_end)
         if not no_time_leakage:
             continue
 
-        train_count = int(train_mask.sum())
-        val_count = int(val_mask.sum())
-        dropped_count = int(dropped_mask.sum())
+        dropped_count = int(val_start_position - train_count)
         effective_ratio = train_count / float(train_count + val_count)
-
-        candidates.append(
-            {
-                "selected_outer_position": selected_outer_position,
-                "selected_label_index": selected_label_index,
-                "boundary_window_end_idx": boundary_window_end_idx,
-                "train_mask": train_mask,
-                "val_mask": val_mask,
-                "dropped_mask": dropped_mask,
-                "train_count": train_count,
-                "val_count": val_count,
-                "dropped_count": dropped_count,
-                "effective_ratio": effective_ratio,
-                "train_counts_by_regime": train_counts,
-                "val_counts_by_regime": val_counts,
-                "dropped_counts_by_regime": count_by_regime(regimes, dropped_mask, observed_regimes),
-                "stage2_train_counts_by_regime_side": stage2_train_counts,
-                "stage2_val_counts_by_regime_side": stage2_val_counts,
-                "train_end_time": serialize_timestamp(label_times[train_mask][-1]),
-                "val_start_time": serialize_timestamp(label_times[val_mask][0]),
-            }
+        candidate_key = (
+            abs(effective_ratio - target_train_ratio),
+            abs(selected_label_index - target_label_index),
+            dropped_count,
         )
+        if selected_key is not None and candidate_key >= selected_key:
+            continue
 
-    if not candidates:
+        selected_key = candidate_key
+        selected = {
+            "selected_outer_position": selected_outer_position,
+            "selected_label_index": selected_label_index,
+            "boundary_window_end_idx": boundary_window_end_idx,
+            "train_count": train_count,
+            "val_count": val_count,
+            "dropped_count": dropped_count,
+            "effective_ratio": effective_ratio,
+            "train_counts_by_regime": counts_to_regime_dict(train_counts_array, observed_regimes),
+            "val_counts_by_regime": counts_to_regime_dict(val_counts_array, observed_regimes),
+            "dropped_counts_by_regime": counts_to_regime_dict(
+                total_regime_counts - train_counts_array - val_counts_array,
+                observed_regimes,
+            ),
+            "stage2_train_counts_by_regime_side": stage2_train_counts,
+            "stage2_val_counts_by_regime_side": stage2_val_counts,
+            "train_end_time": serialize_timestamp(outer_label_times[train_count - 1]),
+            "val_start_time": serialize_timestamp(outer_label_times[val_start_position]),
+        }
+
+    if selected is None:
         raise ValueError(
             f"unable to build inner fold {fold_id} with target_train_ratio={target_train_ratio:.2f} "
             f"and strict minima (regime train/val={config.min_train_samples_per_regime}/{config.min_val_samples_per_regime}, "
             f"head train/val={config.min_train_samples_per_head}/{config.min_val_samples_per_head})"
         )
-
-    selected = min(
-        candidates,
-        key=lambda candidate: (
-            abs(candidate["effective_ratio"] - target_train_ratio),
-            abs(candidate["selected_label_index"] - target_label_index),
-            candidate["dropped_count"],
-        ),
-    )
+    boundary_window_end_idx = int(selected["boundary_window_end_idx"])
+    train_mask = outer_train_mask & (window_end + config.embargo_bars < boundary_window_end_idx)
+    val_mask = outer_train_mask & (window_end >= boundary_window_end_idx)
+    dropped_mask = outer_train_mask & ~(train_mask | val_mask)
 
     plan = InnerFoldPlan(
         fold_id=fold_id,
@@ -456,7 +503,7 @@ def choose_single_inner_fold(
         stage2_train_counts_by_regime_side=selected["stage2_train_counts_by_regime_side"],
         stage2_val_counts_by_regime_side=selected["stage2_val_counts_by_regime_side"],
     )
-    return plan, selected["train_mask"], selected["val_mask"], selected["dropped_mask"]
+    return plan, train_mask, val_mask, dropped_mask
 
 
 def choose_inner_splits(
@@ -505,8 +552,21 @@ def build_inner_split_manifest(folds: list[FoldRuntime]) -> dict[str, Any]:
     )
 
 
+def dedupe_candidate_params(param_sets: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    unique: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for params in param_sets:
+        key = json.dumps(json_ready(params), sort_keys=True)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(params)
+    return unique
+
+
 def build_stage1_candidate_registry(config: Step14Config) -> list[CandidateSpec]:
-    combos = [
+    baseline_hidden_layers = tuple(int(value) for value in config.stage1_hidden_layer_options[0])
+    cand0_combos = [
         {
             "cand0_max_fraction": float(cand0_max_fraction),
             "cand0_sample_weight": float(cand0_sample_weight),
@@ -517,8 +577,38 @@ def build_stage1_candidate_registry(config: Step14Config) -> list[CandidateSpec]
     baseline_params = {
         "cand0_max_fraction": config.cand0_max_fractions[0],
         "cand0_sample_weight": config.cand0_sample_weights[0],
+        "hidden_layers": baseline_hidden_layers,
     }
-    ordered = [baseline_params] + [combo for combo in combos if combo != baseline_params]
+    cand0_variants = [
+        {
+            **combo,
+            "hidden_layers": baseline_hidden_layers,
+        }
+        for combo in cand0_combos
+        if combo
+        != {
+            "cand0_max_fraction": baseline_params["cand0_max_fraction"],
+            "cand0_sample_weight": baseline_params["cand0_sample_weight"],
+        }
+    ]
+    architecture_variants = [
+        {
+            "cand0_max_fraction": baseline_params["cand0_max_fraction"],
+            "cand0_sample_weight": baseline_params["cand0_sample_weight"],
+            "hidden_layers": tuple(int(value) for value in hidden_layers),
+        }
+        for hidden_layers in config.stage1_hidden_layer_options[1:]
+    ]
+    targeted_variants = [
+        {
+            "cand0_max_fraction": baseline_params["cand0_max_fraction"],
+            "cand0_sample_weight": baseline_params["cand0_sample_weight"],
+            **variant,
+            "hidden_layers": tuple(int(value) for value in variant.get("hidden_layers", baseline_hidden_layers)),
+        }
+        for variant in config.stage1_targeted_variants
+    ]
+    ordered = dedupe_candidate_params([baseline_params, *cand0_variants, *architecture_variants, *targeted_variants])
     return [
         CandidateSpec(
             stage="stage1",
@@ -570,6 +660,13 @@ def candidate_registry_df(candidates: list[CandidateSpec], *, seed: int) -> pd.D
 
 
 def build_stage1_config(base_config: dict[str, Any], candidate: CandidateSpec, output_dir: Path, seed: int) -> Step12Config:
+    hidden_layers = candidate.params.get("hidden_layers", base_config.get("hidden_layers", [64, 32]))
+    learning_rate = candidate.params.get("learning_rate", base_config["learning_rate"])
+    weight_decay = candidate.params.get("weight_decay", base_config["weight_decay"])
+    batch_size = candidate.params.get("batch_size", base_config["batch_size"])
+    epochs = candidate.params.get("epochs", base_config["epochs"])
+    patience = candidate.params.get("patience", base_config["patience"])
+    min_delta = candidate.params.get("min_delta", base_config["min_delta"])
     return Step12Config(
         input_dir=Path("."),
         output_dir=output_dir,
@@ -579,13 +676,13 @@ def build_stage1_config(base_config: dict[str, Any], candidate: CandidateSpec, o
         min_val_samples_per_regime=int(base_config["min_val_samples_per_regime"]),
         cand0_max_fraction=float(candidate.params["cand0_max_fraction"]),
         cand0_sample_weight=float(candidate.params["cand0_sample_weight"]),
-        hidden_layers=tuple(int(value) for value in base_config.get("hidden_layers", [64, 32])),
-        learning_rate=float(base_config["learning_rate"]),
-        weight_decay=float(base_config["weight_decay"]),
-        batch_size=int(base_config["batch_size"]),
-        epochs=int(base_config["epochs"]),
-        patience=int(base_config["patience"]),
-        min_delta=float(base_config["min_delta"]),
+        hidden_layers=tuple(int(value) for value in hidden_layers),
+        learning_rate=float(learning_rate),
+        weight_decay=float(weight_decay),
+        batch_size=int(batch_size),
+        epochs=int(epochs),
+        patience=int(patience),
+        min_delta=float(min_delta),
         seed=int(seed),
         model_name=str(base_config.get("model_name", "mlp_v1")),
         fail_on_acceptance=False,
@@ -901,6 +998,7 @@ def build_stage1_selection_report(summary_df: pd.DataFrame, candidates: list[Can
                 "candidate_id": candidate.candidate_id,
                 "search_rank": candidate.search_rank,
                 "is_baseline": candidate.is_baseline,
+                "params": candidate.params,
                 "mean_macro_f1": float(candidate_df["macro_f1"].mean()),
                 "mean_cand0_pass_recall": float(candidate_df["cand0_pass_recall"].mean()),
                 "min_cand0_pass_recall": float(candidate_df["cand0_pass_recall"].min()),
@@ -915,12 +1013,17 @@ def build_stage1_selection_report(summary_df: pd.DataFrame, candidates: list[Can
     provisional_winner_source = "eligible_set"
     used_control_fallback = False
     if eligible_rows:
+        best_macro_f1 = max(row["mean_macro_f1"] for row in eligible_rows)
+        tolerance_window = [
+            row for row in eligible_rows if row["mean_macro_f1"] >= best_macro_f1 - STAGE1_PRIMARY_METRIC_TOLERANCE
+        ]
         provisional_winner = min(
-            eligible_rows,
+            tolerance_window,
             key=lambda row: (
-                -row["mean_macro_f1"],
                 -row["mean_cand0_pass_recall"],
+                -row["min_cand0_pass_recall"],
                 row["mean_log_loss"],
+                -row["mean_macro_f1"],
                 0 if row["is_baseline"] else 1,
                 row["search_rank"],
             ),
@@ -933,9 +1036,12 @@ def build_stage1_selection_report(summary_df: pd.DataFrame, candidates: list[Can
     return json_ready(
         {
             "primary_metric": STAGE1_PRIMARY_METRIC,
+            "primary_metric_tolerance": STAGE1_PRIMARY_METRIC_TOLERANCE,
             "tie_breakers": [
                 "higher_mean_cand0_pass_recall",
+                "higher_min_cand0_pass_recall",
                 "lower_mean_log_loss",
+                "higher_mean_macro_f1_within_tolerance_window",
                 "baseline_preferred",
             ],
             "baseline_candidate_id": baseline_row["candidate_id"],
@@ -1045,6 +1151,7 @@ def build_stage2_selection_report(summary_df: pd.DataFrame, candidates: list[Can
                 "candidate_id": candidate.candidate_id,
                 "search_rank": candidate.search_rank,
                 "is_baseline": candidate.is_baseline,
+                "params": candidate.params,
                 "mean_normalized_effective_mae_mean": float(candidate_df["normalized_effective_mae_mean"].mean()),
                 "beat_default_share": float(candidate_df["beats_default_baseline"].mean()),
                 "max_hold_boundary_rate": float(candidate_df["hold_boundary_rate"].max()),
@@ -1476,6 +1583,7 @@ def build_handoff_manifest(
     selected_stage1_metadata: dict[str, Any],
     selected_stage2_metadata: dict[str, Any],
 ) -> dict[str, Any]:
+    model_pack_version = str(bundle.metadata["model_pack_version"])
     return json_ready(
         {
             "schema_version": bundle.metadata["schema_version"],
@@ -1493,7 +1601,9 @@ def build_handoff_manifest(
                 "final_handoff_candidate_id": final_holdout_report["stage1"]["final_handoff_candidate_id"],
                 "final_handoff_is_baseline": final_holdout_report["stage1"]["final_handoff_is_baseline"],
                 "clf_version": selected_stage1_metadata["clf_version"],
-                "expected_future_pack_filenames": [f"clf_reg{regime_id}.onnx" for regime_id in range(6)],
+                "expected_future_pack_filenames": [
+                    f"clf_reg{regime_id}_v{model_pack_version}.onnx" for regime_id in range(6)
+                ],
             },
             "stage2": {
                 "selected_candidate_id": selected_stage2_candidate.candidate_id,
@@ -1501,7 +1611,9 @@ def build_handoff_manifest(
                 "final_handoff_candidate_id": final_holdout_report["stage2"]["final_handoff_candidate_id"],
                 "final_handoff_is_baseline": final_holdout_report["stage2"]["final_handoff_is_baseline"],
                 "prm_version": selected_stage2_metadata["prm_version"],
-                "expected_future_pack_filenames": [f"prm_reg{regime_id}.onnx" for regime_id in range(6)],
+                "expected_future_pack_filenames": [
+                    f"prm_reg{regime_id}_v{model_pack_version}.onnx" for regime_id in range(6)
+                ],
             },
         }
     )
@@ -1584,6 +1696,8 @@ def build_validation_metadata(
     handoff_manifest: dict[str, Any],
     repro_report: dict[str, Any] | None,
 ) -> dict[str, Any]:
+    stage1_candidate_count = len(stage1_registry_df)
+    stage2_candidate_count = len(stage2_registry_df)
     acceptance = {
         "A1_lineage_audit_pass": bool(lineage_audit["passed"]),
         "A2_outer_holdout_matches_step12": bool(
@@ -1596,22 +1710,22 @@ def build_validation_metadata(
             and all(fold["no_time_leakage"] for fold in inner_manifest["folds"])
         ),
         "A4_candidate_registries_complete": bool(
-            len(stage1_registry_df) == 6
-            and len(stage2_registry_df) == 8
+            stage1_candidate_count >= 1
+            and stage2_candidate_count >= 1
             and bool(stage1_registry_df["is_baseline"].sum() == 1)
             and bool(stage2_registry_df["is_baseline"].sum() == 1)
             and stage1_registry_df["candidate_id"].is_unique
             and stage2_registry_df["candidate_id"].is_unique
         ),
         "A5_stage1_cv_complete_and_valid": bool(
-            len(stage1_cv_summary) == 6 * len(config.inner_fold_train_ratios) * 6
+            len(stage1_cv_summary) == stage1_candidate_count * len(config.inner_fold_train_ratios) * 6
             and stage1_cv_summary["metrics_present"].all()
             and stage1_cv_summary["prob_all_finite"].all()
             and stage1_cv_summary["prob_sum_close"].all()
             and stage1_selection_report["provisional_winner_candidate_id"] is not None
         ),
         "A6_stage2_cv_complete_and_valid": bool(
-            len(stage2_cv_summary) == 8 * len(config.inner_fold_train_ratios) * 6 * 2
+            len(stage2_cv_summary) == stage2_candidate_count * len(config.inner_fold_train_ratios) * 6 * 2
             and stage2_cv_summary["metrics_present"].all()
             and stage2_cv_summary["effective_all_finite"].all()
             and stage2_cv_summary["contract_valid"].all()
